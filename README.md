@@ -1,10 +1,8 @@
 # 区块链低代码开发平台
 [toc]
 
-
 ### 开源项目介绍
 Bsin-PaaS（毕昇） 是一套开放式和生态化的企业级低代码、零代码去中心化应用搭建平台，可快速助企业搭建有竞争力的业务中台、流程中台、业务前台。平台包括大前端、微服务框架、服务编排、工作流引擎、安全会话网关及区块链引擎。该方案由区块链(公链、联盟链)作为技术支撑,为企业提供daPaaS层的一站式解决方案，打造数字经济底层技术架构。作为一个平台，Bsin-PaaS本身拥有自己的数字货币资产，实现让价值掌握在拥有者手中。
-
 
 ### 产品优势：
 * 开箱即用
@@ -28,13 +26,11 @@ Bsin-PaaS（毕昇） 是一套开放式和生态化的企业级低代码、零�
 
 
 ### 社区文档建设
-* https://github.com/crawlab-team/artipub
+* http://help.flyray.me
 
 >开源协议
 
-AGPL协议的主要内容是只要在一个软件中使用(”使用”指类库引用，修改后的代码或者衍生代
-码)GPL协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。这就是所谓的
-”传染性”。GPL协议的产品作为一个单独的产品使用没有任何问题，还可以享受免费的优势。
+apache license 2.0
 
 ## 组织架构
 * 基金会 负责投资生态项目
@@ -43,17 +39,21 @@ AGPL协议的主要内容是只要在一个软件中使用(”使用”指类库
 
 ## 社区站点
 >社区介绍站点
+```
+http://www.huoyuanshequ.com
+手机版
+http://h5.huoyuanshequ.com
+```
 
-huoyuanshequ.com
+>项目演示
 
->文档演示
+```
+运营平台
+http://operation.flyray.me/
+商户中心
+http://merchant.flyray.me/
 
-doc.huoyuanshequ.com
-
->项目演示域名
-
-flyray.me
-
+```
 
 ## 代号
 >海星计划
@@ -71,26 +71,15 @@ flyray.me
 
 ## 技术交流
 
-QQ交流群： test
-官方网站： test
-官方博客： test
-关注官方微信公众号，获取更多资讯
+* QQ交流群： 
+* 官方网站： test
+* 官方博客： test
+* 关注官方微信公众号，获取更多资讯
 
 ## 对社区的期望
 我们希望社区更多的参与进来共建，如果觉得文档不完善，可以参与完善文档，如果觉得代码有问题，可以提 PR 修复 如果希望我们能支持更多场景，也可以提 Feature Request
 
 我们的知识是从社区而来，我们也有必要赋能社区，帮助社区更好的运作下去。
-
-## 参考开源项目
-* https://www.jeesite.com/
-* http://www.jeecg.com/
-* http://www.jeeplus.org/
-* https://www.pig4cloud.com/
-* https://www.opsli.com/
-* https://www.linkseeks.com/product/4.html
-
-## 文档建设
-* https://juejin.cn/post/6959403986495471647#heading-15
 
 ## 谈谈问题
 ```
@@ -104,8 +93,7 @@ QQ交流群： test
 ```
 
 ## 社区治理
-* https://www.chainnews.com/articles/532391891578.htm
-
+* 
 
 ## 生态应用建设计划
 
