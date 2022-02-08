@@ -71,6 +71,8 @@ http://h5.huoyuanshequ.com
 ## 技术交流
 
 * QQ交流群： 
+
+![avatar](./doc/images/qq交流群.png)
 * 官方网站： test
 * 官方博客： test
 * 关注官方微信公众号，获取更多资讯
