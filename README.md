@@ -48,7 +48,7 @@ http://h5.huoyuanshequ.com
 >项目演示
 
 ```
-运营平台
+运营平台 租户:bsin-paas 账户:admin 123456
 http://operation.flyray.me/
 商户中心
 http://merchant.flyray.me/
