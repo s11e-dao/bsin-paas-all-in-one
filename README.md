@@ -73,8 +73,13 @@ http://h5.huoyuanshequ.com
 * QQ交流群： 
 
 ![avatar](./doc/images/qq交流群.png)
-* 官方网站： test
-* 官方博客： test
+
+* 公众号：
+
+![avatar](./doc/images/bsin-paas公众号.jpg)
+
+* 官方网站： http://www.huoyuanshequ.com
+* 官方博客： http://www.huoyuanshequ.com
 * 关注官方微信公众号，获取更多资讯
 
 ## 对社区的期望
