@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.SysRole">
+        <id column="role_id" property="roleId" />
+        <result column="role_code" property="roleCode" />
+        <result column="role_name" property="roleName" />
+        <result column="app_id" property="appId" />
+        <result column="remark" property="remark" />
+        <result column="app_name" property="appName" />
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="type" property="type"/>
+    </resultMap>
+
+    <resultMap id="FacadeResultMap" type="me.flyray.bsin.facade.response.RoleResp">
+        <id column="role_id" property="roleId" />
+        <result column="role_code" property="roleCode" />
+        <result column="role_name" property="roleName" />
+        <result column="app_id" property="appId" />
+        <result column="remark" property="remark" />
+        <result column="app_name" property="appName" />
+        <result column="type" property="type"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="me.flyray.bsin.server.domain.SysRole">
+       insert into sys_role(role_id, role_code, role_name, app_id, remark,type, create_by,tenant_id)
+       values (#{roleId},#{roleCode},#{roleName},#{appId},#{remark},#{type},#{createBy},#{tenantId})
+   </insert>
+
+    <select id="getRoleInfoByRoleCode" resultMap="BaseResultMap">
+        select role_id, role_code, role_name, app_id, remark ,type  from sys_role
+        where role_code = #{roleCode} and del_flag = 0
+    </select>
+
+    <update id="deleteById" parameterType="java.lang.String">
+        update sys_role set del_flag = 1 where role_id = #{roleId}
+    </update>
+
+    <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysRole">
+        update sys_role set
+        role_code=#{roleCode},
+        role_name=#{roleName},
+        app_id=#{appId},
+        remark=#{remark},
+        update_by=#{updateBy},
+        update_time=now()
+        where role_id = #{roleId} and del_flag = 0
+    </update>
+
+    <select id="selectPageList" resultMap="BaseResultMap">
+        select role_id, role_code, role_name,app_name, sr.app_id, sr.remark ,sr.create_time ,sr.create_by ,sr.update_time,sr.update_by  from sys_role sr left join sys_app sa on sr.app_id = sa.app_id
+        <where>
+                 1=1
+            <if test="appId != null and appId != ''">
+                and sr.app_id = #{appId}
+            </if>
+            <if test="roleCode != null and roleCode != ''">
+               and role_code = #{roleCode}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and role_name = #{roleName}
+            </if>
+                and sr.del_flag = 0
+                and sr.tenant_id = #{tenantId}
+        </where>
+    </select>
+
+    <select id="getRoleListByPostId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select r.role_id,role_code,role_name,pr.app_id  from sys_role as r left join sys_post_role as pr
+                                                                                       on r.role_id=pr.role_id
+                                                                                           and r.app_id=pr.app_id
+        where pr.post_id = #{postId}
+    </select>
+
+    <select id="selectListByAppId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select role_id, role_code, role_name, app_id, remark, tenant_id from sys_role
+        where app_id = #{appId} and del_flag = 0 and tenant_id = #{tenantId}
+    </select>
+
+    <select id="selectListByAppCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select r.role_id, r.role_code, r.role_name, r.app_id, r.remark, a.app_code,r.del_flag from sys_role r left join sys_app a on r.app_id = a.app_id
+        where a.app_code = #{appCode} and r.del_flag = 0
+    </select>
+
+    <update id="deleteByAppId" >
+        update sys_role set del_flag = 1 where app_id = #{appId}
+    </update>
+
+    <select id="selectAllRole" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select role_id, role_code, role_name, app_id, remark, create_time, update_time, create_by, update_by
+        from sys_role
+    </select>
+</mapper>

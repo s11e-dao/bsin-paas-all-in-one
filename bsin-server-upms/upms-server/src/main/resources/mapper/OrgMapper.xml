@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.OrgMapper">
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.SysOrg">
+        <id column="org_id" property="orgId"/>
+        <result column="org_code" property="orgCode"/>
+        <result column="org_name" property="orgName"/>
+        <result column="sort" property="sort"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="level" property="level"/>
+        <result column="type" property="type"/>
+        <result column="leader" property="leader"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="email" property="email"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <select id="selectOrgList" parameterType="me.flyray.bsin.server.domain.SysPost" resultMap="BaseResultMap">
+        select org_id, org_code, org_name,parent_id, level, type, leader, phone, address, email, tenant_id, create_time, update_time, remark from
+        sys_org
+        <where>
+            <if test="orgCode != null and orgCode != ''">
+                org_code = #{orgCode}
+            </if>
+            <if test="orgName != null and orgName != ''">
+                and org_name like concat('%',#{orgName},'%')
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOrgListByTenantId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select org_id, org_code, org_name, `sort`, parent_id, level, type, leader,
+         phone, address, remark, email, tenant_id, create_time, update_time, `del_flag`
+        from sys_org
+        where sys_org.tenant_id = #{tenantId}
+          and `del_flag` = 0
+    </select>
+
+    <update id="deleteById" parameterType="java.lang.String">
+        update sys_org
+        set `del_flag`=1
+        where org_id = #{orgId}
+    </update>
+
+    <insert id="insertOrg" parameterType="me.flyray.bsin.server.domain.SysOrg">
+        insert into sys_org (org_id, org_code, org_name, `sort`, parent_id, level, type,
+        leader, phone, address, email, tenant_id, remark)
+        values (#{orgId}, #{orgCode}, #{orgName}, #{sort}, #{parentId}, #{level}, #{type}, #{leader}, #{phone},
+                #{address}, #{email}, #{tenantId}, #{remark})
+    </insert>
+
+    <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysOrg">
+        update sys_org set org_name=#{orgName},org_code=#{orgCode},`sort`=#{sort},parent_id=#{parentId},level=#{level},type=#{type},leader=#{leader},phone=#{phone},address=#{address},
+        email=#{email},remark=#{remark},update_time = now() where org_id = #{orgId}
+    </update>
+
+    <delete id="deleteAppAssociationById" parameterType="java.lang.String">
+        delete
+        from sys_org_app
+        where org_id = #{orgId}
+    </delete>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select org_id,
+               org_code,
+               org_name,
+               `sort`,
+               parent_id,
+               level,
+               type,
+               leader,
+               phone,
+               address,
+               email,
+               tenant_id,
+               create_time,
+               update_time,
+               remark
+        from sys_org
+        where org_id = #{orgId}
+          and `del_flag` = 0
+    </select>
+
+    <!--根据租户id删除机构-->
+    <update id="deleteByTenantId" parameterType="java.lang.String">
+        update sys_org
+        set `del_flag` = 1
+        where tenant_id = #{tenantId}
+    </update>
+
+    <select id="selectByOrgCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select org_code from sys_org where org_code=#{orgCode}
+    </select>
+</mapper>

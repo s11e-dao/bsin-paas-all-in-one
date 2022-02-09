@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.UserPostMapper">
+    <resultMap id="map" type="me.flyray.bsin.server.domain.SysUser">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="username"/>
+        <result column="password" property="password"/>
+        <result column="status" property="status"/>
+        <result column="org_id" property="orgId"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="nickname" property="nickname"/>
+        <result column="phone" property="phone"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="type" property="type"/>
+    </resultMap>
+
+
+    <insert id="assignPosts" parameterType="java.lang.String">
+        insert into sys_user_post(user_id, post_id)
+        VALUES
+        <foreach collection="postIds" item="postId" separator=",">
+            (#{userId},#{postId})
+        </foreach>
+    </insert>
+
+
+    <delete id="unbindPost" parameterType="java.lang.String">
+        delete from sys_user_post where user_id=#{userId}
+    </delete>
+
+    <delete id="unbindPostByUserId" parameterType="java.lang.String">
+        delete from sys_user_post where user_id=#{userId}
+    </delete>
+
+    <select id="getUserByPostId" resultType="me.flyray.bsin.server.domain.SysPost">
+        select sys_user_post.post_id,sys_post.post_code from sys_user_post join sys_post
+            on sys_user_post.post_id=sys_post.post_id
+        where sys_user_post.post_id=#{postId}
+    </select>
+
+    <select id="getPostByUserId" resultMap="map">
+        select post_id, sys_user.user_id, user_name, password, status, org_id, tenant_id,
+               nickname, phone, avatar, email, del_flag, create_by, create_time, update_by, update_time, type
+        from sys_user_post join sys_user on sys_user_post.user_id=sys_user.user_id
+        where sys_user_post.user_id=#{userId}
+    </select>
+
+
+</mapper>

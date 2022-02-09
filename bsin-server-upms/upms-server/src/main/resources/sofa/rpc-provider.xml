@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+
+    <!--业务接口sofa注册信息，根据业务需要添加，项目组使用时请删除以下示例工程的注册信息及逻辑接口实现代码-->
+    <bean id="postService" class="me.flyray.bsin.server.impl.PostServiceImpl"/>
+    <sofa:service ref="postService" interface="me.flyray.bsin.facade.service.PostService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <!--业务接口sofa注册信息，根据业务需要添加，项目组使用时请删除以下示例工程的注册信息及逻辑接口实现代码-->
+    <bean id="orgService" class="me.flyray.bsin.server.impl.OrgServiceImpl"/>
+    <sofa:service ref="orgService" interface="me.flyray.bsin.facade.service.OrgService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <!--业务接口sofa注册信息，根据业务需要添加，项目组使用时请删除以下示例工程的注册信息及逻辑接口实现代码-->
+    <bean id="userService" class="me.flyray.bsin.server.impl.UserServiceImpl"/>
+    <sofa:service ref="userService" interface="me.flyray.bsin.facade.service.UserService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <!--业务接口sofa注册信息，根据业务需要添加，项目组使用时请删除以下示例工程的注册信息及逻辑接口实现代码-->
+    <bean id="helloService" class="me.flyray.bsin.server.impl.HelloServiceImpl"/>
+    <sofa:service ref="helloService" interface="me.flyray.bsin.facade.service.HelloService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="roleService" class="me.flyray.bsin.server.impl.RoleServiceImpl"/>
+    <sofa:service ref="roleService" interface="me.flyray.bsin.facade.service.RoleService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="menuService" class="me.flyray.bsin.server.impl.MenuServiceImpl"/>
+    <sofa:service ref="menuService" interface="me.flyray.bsin.facade.service.MenuService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="appService" class="me.flyray.bsin.server.impl.AppServiceImpl"/>
+    <sofa:service ref="appService" interface="me.flyray.bsin.facade.service.AppService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="tenantService" class="me.flyray.bsin.server.impl.TenantServiceImpl"/>
+    <sofa:service ref="tenantService" interface="me.flyray.bsin.facade.service.TenantService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+</beans>

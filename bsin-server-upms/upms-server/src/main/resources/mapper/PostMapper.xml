@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.PostMapper">
+    <resultMap id="map" type="me.flyray.bsin.server.domain.SysPost">
+        <id column="post_id" property="postId"/>
+        <result column="post_code" property="postCode"/>
+        <result column="post_name" property="postName"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time"  jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time"  jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="tenant_id" property="tenantId"/>
+    </resultMap>
+
+    <insert id="insertPost" parameterType="me.flyray.bsin.server.domain.SysPost">
+        insert into sys_post (post_id, post_code, post_name, sort, remark, create_by,tenant_id)
+        values(#{postId},#{postCode},#{postName},#{sort},#{remark},#{createBy},#{tenantId})
+    </insert>
+
+    <update id="deleteById" parameterType="String">
+        update sys_post set del_flag=1 where post_id=#{postId}
+    </update>
+
+    <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysPost">
+        update sys_post set post_name=#{postName}, sort=#{sort},status=#{status},remark=#{remark},update_by=#{updateBy},
+ tenant_id=#{tenantId}, update_time=now() where post_id=#{postId}
+    </update>
+
+    <select id="selectPostList" parameterType="java.lang.String" resultMap="map">
+        select post_id, post_code, post_name, sort, status, remark, create_by, update_by, tenant_id,create_time,update_time  from sys_post
+    <where>
+        tenant_id = #{tenantId}
+        <if test="postCode != null and postCode != ''">
+            and post_code = #{postCode}
+        </if>
+        <if test="postName != null and postName != ''">
+            and post_name like concat('%',#{postName},'%')
+        </if>
+            and del_flag = 0
+    </where>
+    </select>
+
+    <select id="selectPostListByTenantId" parameterType="me.flyray.bsin.server.domain.SysPost" resultMap="map">
+        select post_id, post_code, post_name, sort, status, remark, create_by,update_by, tenant_id  from sys_post
+        where tenant_id=#{tenantId} and del_flag = 0
+    </select>
+
+    <select id="getPostByUserId" resultMap="map" parameterType="java.lang.String">
+        select sys_post.post_id,post_name,post_code from sys_user_post join sys_post where sys_user_post.post_id=sys_post.post_id and sys_user_post.user_id=#{userId}
+    </select>
+
+    <update id="deleteByTenantId" parameterType="java.lang.String">
+        update sys_post set del_flag = 1 where tenant_id = #{tenantId}
+    </update>
+
+    <select id="getPostByPostCode" resultMap="map" parameterType="java.lang.String">
+        select post_code from sys_post where post_code=#{postCode}
+    </select>
+
+    <select id="selectList"  resultMap="map">
+        select post_id, post_code, post_name, sort, status, remark, create_by, create_time,
+               update_by, update_time, del_flag, tenant_id
+        from sys_post
+        <where>
+            tenant_id = #{tenantId,jdbcType=VARCHAR}
+            <if test="postId != null and postId != ''">
+                and post_id = #{postId}
+            </if>
+            <if test="postCode != null and postCode != ''">
+                and post_code = #{postCode}
+            </if>
+            <if test="postName != null and postName != ''">
+                and post_name like concat('%',#{postName},'%')
+            </if>
+            and del_flag = 0
+        </where>
+    </select>
+
+    <select id="getPostByOrgId" resultMap="map">
+        select sys_post.post_id, sys_post.post_code, sys_post.post_name, sys_post.sort, sys_post.status,
+               sys_post.remark, sys_post.create_by, sys_post.create_time, sys_post.update_by, sys_post.update_time,
+               sys_post.del_flag, sys_post.tenant_id, sys_org_post.org_id, sys_org_post.post_id
+        from sys_post join sys_org_post on sys_post.post_id=sys_org_post.post_id
+        where org_id=#{orgId} and del_flag=0
+    </select>
+
+    <select id="getAlreadyAssignPostByUserId" resultMap="map">
+        select p.post_id, post_code, post_name, sort, status, remark, tenant_id, create_by, create_time, update_by,
+               update_time, del_flag from sys_post p join sys_user_post sup on p.post_id = sup.post_id
+        where user_id = #{userId}
+    </select>
+</mapper>

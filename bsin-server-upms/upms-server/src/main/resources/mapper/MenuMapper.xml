@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.SysMenu">
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <sql id="baseColumnList">
+    sys_menu.menu_id, menu_code, menu_name, permission,sys_menu.app_id, path, parent_id, icon, sort, status,
+    type, create_by, create_time, update_by, update_time, del_flag, remark
+  </sql>
+
+  <select id="selectListByAppIdAndRoleId"  resultMap="BaseResultMap">
+    select
+    <include refid="baseColumnList" />
+    from sys_menu left join sys_role_menu on sys_menu.menu_id=sys_role_menu.menu_id
+    where sys_menu.app_id = #{appId,jdbcType=VARCHAR} and sys_role_menu.role_id = #{roleId,jdbcType=VARCHAR}
+      and del_flag = 0
+  </select>
+
+  <select id="selectListByAppId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="baseColumnList"/>
+    from sys_menu where app_id = #{appId,jdbcType=VARCHAR} and del_flag = 0
+  </select>
+
+  <select id="selectChild" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="baseColumnList"></include>
+    from sys_menu where parent_id = #{parentId,jdbcType=VARCHAR} and del_flag = 0
+  </select>
+
+  <update id="deleteById" parameterType="java.lang.String">
+    update  sys_menu set del_flag = 1
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insert" parameterType="me.flyray.bsin.server.domain.SysMenu">
+    insert into sys_menu (menu_id, menu_code, menu_name,
+      permission, app_id, path,
+      parent_id, icon, sort,
+      status, type, create_by, remark)
+    values (#{menuId,jdbcType=VARCHAR}, #{menuCode,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR},
+      #{permission,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+      #{parentId,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="getMenuInfoByMenuCode" resultMap="BaseResultMap">
+    select
+    <include refid="baseColumnList"></include>
+    from sys_menu
+    where menu_code = #{menuCode} and del_flag = 0
+  </select>
+
+  <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysMenu">
+    update sys_menu set
+        menu_code = #{menuCode,jdbcType=VARCHAR},
+        menu_name = #{menuName,jdbcType=VARCHAR},
+        permission = #{permission,jdbcType=VARCHAR},
+        app_id = #{appId,jdbcType=VARCHAR},
+        path = #{path,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=VARCHAR},
+        icon = #{icon,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        type = #{type,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_time = now()
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="deleteByAppId">
+    update sys_menu set del_flag = 1 where app_id = #{appId}
+  </update>
+
+  <select id="getPermissionMenuTemplate" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="baseColumnList"/>
+    FROM sys_menu
+    where app_id= #{appId} AND del_flag = 1
+  </select>
+
+  <select id="selectMenuButtonByMenuId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="baseColumnList"/>
+    FROM sys_menu WHERE parent_id=#{menuId} AND del_flag=0
+  </select>
+
+  <select id="selectListByMenuIds" resultMap="BaseResultMap">
+    SELECT
+    <include refid="baseColumnList"/>
+    FROM sys_menu WHERE  del_flag=0 and menu_id in
+    <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+      #{menuId,jdbcType=VARCHAR}
+    </foreach>
+  </select>
+
+  <select id="selectMenuIdsByAppIdAndRoleId"  resultType="java.lang.String">
+    select
+    sys_menu.menu_id
+    from sys_menu left join sys_role_menu on sys_menu.menu_id = sys_role_menu.menu_id
+    where sys_menu.app_id = #{appId,jdbcType=VARCHAR} and sys_role_menu.role_id = #{roleId,jdbcType=VARCHAR}
+    and del_flag = 0
+  </select>
+
+
+  <select id="selectTopMenuId" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT
+    menu_id
+    FROM sys_menu left join sys_app sa on sys_menu.app_id = sa.app_id
+    where app_code= #{appCode} AND parent_id = -1
+  </select>
+
+  <select id="selectOneByMenuId" resultMap="BaseResultMap">
+    select menu_id,app_id from sys_menu where menu_id = #{menuId} and del_flag = 0
+  </select>
+</mapper>

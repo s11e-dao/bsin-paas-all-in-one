@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.AppMapper">
+  <resultMap id="BaseResultMap" type="me.flyray.bsin.server.domain.SysApp">
+    <id column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_code" jdbcType="VARCHAR" property="appCode" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="theme" jdbcType="VARCHAR" property="theme" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="app_Language" jdbcType="INTEGER" property="appLanguage" />
+  </resultMap>
+
+  <resultMap id="AppResultMap" type="me.flyray.bsin.facade.response.AppResp">
+    <id column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+
+  <sql id="baseColumnList">
+    app_id, app_code, app_name, logo, url,`status`, remark, create_by, create_time, update_by,
+    update_time, theme, type, app_Language
+  </sql>
+
+  <select id="selectPageList"  resultMap="BaseResultMap">
+    select
+    lert.app_id, app_code, app_name, logo, url, status,remark, create_by, create_time, update_by,
+    update_time, theme, lert.type, app_Language
+    from sys_app lert left join sys_tenant_app on lert.app_id = sys_tenant_app.app_id
+    <where>
+        tenant_id = #{tenantId,jdbcType=VARCHAR}
+        <if test="appId != null and appId != ''">
+          and lert.app_id = #{appId}
+        </if>
+        <if test="appCode != null and appCode != ''">
+          and app_code = #{appCode}
+        </if>
+        <if test="appName != null and appName != ''">
+          and app_name like concat ('%',#{appName,jdbcType=VARCHAR},'%')
+        </if>
+         and del_flag = 0
+    </where>
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+   update sys_app set del_flag = 1 where  app_id = #{appId}
+  </delete>
+
+  <insert id="insert" parameterType="me.flyray.bsin.server.domain.SysApp">
+    insert into sys_app (app_id, app_code, app_name,logo,url, status,remark,create_by, theme,
+      type, app_Language)
+    values (#{appId,jdbcType=VARCHAR}, #{appCode,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR},
+      #{logo,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER}, #{appLanguage,jdbcType=INTEGER})
+  </insert>
+
+  <select id="getAppInfoByAppCode" resultMap="BaseResultMap">
+    select
+    <include refid="baseColumnList"/>
+    from sys_app
+    where  app_code = #{appCode} and del_flag = 0
+  </select>
+
+  <select id="getAppInfoByAppId" resultMap="BaseResultMap">
+    select
+    <include refid="baseColumnList"/>
+    from sys_app
+    where  app_id = #{appId} and del_flag = 0
+  </select>
+
+  <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysApp">
+    update sys_app set
+    app_code = #{appCode,jdbcType=VARCHAR},
+    app_name = #{appName,jdbcType=VARCHAR},
+    logo = #{logo,jdbcType=VARCHAR},
+    url = #{url,jdbcType=VARCHAR},
+    remark = #{remark,jdbcType=VARCHAR},
+    status = #{status,jdbcType=VARCHAR},
+    update_by = #{updateBy,jdbcType=VARCHAR},
+    update_time = now(),
+    theme = #{theme,jdbcType=VARCHAR},
+    type = #{type,jdbcType=INTEGER},
+    app_Language = #{appLanguage,jdbcType=INTEGER}
+    where app_id = #{appId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectListByTenantIdAndAppName"  resultMap="AppResultMap">
+    select
+    lert.app_id, lert.app_name, sys_tenant_app.type
+    from sys_app lert left join sys_tenant_app on lert.app_id = sys_tenant_app.app_id
+    <where>
+      tenant_id = #{tenantId,jdbcType=VARCHAR} and del_flag = 0
+    <if test="appName != null and appName != ''">
+     and app_name like concat ('%',#{appName,jdbcType=VARCHAR},'%')
+    </if>
+    </where>
+  </select>
+
+  <select id="selectAppIdsByTenantIdAndAppName"  resultType="java.lang.String">
+    select
+    lert.app_id
+    from sys_app lert left join sys_tenant_app on lert.app_id = sys_tenant_app.app_id
+    <where>
+      tenant_id = #{tenantId,jdbcType=VARCHAR} and del_flag = 0
+      <if test="appName != null and appName != ''">
+        and app_name like concat ('%',#{appName,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectListByOrgId"  resultMap="BaseResultMap">
+    select
+      sys_app.app_id, app_code, app_name, logo, url,status, remark, create_by, create_time, update_by,
+      update_time, theme, sys_app.type, app_Language
+    from sys_app left join sys_org_app on sys_app.app_id = sys_org_app.app_id
+    where org_id = #{orgId,jdbcType=VARCHAR} and del_flag = 0
+  </select>
+
+  <select id="selectOrgAppTypeListByOrgId"  resultMap="AppResultMap">
+    select
+      sys_app.app_id, app_name, sys_org_app.type
+    from sys_app left join sys_org_app on sys_app.app_id = sys_org_app.app_id
+    where org_id = #{orgId,jdbcType=VARCHAR} and del_flag = 0
+  </select>
+
+  <select id="selectPublishApps"  resultMap="BaseResultMap">
+    select
+      app_id, app_code, app_name, logo, url, remark,status, create_by, create_time, update_by,
+      update_time, theme, type, app_Language
+    from sys_app
+    where status = 1 and del_flag = 0
+  </select>
+</mapper>

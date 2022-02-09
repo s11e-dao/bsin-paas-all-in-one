@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <!--注意：若需要用 spring 扩展 profile 支持，则文件名应为 logback-spring.xml，而不是 logback.xml。-->
+    <springProperty scope="context" name="logging.path" source="logging.path"/>
+    <springProperty scope="context" name="logging.level" source="logging.level.bsin"/>
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
+    <!--  需要调试再添加 STDOUT 标准输出-->
+   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{HH:mm:ss.SSS} [%X{traceJournalNo}] %-5level %logger{80} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <!--以“天”为单位生成各日志文件 -->
+    <appender name="ERROR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <!-- 过滤器，只记录 error 级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 日志名称 -->
+        <file>${logging.path}/${spring.application.name}/common-error.log</file>
+        <!-- 每天生成一个日志文件，保存 14 天的日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名：按天回滚 -->
+            <FileNamePattern>${logging.path}/${spring.application.name}/common-error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxFileSize>300MB</MaxFileSize>
+            <!--日志文件保留天数-->
+            <MaxHistory>14</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d 表示日期，[%customLogFields]自定义日志输出字段信息，%thread 表示线程名，%-5level：级别从左显示 5 个字符宽度 %msg：日志消息，%n 是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level [%X{SOFA-TraceId},%X{SOFA-SpanId}] %X{NGDB-ServiceId} %X{NGDB-RetCd} %X{NGDB-BusinessId} %logger{50}-%msg%n</pattern>
+            <!-- 编码 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="ROOT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <file>${logging.path}/${spring.application.name}/common-default.log</file>
+        <!-- 每天生成一个日志文件，保存 14 天的日志文件 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名：按天回滚 daily -->
+            <FileNamePattern>${logging.path}/${spring.application.name}/common-default.%d{yyyy-MM-dd}.%i.log
+            </FileNamePattern>
+            <MaxFileSize>300MB</MaxFileSize>
+            <!--日志文件保留天数-->
+            <MaxHistory>14</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d 表示日期，[%customLogFields]自定义日志输出字段信息，%thread 表示线程名，%-5level：级别从左显示 5 个字符宽度 %msg：日志消息，%n 是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level [%X{SOFA-TraceId},%X{SOFA-SpanId}] %X{NGDB-ServiceId} %X{NGDB-RetCd} %X{NGDB-BusinessId} %logger{50}-%msg%n</pattern>
+            <!-- 编码 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd:HH:mm:ss.SSS} [%thread] %-5level [%X{SOFA-TraceId},%X{SOFA-SpanId}] %X{NGDB-ServiceId} %X{NGDB-RetCd} %X{NGDB-BusinessId} %logger{80} ---- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="io.seata.saga" level="debug" additivity="false">
+        <appender-ref ref="ROOT-APPENDER"/>
+    </logger>
+
+    <appender name="ASYNC_ROLLING_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <!--<discardingThreshold></discardingThreshold>-->
+        <queueSize>512</queueSize>
+        <appender-ref ref="ROOT-APPENDER"/>
+    </appender>
+    <appender name="ASYNC_ROLLING_FILE_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize>
+        <appender-ref ref="ERROR-APPENDER"/>
+    </appender>
+
+    <logger name="org.dozer" level="OFF"></logger>
+    <root level="${logging.level}">
+        <!--   需要调试时再打开 STDOUT 控制台标志输出    -->
+<!--        <appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ASYNC_ROLLING_FILE"/>
+        <appender-ref ref="ASYNC_ROLLING_FILE_ERROR"/>
+    </root>
+
+</configuration>

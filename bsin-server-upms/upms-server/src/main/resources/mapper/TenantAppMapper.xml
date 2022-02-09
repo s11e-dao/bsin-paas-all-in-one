@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.TenantAppMapper">
+
+    <insert id="authorizeApps" >
+        insert into sys_tenant_app(tenant_id, app_id,type) values
+        <foreach collection="appIds" item="appId" separator=",">
+        (#{tenantId},#{appId},#{type})
+        </foreach>
+    </insert>
+
+    <delete id="unAuthorizeAppByTenantId" parameterType="java.lang.String">
+        delete from sys_tenant_app where tenant_id = #{tenantId} and type = #{type}
+    </delete>
+
+    <delete id="unAuthorizeApp" parameterType="java.lang.String">
+        delete from sys_tenant_app
+        where tenant_id = #{tenantId} and app_id = #{appId}
+    </delete>
+
+    <select id="selectTenantAppType" resultType="java.lang.Integer">
+        select type from sys_tenant_app
+        where tenant_id = #{tenantId} and app_id = #{appId}
+    </select>
+</mapper>

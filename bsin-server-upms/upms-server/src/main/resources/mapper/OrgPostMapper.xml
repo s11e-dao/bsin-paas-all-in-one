@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.OrgPostMapper">
+
+    <insert id="assignPosts" parameterType="java.lang.String">
+        insert into sys_org_post(org_id, post_id) values
+        <foreach collection="postIds" item="postId" separator=",">
+            (#{orgId},#{postId})
+        </foreach>
+    </insert>
+
+    <delete id="unbindPostByOrgId" parameterType="java.lang.String">
+        delete
+        from sys_org_post
+        where org_id = #{orgId}
+    </delete>
+
+    <delete id="unbindPost" parameterType="java.lang.String">
+        delete
+        from sys_org_post
+        where org_id = #{orgId}
+    </delete>
+
+    <delete id="unbindPosts" parameterType="java.lang.String">
+        delete
+        from sys_org_post
+        where org_id = #{orgId} and post_id=#{postId}
+    </delete>
+
+    <select id="getPostByOrgId" resultType="me.flyray.bsin.server.domain.SysPost">
+        select post_id,sys_org_post.org_id from sys_org_post join sys_org  where sys_org_post.org_id=#{orgId}
+    </select>
+</mapper>

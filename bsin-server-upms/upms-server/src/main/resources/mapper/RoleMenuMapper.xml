@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="me.flyray.bsin.server.mapper.RoleMenuMapper">
+
+    <insert id="authorizeMenus"  >
+        insert into sys_role_menu(role_id, menu_id, app_id)  values
+        <foreach collection="menuIds" item="menuId" separator="," >
+           (#{roleId},#{menuId},#{appId})
+        </foreach>
+    </insert>
+
+    <delete id="unAuthorizeMenusByAppId" parameterType="java.lang.String">
+        delete from sys_role_menu where app_id = #{appId}
+    </delete>
+
+    <delete id="unAuthorizeMenusByRoleId" parameterType="java.lang.String">
+        delete from sys_role_menu where role_id = #{roleId}
+    </delete>
+
+    <select id="selectUserMenuIds" resultType="java.lang.String">
+        select menu_id from sys_role_menu where role_id in
+        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
+            #{roleId,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <delete id="unAuthorizeMenuByAppIdAndMenuId" parameterType="java.lang.String">
+        delete from sys_role_menu where app_id = #{appId} and menu_id=#{menuId}
+    </delete>
+</mapper>

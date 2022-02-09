@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+
+    <bean id="stateMachineEngine" class="io.seata.saga.engine.impl.ProcessCtrlStateMachineEngine">
+        <property name="stateMachineConfig" ref="bsinSagaStateMachineConfig"></property>
+    </bean>
+
+    <sofa:reference jvm-first="false" id="appService" interface="com.alipay.sofa.rpc.api.GenericService">
+        <sofa:binding.bolt>
+            <sofa:global-attrs generic-interface="me.flyray.bsin.facade.service.AppService"/>
+        </sofa:binding.bolt>
+    </sofa:reference>
+
+    <!--
+    <bean id="bsinSagaStateMachineConfig" class="me.flyray.bsin.gateway.config.BsinSagaStateMachineConfig">
+        <property name="dataSource" ref="dataSource"></property> -->
+        <!-- 动态加载状态数据 -->
+        <!--<property name="resources" value="classpath*:statelang/*.json"></property>-->
+    <!--  <property name="enableAsync" value="true"></property>
+        <property name="threadPoolExecutor" ref="threadExecutor"></property>
+        <property name="applicationId" value="saga_sample"></property>
+        <property name="txServiceGroup" value="my_test_tx_group"></property>
+    </bean>
+    -->
+
+    <bean id="bsinSagaStateMachineConfig" class="io.seata.saga.engine.config.DbStateMachineConfig">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 动态加载状态数据 -->
+        <property name="resources" value="classpath*:statelang/*.json"></property>
+        <property name="enableAsync" value="true"></property>
+        <property name="threadPoolExecutor" ref="threadExecutor"></property>
+        <property name="applicationId" value="saga_sample"></property>
+        <property name="txServiceGroup" value="my_test_tx_group"></property>
+    </bean>
+
+    <bean id="threadExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
+        <property name="threadNamePrefix" value="SAGA_ASYNC_EXE_"/>
+        <property name="corePoolSize" value="1"/>
+        <property name="maxPoolSize" value="20"/>
+    </bean>
+    <bean class="io.seata.saga.rm.StateMachineEngineHolder">
+        <property name="stateMachineEngine" ref="stateMachineEngine"/>
+    </bean>
+</beans>
+
+

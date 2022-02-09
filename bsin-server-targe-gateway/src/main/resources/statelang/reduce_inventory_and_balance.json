@@ -1,0 +1,133 @@
+{
+  "nodes": [
+    {
+      "type": "node",
+      "size": "72*72",
+      "shape": "flow-circle",
+      "color": "#FA8C16",
+      "label": "Start",
+      "stateId": "Start1",
+      "stateType": "Start",
+      "stateProps": {
+        "StateMachine": {
+          "Name": "reduceInventoryAndBalance1",
+          "Comment": "reduce inventory then reduce balance in a transaction",
+          "Version": "0.0.1"
+        }
+      },
+      "x": 336.5,
+      "y": 115.25,
+      "id": "f7c25bf2"
+    },
+    {
+      "type": "node",
+      "size": "110*48",
+      "shape": "flow-rect",
+      "color": "#1890FF",
+      "label": "ServiceTask1",
+      "stateId": "ServiceTask1",
+      "stateType": "ServiceTask",
+      "stateProps": {
+        "ServiceName": "bsinStateMachineServiceTaskProxyImpl",
+        "ServiceMethod": "execute",
+        "Input": [
+          {
+            "serviceName":"InventoryAction",
+            "serviceMethod":"reduce",
+            "param":{
+              "businessKey":"$.[businessKey]",
+              "count":"$.[count]"
+            }
+          }
+        ],
+        "Output": {
+          "reduceInventoryResult": "$.#root"
+        },
+        "Status": {
+          "#root == true": "SU",
+          "#root == false": "FA",
+          "$Exception{java.lang.Throwable}": "UN"},
+        "Retry": []
+      },
+      "x": 334.5,
+      "y": 261.25,
+      "id": "e9839522"
+    },
+    {
+      "type": "node",
+      "size": "110*48",
+      "shape": "flow-rect",
+      "color": "#1890FF",
+      "label": "ServiceTask2",
+      "stateId": "ServiceTask2",
+      "stateType": "ServiceTask",
+      "stateProps": {
+        "ServiceName": "bsinStateMachineServiceTaskProxyImpl",
+        "ServiceMethod": "execute",
+        "Input": [
+          {
+            "serviceName":"BalanceAction",
+            "serviceMethod":"reduce",
+            "param":{
+              "businessKey":"$.[businessKey]",
+              "amount":"$.[amount]",
+              "para":{
+                "throwException": "$.[mockReduceBalanceFail]"
+              }
+            }
+          }
+        ],
+        "Output": {
+          "compensateReduceBalanceResult": "$.#root"
+        },
+        "Status": {
+          "#root == true": "SU",
+          "#root == false": "FA",
+          "$Exception{java.lang.Throwable}": "UN"
+        },
+        "Retry": []
+      },
+      "x": 328.5,
+      "y": 388.25,
+      "id": "244961a6"
+    },
+    {
+      "type": "node",
+      "size": "72*72",
+      "shape": "flow-circle",
+      "color": "#05A465",
+      "label": "Succeed",
+      "stateId": "Succeed1",
+      "stateType": "Succeed",
+      "x": 321.5,
+      "y": 514.25,
+      "id": "5b1526ea"
+    }
+  ],
+  "edges": [
+    {
+      "source": "f7c25bf2",
+      "sourceAnchor": 2,
+      "target": "e9839522",
+      "targetAnchor": 0,
+      "id": "e7e4ccf4",
+      "shape": "flow-polyline-round"
+    },
+    {
+      "source": "e9839522",
+      "sourceAnchor": 2,
+      "target": "244961a6",
+      "targetAnchor": 0,
+      "id": "feb27f46",
+      "shape": "flow-polyline-round"
+    },
+    {
+      "source": "244961a6",
+      "sourceAnchor": 2,
+      "target": "5b1526ea",
+      "targetAnchor": 0,
+      "id": "aec0c57d",
+      "shape": "flow-polyline-round"
+    }
+  ]
+}

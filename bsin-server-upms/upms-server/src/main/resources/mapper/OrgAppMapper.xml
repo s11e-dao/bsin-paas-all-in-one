@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.flyray.bsin.server.mapper.OrgAppMapper">
+    <delete id="deleteAppAssociationById" parameterType="java.lang.String">
+        delete
+        from sys_org_app
+        where org_id = #{orgId}
+    </delete>
+
+    <insert id="authorizeApp">
+        insert into sys_org_app(org_id, app_id,type) values (#{orgId},#{appId},#{type})
+    </insert>
+
+    <delete id="unAuthorizeAppsByOrgId" parameterType="java.lang.String">
+        delete
+        from sys_org_app
+        <where>
+            org_id = #{orgId}
+            <if test="type = null and type = ''">
+                and type =  #{type}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="unAuthorizeApp" parameterType="java.lang.String">
+        delete
+        from sys_org_app
+        where org_id = #{orgId} and app_id = #{appId}
+    </delete>
+
+    <select id="getOrgIdsByAppId" parameterType="java.lang.String" resultType="java.lang.String">
+        select org_id from sys_org_app where app_id = #{appId}
+    </select>
+
+    <select id="getAppByOrgId" resultType="me.flyray.bsin.server.domain.SysOrg">
+        select sys_org_app.app_id,sys_org.org_id from sys_org_app join sys_org where sys_org_app.org_id=#{orgId}
+    </select>
+
+    <delete id="unAuthorizeAppsByOrgIdAndAppId" parameterType="java.lang.String">
+        delete sys_org_app
+        from sys_org_app ,sys_org
+        where sys_org_app.org_id = sys_org.org_id and sys_org.org_id = #{orgId} and sys_org_app.app_id = #{appId}
+    </delete>
+
+</mapper>
