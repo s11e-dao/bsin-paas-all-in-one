@@ -70,6 +70,9 @@ http://h5.huoyuanshequ.com
 
 ## 技术交流
 
+加个人微信，入微信技术群
+![avatar](./doc/images/bsin-bot微信.jpg)
+
 * QQ交流群： 
 
 ![avatar](./doc/images/qq交流群.png)
