@@ -1,0 +1,12 @@
+.header {
+  box-shadow: 3px 0px 3px 0px #e3e4e5;
+}
+.header .trigger {
+  float: left;
+  color: #999;
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
