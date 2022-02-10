@@ -62,10 +62,14 @@ http://merchant.flyray.me/
 * 工作流引擎
 ![avatar](./doc/images/sys/工作流引擎.png)
 
+* 工作流画布
+![avatar](./doc/images/sys/工作流画布.png)
+
+
 * 服务编排
 ![avatar](./doc/images/sys/服务编排.png)
 
-* 服务编排1
+* 服务编排画布
 ![avatar](./doc/images/sys/服务编排1.png)
 
 * 数字资产管理平台
@@ -149,5 +153,8 @@ http://h5.huoyuanshequ.com
 
 ## 生态激励计划
 ![avatar](./doc/images/sys/生态激励计划.png)
+
+## 开源地址
+* https://gitee.com/bsin-paas/all-in-one.git
 
 
