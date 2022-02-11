@@ -1,10 +1,10 @@
 package me.flyray.bsin.gateway.service;
 
-import me.flyray.bsin.gateway.domain.ChoreographyService;
+import me.flyray.bsin.gateway.domain.ChoreographyServiceBiz;
 
 import java.util.Map;
 
 public interface ChoreographyServiceService {
 
-    ChoreographyService getChoreographyServiceByServiceAndMethod(Map<String,Object> requestMap);
+    ChoreographyServiceBiz getChoreographyServiceByServiceAndMethod(Map<String,Object> requestMap);
 }

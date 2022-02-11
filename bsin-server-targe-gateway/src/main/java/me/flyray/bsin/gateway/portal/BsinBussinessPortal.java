@@ -1,8 +1,14 @@
 package me.flyray.bsin.gateway.portal;
 
 import me.flyray.bsin.gateway.common.ApiResult;
+import me.flyray.bsin.gateway.context.BsinContextBuilder;
+import me.flyray.bsin.gateway.domain.ChoreographyServiceBiz;
+import me.flyray.bsin.gateway.service.ChoreographyServiceService;
+import me.flyray.bsin.gateway.service.impl.BsinInvokeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -13,8 +19,15 @@ import java.util.Map;
  * @modified By：
  */
 
-
+@RestController
 public class BsinBussinessPortal {
+
+    @Autowired
+    public BsinContextBuilder bsinContextBuilder;
+    @Autowired
+    public BsinInvokeService bsinInvokeService;
+    @Autowired
+    private ChoreographyServiceService choreographyServiceService;
 
     /**
      * http请求入口
@@ -23,7 +36,22 @@ public class BsinBussinessPortal {
      */
     @PostMapping("/biz-gateway")
     public ApiResult portal(@RequestBody Map<String, Object> req) {
-
-        return null;
+        // 系统参数
+        String serviceName = (String) req.get("serviceName");
+        String methodName = (String) req.get("methodName");
+        // 1、拼装报文
+        Map<String, Object> reqParam = bsinContextBuilder.buildReqMessage(req);
+        // 获取编排服务
+        ChoreographyServiceBiz choreographyServiceBiz = choreographyServiceService.getChoreographyServiceByServiceAndMethod(req);
+        if(choreographyServiceBiz != null){
+            // 2、编排服务调用
+            ApiResult apiResult = bsinInvokeService.choreographyInvoke(choreographyServiceBiz, reqParam);
+            return apiResult;
+        }
+        // 3、泛化调用
+        Map result = bsinInvokeService.genericInvoke(serviceName, methodName, reqParam);
+        // 4、响应报文处理
+        ApiResult apiResult = bsinContextBuilder.buildResMessage(serviceName, methodName, result);
+        return  apiResult;
     }
 }

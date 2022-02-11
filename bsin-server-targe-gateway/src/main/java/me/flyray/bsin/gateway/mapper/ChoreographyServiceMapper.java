@@ -1,6 +1,6 @@
 package me.flyray.bsin.gateway.mapper;
 
-import me.flyray.bsin.gateway.domain.ChoreographyService;
+import me.flyray.bsin.gateway.domain.ChoreographyServiceBiz;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface ChoreographyServiceMapper {
 
-    ChoreographyService selectByServiceNameAndMethodName(
+    ChoreographyServiceBiz selectByServiceNameAndMethodName(
             @Param("serviceName") String serviceName,
             @Param("methodName") String methodName);
 

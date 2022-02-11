@@ -18,7 +18,7 @@ public class FilterConfig {
     public FilterRegistrationBean registFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new TokenValidationFilter());
-        registration.addUrlPatterns("/gateway");
+        registration.addUrlPatterns("/gateway","/biz-gateway");
         registration.setName("UrlFilter");
         registration.setOrder(1);
         return registration;

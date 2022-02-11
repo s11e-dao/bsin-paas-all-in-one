@@ -49,8 +49,11 @@ public class TokenValidationFilter implements Filter {
             JSONObject bodyData = JSONObject.parseObject(body);
             String serviceName = String.valueOf(bodyData.get("serviceName"));
             String serviceMethod = String.valueOf(bodyData.get("methodName"));
-            // 判断是否诗登录方法，如果是则不做token校验，直接返回true
-            if (serviceMethod.equals("login") || serviceMethod.equals("getPublishApps") || serviceMethod.equals("getAllTenantList")){
+            // 判断是否诗登录、注册方法，还有火源社区的应用、任务、文章、文章分类如果是则不做token校验，直接返回true
+            if (serviceMethod.equals("login") || serviceMethod.equals("getPublishedApps")
+                    || serviceMethod.equals("getAllTenantList") || serviceMethod.equals("getArticlePageList")
+                    || serviceMethod.equals("register") || serviceMethod.equals("getArticleCategoryList")
+                    || serviceMethod.equals("getAppPageList") || serviceMethod.equals("getTaskList")){
                 chain.doFilter(requestWrapper, response);
                 return;
             }
@@ -68,18 +71,18 @@ public class TokenValidationFilter implements Filter {
                 jwt = JWTUtil.parseToken(token);
             } catch (Exception e){
                 System.out.println(e);
-                throw new BusinessException("token异常");
+                throw new BusinessException(ResponseCode.TOKEN_ERROR);
             }
             String userId = (String) jwt.getPayload("userId");
-            String nickname = (String) jwt.getPayload("nickname");
+            String username = (String) jwt.getPayload("username");
             String email = (String) jwt.getPayload("email");
-            BaseContextHandler.set("nickname",nickname);
             BaseContextHandler.set("email",email);
             String tenantId = (String) jwt.getPayload("tenantId");
             String createBy = (String) jwt.getPayload("createBy");
             String updateBy = (String) jwt.getPayload("updateBy");
             BaseContextHandler.set("tenantId",tenantId);
             BaseContextHandler.set("userId",userId);
+            BaseContextHandler.set("username",username);
             BaseContextHandler.set("createBy",createBy);
             BaseContextHandler.set("updateBy",updateBy);
         }

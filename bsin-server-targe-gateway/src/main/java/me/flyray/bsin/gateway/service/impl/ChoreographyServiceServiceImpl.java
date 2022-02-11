@@ -1,6 +1,6 @@
 package me.flyray.bsin.gateway.service.impl;
 
-import me.flyray.bsin.gateway.domain.ChoreographyService;
+import me.flyray.bsin.gateway.domain.ChoreographyServiceBiz;
 import me.flyray.bsin.gateway.mapper.ChoreographyServiceMapper;
 import me.flyray.bsin.gateway.service.ChoreographyServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ public class ChoreographyServiceServiceImpl implements ChoreographyServiceServic
     private ChoreographyServiceMapper choreographyServiceMapper;
 
     @Override
-    public ChoreographyService getChoreographyServiceByServiceAndMethod(Map<String, Object> requestMap) {
+    public ChoreographyServiceBiz getChoreographyServiceByServiceAndMethod(Map<String, Object> requestMap) {
         String serviceName = (String)requestMap.get("serviceName");
         String methodName = (String)requestMap.get("methodName");
-        ChoreographyService choreographyService =  choreographyServiceMapper.selectByServiceNameAndMethodName(serviceName,methodName);
-        return choreographyService;
+        ChoreographyServiceBiz choreographyServiceBiz =  choreographyServiceMapper.selectByServiceNameAndMethodName(serviceName,methodName);
+        return choreographyServiceBiz;
     }
 }
