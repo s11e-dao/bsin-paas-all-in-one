@@ -178,6 +178,10 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public Map<String, Object> authorizeApps(Map<String, Object> requestMap) {
         String tenantId = (String)requestMap.get("bizTenantId");
+        final SysTenant sysTenant = tenantMapper.selectTenantInfoByTenantId(tenantId);
+        if(sysTenant.getType()==0){
+            throw new BusinessException(ResponseCode.SUB_TENANT_NOT_AUTH);
+        }
         // 获取已经授权的应用ID
         List<String> authedAppIds = appMapper.selectAppIdsByTenantIdAndAppName(tenantId,null);
         List<String> appIds = (List<String>) requestMap.get("appIds");
@@ -186,13 +190,16 @@ public class TenantServiceImpl implements TenantService {
         // a、全部解除授权逻辑
         if(appIds.size()<1){
             // 1、解除给租户的”授权应用“
-            tenantAppMapper.unAuthorizeAppsByTenantId(tenantId, TenantOrgAppType.AUTH.getCode());
+            tenantAppMapper.unAuthorizeAppByTenantId(tenantId, TenantOrgAppType.AUTH.getCode());
             // 2、解绑租户对应机构下的所有”授权应用“
             for (SysOrg tenantOrg :tenantOrgs) {
                 orgAppMapper.unAuthorizeAppsByOrgId(tenantOrg.getOrgId(),TenantOrgAppType.AUTH.getCode());
                 // 3、解除机构对应岗位的应用角色授权
                 for (String authedAppId :authedAppIds) {
-                    postRoleMapper.unAssignRoles(tenantOrg.getOrgId(),authedAppId);
+                    List<String> postIds = orgPostMapper.getPostIdsByOrgId(tenantOrg.getOrgId());
+                    for (String postId :postIds) {
+                        postRoleMapper.unAssignRoles(postId, authedAppId);
+                    }
                 }
             }
             return RespBodyHandler.RespBodyDto();
@@ -201,6 +208,8 @@ public class TenantServiceImpl implements TenantService {
         // 获取需要解除授权的应用ID
         // authedAppIds:[1,2,5]，sysApps:[1,2,3,4]
         List<String> unAuthAppIds = appBiz.getDifferentAppIds(authedAppIds,appIds);
+        // 剔除需集合中默认应用id ，租户下的默认应用不能解绑
+        unAuthAppIds = unAuthAppIds.stream().filter(appId -> tenantAppMapper.selectTenantAppType(tenantId,appId) != 0).collect(Collectors.toList());
         for (String unAuthAppId : unAuthAppIds){
             // 1、解除给租户的”授权应用“
             tenantAppMapper.unAuthorizeApp(tenantId,unAuthAppId);
@@ -208,7 +217,10 @@ public class TenantServiceImpl implements TenantService {
             for (SysOrg tenantOrg :tenantOrgs) {
                 orgAppMapper.unAuthorizeAppsByOrgIdAndAppId(tenantOrg.getOrgId(),unAuthAppId);
                 // 3、解除机构对应岗位的应用角色授权
-                postRoleMapper.unAssignRoles(tenantOrg.getOrgId(), unAuthAppId);
+                List<String> postIds = orgPostMapper.getPostIdsByOrgId(tenantOrg.getOrgId());
+                for (String postId :postIds) {
+                    postRoleMapper.unAssignRoles(postId, unAuthAppId);
+                }
             }
         }
         // 需要授权的应用ID

@@ -19,7 +19,7 @@ public interface TenantAppMapper {
     /**
      * 解除某一类型的所有授权
      */
-    void unAuthorizeAppsByTenantId(@Param("tenantId") String tenantId,@Param("type") String type);
+    void unAuthorizeAppByTenantId(@Param("tenantId") String tenantId,@Param("type") String type);
 
     void unAuthorizeApp(@Param("tenantId") String tenantId , @Param("appId") String appId);
 

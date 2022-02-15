@@ -49,7 +49,7 @@ public class AppServiceImpl implements AppService {
         SysApp sysApp = BsinServiceContext.getReqBodyDto(SysApp.class, requestMap);
         String tenantId = (String)requestMap.get("tenantId");
         // 根据租户类型确定应用类型
-        SysTenant sysTenant = tenantMapper.selectByTenantId(tenantId);
+        SysTenant sysTenant = tenantMapper.selectTenantInfoByTenantId(tenantId);
         if(sysTenant.getType() == 0){
             sysApp.setType(0);
         }else {
@@ -77,7 +77,7 @@ public class AppServiceImpl implements AppService {
         String tenantId = (String)requestMap.get("tenantId");
         // 授权应用不能删除
         String type = tenantAppMapper.selectTenantAppType(tenantId, sysApp.getAppId()).toString();
-        if(type.equals(TenantOrgAppType.AUTH.getCode())){
+        if(type.equals(TenantOrgAppType.AUTH.getCode()) || type.equals(TenantOrgAppType.DEF_AUTH.getCode())){
             throw new BusinessException(ResponseCode.APP_NOT_DELETE);
         }
         // 判断该应用是否被授权给其他机构
@@ -129,7 +129,7 @@ public class AppServiceImpl implements AppService {
      * @return
      */
     @Override
-    public Map<String,Object> selectPageList (Map<String, Object> requestMap) {
+    public Map<String,Object> getPageList (Map<String, Object> requestMap) {
         String tenantId = (String)requestMap.get("tenantId");
         String appId = (String)requestMap.get("appId");
         String appCode = (String)requestMap.get("appCode");
@@ -147,7 +147,7 @@ public class AppServiceImpl implements AppService {
      * @return
      */
     @Override
-    public Map<String, Object> selectAuthorizableList(Map<String, Object> requestMap) {
+    public Map<String, Object> getAuthorizableList(Map<String, Object> requestMap) {
         String tenantId = (String)requestMap.get("tenantId");
         String appName = (String)requestMap.get("appName");
         List<AppResp> sysApps = appMapper.selectListByTenantIdAndAppName(tenantId,appName);
@@ -155,14 +155,14 @@ public class AppServiceImpl implements AppService {
     }
 
     /**
-     * 查询某个租户下已授权的应用
+     * 查询某个租户下的授权应用
      * @param requestMap
      * @return
      */
     @Override
-    public Map<String, Object> selectAuthorizedListByTenantId(Map<String, Object> requestMap) {
+    public Map<String, Object> getAuthorizedListByTenantId(Map<String, Object> requestMap) {
         String tenantId = (String)requestMap.get("bizTenantId");
-        List<AppResp> sysApps = appMapper.selectListByTenantIdAndAppName(tenantId,null);
+        List<AppResp> sysApps = appMapper.selectListByTenantId(tenantId);
         return RespBodyHandler.setRespBodyListDto(sysApps);
     }
 
@@ -172,8 +172,7 @@ public class AppServiceImpl implements AppService {
      * @return
      */
     @Override
-    public Map<String, Object> getPublishApps(Map<String, Object> requestMap) {
-//        String tenantId = (String)requestMap.get("tenantId");
+    public Map<String, Object> getPublishedApps(Map<String, Object> requestMap) {
         List<SysApp> sysApps = appMapper.selectPublishApps();
         return RespBodyHandler.setRespBodyListDto(sysApps);
     }

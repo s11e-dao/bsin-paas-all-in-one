@@ -57,6 +57,7 @@ public enum ResponseCode implements ReturnCode {
 
     // 租户 100700
     TENANT_CODE_EXISTS("100701","租户编码已存在"),
+    SUB_TENANT_NOT_AUTH("100702","超级租户不能授权"),
 
     // 机构岗位 100800
     ID_NOT_ISNULL("100801","Id不能为空");

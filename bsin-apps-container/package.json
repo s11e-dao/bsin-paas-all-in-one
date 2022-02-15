@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
+    "@jiaminghi/data-view-react": "^1.2.4",
+    "styled-components": "^5.2.0",
     "better-scroll": "^2.4.2",
     "caniuse-lite": "^1.0.30001285",
     "react": "17.x",
@@ -29,6 +31,7 @@
     "umi": "^3.5.20",
     "unstated": "^2.1.1",
     "unstated-next": "^1.1.0",
+    "echarts": "^4.9.0",
     "xlsx": "^0.17.4"
   },
   "devDependencies": {

@@ -33,7 +33,7 @@ export default function index(props: any) {
         setAppMenu(res.data);
         setAppCode(app);
       } else {
-        message.error(`你没有${app}权限`);
+        // message.error(`你没有${app}权限`);
         setTimeout(() => {
           history.push('/');
           location.reload();

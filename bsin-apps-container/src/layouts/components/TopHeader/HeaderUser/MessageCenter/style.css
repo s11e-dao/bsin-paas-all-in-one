@@ -1,0 +1,24 @@
+
+.mes {
+  position: relative;
+  padding-top: 5px;
+  width: 40px;
+  height: 64px;
+}
+
+.mes:hover {
+  background-color: rgba(200, 200, 200, 0.45);
+  cursor: pointer;
+}
+
+.mes::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  right: 25%;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 99;
+}

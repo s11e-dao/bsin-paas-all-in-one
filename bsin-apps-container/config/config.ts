@@ -4,7 +4,7 @@ import routes from './router';
 export default defineConfig({
   define: {
     // 后台访问地址
-    //'process.env.baseUrl': 'http://192.168.1.101:8083/gateway',
+    // 'process.env.baseUrl': 'http://192.168.1.100:8083/gateway',
     'process.env.baseUrl': 'http://114.116.93.253:31551/gateway',
   },
   // 设置 node_modules 目录下依赖文件的编译方式。

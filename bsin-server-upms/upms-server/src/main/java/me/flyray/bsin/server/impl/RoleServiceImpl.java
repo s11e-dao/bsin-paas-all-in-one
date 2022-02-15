@@ -4,14 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import me.flyray.bsin.facade.service.RoleService;
 import me.flyray.bsin.server.common.ResponseCode;
-import me.flyray.bsin.server.domain.SysApp;
 import me.flyray.bsin.server.domain.SysRole;
-import me.flyray.bsin.server.domain.SysTenant;
 import me.flyray.bsin.server.exception.BusinessException;
-import me.flyray.bsin.server.mapper.AppMapper;
 import me.flyray.bsin.server.mapper.RoleMapper;
 import me.flyray.bsin.server.mapper.RoleMenuMapper;
-import me.flyray.bsin.server.mapper.TenantMapper;
 import me.flyray.bsin.server.utils.BsinServiceContext;
 import me.flyray.bsin.server.utils.BsinSnowflake;
 import me.flyray.bsin.server.utils.RespBodyHandler;
@@ -29,10 +25,6 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
     @Autowired
     private RoleMenuMapper roleMenuMapper;
-    @Autowired
-    private TenantMapper tenantMapper;
-    @Autowired
-    private AppMapper appMapper;
 
     /**
      * 添加角色

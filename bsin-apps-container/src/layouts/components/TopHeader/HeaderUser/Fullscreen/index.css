@@ -1,0 +1,21 @@
+.open {
+  height: 64px;
+  line-height: 64px;
+  padding: 0 5px;
+}
+
+.open:hover {
+  background-color: rgba(200, 200, 200, 0.45);
+  cursor: pointer;
+}
+
+.fullscreen { 
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 9999;
+  color: #999;
+}

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 @Transactional(rollbackFor = Exception.class)
 public class MenuServiceImpl implements MenuService {
@@ -30,8 +30,6 @@ public class MenuServiceImpl implements MenuService {
     private MenuBiz menuBiz;
     @Autowired
     private TenantMapper tenantMapper;
-    @Autowired
-    private AppMapper appMapper;
     @Autowired
     private PostMapper postMapper;
     @Autowired
@@ -55,7 +53,7 @@ public class MenuServiceImpl implements MenuService {
         String tenantId = (String)requestMap.get("tenantId");
         // 授权应用不能添加菜单
         String type = tenantAppMapper.selectTenantAppType(tenantId, sysMenu.getAppId()).toString();
-        if(type.equals(TenantOrgAppType.AUTH.getCode())){
+        if(type.equals(TenantOrgAppType.AUTH.getCode())|| type.equals(TenantOrgAppType.DEF_AUTH.getCode())){
             throw new BusinessException(ResponseCode.MENU_NOT_ADD);
         }
         //判断菜单编码是否重复
@@ -85,7 +83,7 @@ public class MenuServiceImpl implements MenuService {
         SysMenu menu = menuMapper.selectOneByMenuId(sysMenu.getMenuId());
         // 授权应用不能删除菜单
         String type = tenantAppMapper.selectTenantAppType(tenantId, menu.getAppId()).toString();
-        if(type.equals(TenantOrgAppType.AUTH.getCode())){
+        if(type.equals(TenantOrgAppType.AUTH.getCode())||type.equals(TenantOrgAppType.DEF_AUTH.getCode())){
             throw new BusinessException(ResponseCode.MENU_NOT_DELETE);
         }
         //判断该菜单是否存在子菜单
@@ -109,7 +107,7 @@ public class MenuServiceImpl implements MenuService {
         String tenantId = (String)requestMap.get("tenantId");
         // 授权应用不能编辑菜单
         String type = tenantAppMapper.selectTenantAppType(tenantId, sysMenu.getAppId()).toString();
-        if(type.equals(TenantOrgAppType.AUTH.getCode())){
+        if(type.equals(TenantOrgAppType.AUTH.getCode())||type.equals(TenantOrgAppType.DEF_AUTH.getCode())){
             throw new BusinessException(ResponseCode.MENU_NOT_UPDATE);
         }
 
@@ -144,7 +142,7 @@ public class MenuServiceImpl implements MenuService {
         else{
             sysMenus = menuMapper.selectListByAppId(appId);
         }
-        SysTenant sysTenant = tenantMapper.selectByTenantId(tenantId);
+        SysTenant sysTenant = tenantMapper.selectTenantInfoByTenantId(tenantId);
         if(sysTenant.getType()==1){
               sysMenus = sysMenus.stream().filter(menu -> !menu.getMenuName().equals("租户管理")).collect(Collectors.toList());
         }

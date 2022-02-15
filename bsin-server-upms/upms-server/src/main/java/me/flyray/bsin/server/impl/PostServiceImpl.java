@@ -168,8 +168,10 @@ public class PostServiceImpl implements PostService {
     public Map<String, Object> getPageListByOrgId(Map<String, Object> requestMap) {
         Map<String, Object> pagination = (Map<String, Object>) requestMap.get("pagination");
         String orgId = (String) requestMap.get("orgId");
+        String postCode = (String) requestMap.get("postCode");
+        String postName = (String) requestMap.get("postName");
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
-        List<SysPost> postList = sysPostMapper.getPostByOrgId(orgId);
+        List<SysPost> postList = sysPostMapper.selectPostListByOrgId(orgId,postCode,postName);
         PageInfo<SysPost> pageInfo = new PageInfo<SysPost>(postList);
         return RespBodyHandler.setRespPageInfoBodyDto(pageInfo);
     }
@@ -207,7 +209,7 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     public Map<String, Object> getAssignedPostByUserId(Map<String, Object> requestMap) {
-        String userId = (String) requestMap.get("userId");
+        String userId = (String) requestMap.get("bizUserId");
         List<SysPost> sysPostList = sysPostMapper.getAlreadyAssignPostByUserId(userId);
         return RespBodyHandler.setRespBodyListDto(sysPostList);
     }
@@ -219,10 +221,10 @@ public class PostServiceImpl implements PostService {
      * @return
      */
     @Override
-    public Map<String, Object> getMayAssignPostByUserId(Map<String, Object> requestMap) {
-        String userId = (String) requestMap.get("userId");
+    public Map<String, Object> getAssignablePostByUserId(Map<String, Object> requestMap) {
+        String userId = (String) requestMap.get("bizUserId");
         SysUser user = userMapper.selectById(userId);
-        List<SysPost> postList = sysPostMapper.getPostByOrgId(user.getOrgId());
+        List<SysPost> postList = sysPostMapper.selectPostListByOrgId(user.getOrgId(),null,null);
         return RespBodyHandler.setRespBodyListDto(postList);
     }
 
@@ -235,7 +237,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Map<String, Object> getPostListByOrgId(Map<String, Object> requestMap) {
         String orgId = (String) requestMap.get("orgId");
-        List<SysPost> postList = sysPostMapper.getPostByOrgId(orgId);
+        List<SysPost> postList = sysPostMapper.selectPostListByOrgId(orgId,null,null);
         return RespBodyHandler.setRespBodyListDto(postList);
     }
 }

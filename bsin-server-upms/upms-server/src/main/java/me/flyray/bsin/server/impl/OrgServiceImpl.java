@@ -4,6 +4,7 @@ import me.flyray.bsin.facade.response.AppResp;
 import me.flyray.bsin.facade.response.OrgResp;
 import me.flyray.bsin.facade.response.OrgTree;
 import me.flyray.bsin.facade.service.OrgService;
+import me.flyray.bsin.server.biz.AppBiz;
 import me.flyray.bsin.server.biz.OrgBiz;
 import me.flyray.bsin.server.common.ResponseCode;
 import me.flyray.bsin.server.domain.SysApp;
@@ -42,6 +43,10 @@ public class OrgServiceImpl implements OrgService {
     private PostMapper postMapper;
     @Autowired
     private TenantAppMapper tenantAppMapper;
+    @Autowired
+    private PostRoleMapper postRoleMapper;
+    @Autowired
+    private AppBiz appBiz;
 
     /**
      * 新增机构
@@ -74,16 +79,16 @@ public class OrgServiceImpl implements OrgService {
     public Map<String, Object> delete(Map<String, Object> requestMap) {
         SysOrg sysOrgs = BsinServiceContext.getReqBodyDtoId(SysOrg.class, requestMap);
         // 要删除的对象
-        SysOrg sysOrg = orgMapper.selectById(sysOrgs.getOrgId());
+        SysOrg sysOrg = orgMapper.selectInfoById(sysOrgs.getOrgId());
         // 根据租户id查询所有机构
         List<SysOrg> orgList = orgMapper.selectOrgListByTenantId(sysOrg.getTenantId());
         // 判断机构应用是否有关联关系
         List<SysOrg> appByOrgId = orgAppMapper.getAppByOrgId(sysOrgs.getOrgId());
         // 判断机构岗位是否有关联关系
-        List<SysOrg> postByOrgId = orgPostMapper.getPostByOrgId(sysOrgs.getOrgId());
+        List<String> postIds = orgPostMapper.getPostIdsByOrgId(sysOrgs.getOrgId());
         if (appByOrgId.size() > 0) {
             throw new BusinessException(ResponseCode.ORG_APP_IS_RELATED);
-        } else if (postByOrgId.size() > 0) {
+        } else if (postIds.size() > 0) {
             throw new BusinessException(ResponseCode.ORG_POST_IS_RELATED);
         } else {
             // 遍历机构列表
@@ -162,10 +167,10 @@ public class OrgServiceImpl implements OrgService {
     }
 
     /**
-     * 授权应用
-     * 创建租户时，顶级机构下的应用不能解除授权
-     * 1、解除新增、其他授权的应用绑定
-     * 2、重新授权应用
+     * 授权应用 注：创建租户时，顶级机构下的应用不能解除授权
+     * 1、判断是否是顶级机构，顶级机构解绑时需要剔除默认应用id
+     * 2、解绑需要解绑的应用，同时解除机构对应岗位的应用角色授权
+     * 3、授权需要授权的应用
      * @return
      */
     @Override
@@ -176,13 +181,60 @@ public class OrgServiceImpl implements OrgService {
         if (orgId == null) {
             throw new BusinessException(ResponseCode.ID_NOT_ISNULL);
         }
-        //解除新增、其他授权的应用绑定
-        orgAppMapper.unAuthorizeAppsByOrgId(orgId,null);
+        // 获取机构下的授权应用
+        List<String> authedAppIds = appMapper.selectAppIdsByOrgId(orgId);
+        // a、全部解绑
         if(appIds.size()<1){
+            // 判断是否是顶级机构，顶级机构下的默认应用不解绑
+            if(orgMapper.selectInfoById(orgId).getParentId().equals("-1")){
+                // 解除新增、其他授权的应用绑定
+                orgAppMapper.unAuthorizeAppsByOrgId(orgId,TenantOrgAppType.ADD.getCode());
+                orgAppMapper.unAuthorizeAppsByOrgId(orgId,TenantOrgAppType.AUTH.getCode());
+                // 去除默认应用
+                authedAppIds = authedAppIds.stream().filter(appId -> orgAppMapper.selectOrgAppType(orgId, appId) != 0).collect(Collectors.toList());
+                // 解除机构对应岗位的应用角色授权
+                for (String authedAppId :authedAppIds) {
+                    List<String> postIds = orgPostMapper.getPostIdsByOrgId(orgId);
+                    for (String postId :postIds) {
+                        postRoleMapper.unAssignRoles(postId, authedAppId);
+                    }
+                }
+            } else {
+                // 解除所有应用绑定
+               orgAppMapper.unAuthorizeAppsByOrgId(orgId,null);
+                // 解除机构对应岗位的应用角色授权
+                for (String authedAppId :authedAppIds) {
+                    List<String> postIds = orgPostMapper.getPostIdsByOrgId(orgId);
+                    for (String postId :postIds) {
+                        postRoleMapper.unAssignRoles(postId, authedAppId);
+                    }
+                }
+            }
+            return RespBodyHandler.RespBodyDto();
+        }
+        // b、重新授权逻辑
+        // 1、需要解绑的应用ID
+        List<String> unAuthAppIds = appBiz.getDifferentAppIds(authedAppIds,appIds);
+        // 剔除集合中默认应用id ，顶级机构下默认应用不能解绑
+        if(orgMapper.selectInfoById(orgId).getParentId().equals("-1")){
+            unAuthAppIds = unAuthAppIds.stream().filter(appId -> orgAppMapper.selectOrgAppType(orgId, appId) != 0).collect(Collectors.toList());
+        }
+        for (String unAuthAppId : unAuthAppIds){
+                // 解绑应用
+                orgAppMapper.unAuthorizeAppsByOrgIdAndAppId(orgId,unAuthAppId);
+                // 解除机构对应岗位的应用角色授权
+                List<String> postIds = orgPostMapper.getPostIdsByOrgId(orgId);
+                for (String postId :postIds) {
+                    postRoleMapper.unAssignRoles(postId, unAuthAppId);
+                }
+        }
+        // 2、需要授权的应用ID
+        List<String> dealAuthAppIds = appBiz.getDifferentAppIds(appIds,authedAppIds);
+        if(dealAuthAppIds.size()<1){
             return RespBodyHandler.RespBodyDto();
         }
        // 重新授权应用
-        for (String appId:appIds) {
+        for (String appId:dealAuthAppIds) {
             String type = tenantAppMapper.selectTenantAppType(tenantId, appId).toString();
             orgAppMapper.authorizeApp(orgId, appId,type);
         }
@@ -205,7 +257,7 @@ public class OrgServiceImpl implements OrgService {
             throw new BusinessException(ResponseCode.ID_NOT_ISNULL);
         }
 
-        List<SysPost> postList = postMapper.getPostByOrgId(orgId);
+        List<SysPost> postList = postMapper.selectPostListByOrgId(orgId,null,null);
         sign:
         for (SysPost post: postList) {
             for (String postId:postIds) {
@@ -255,17 +307,5 @@ public class OrgServiceImpl implements OrgService {
         String orgId = (String) requestMap.get("orgId");
         List<AppResp> sysAppList = appMapper.selectOrgAppTypeListByOrgId(orgId);
         return RespBodyHandler.setRespBodyListDto(sysAppList);
-    }
-
-    /**
-     * 查询机构下分配的岗位集合
-     * @param requestMap
-     * @return
-     */
-    @Override
-    public Map<String, Object> getPostListByOrgId(Map<String, Object> requestMap) {
-        String orgId = (String) requestMap.get("orgId");
-        List<SysOrg> sysOrgList = orgPostMapper.getPostByOrgId(orgId);
-        return RespBodyHandler.setRespBodyDto(sysOrgList);
     }
 }

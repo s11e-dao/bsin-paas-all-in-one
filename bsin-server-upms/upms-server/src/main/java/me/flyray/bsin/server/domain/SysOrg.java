@@ -106,5 +106,6 @@ public class SysOrg implements Serializable {
         this.tenantId = tenantId;
         this.orgId = orgId;
         this.parentId= "-1";
+        this.type= 1;
     }
 }

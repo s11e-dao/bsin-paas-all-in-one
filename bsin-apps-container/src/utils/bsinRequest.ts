@@ -118,7 +118,7 @@ bsinRequest.interceptors.response.use(
         .then((body) => {
           if (body?.code !== '000000') {
             notification.error({
-              message: body?.code,
+              message: '',
               description: body?.message,
             });
             body = false;

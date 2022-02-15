@@ -12,17 +12,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public enum TenantOrgAppType {
 
     /**
-     * 默认授权
+     * 默认应用
      */
-    DEF_AUTH("0","默认授权"),
+    DEF_AUTH("0","默认应用"),
     /**
      * 新增授权
      */
-    ADD("1", "新增授权"),
+    ADD("1", "新增应用"),
     /**
      * 其他授权
      */
-    AUTH("2", "其他授权");
+    AUTH("2", "其他授权应用");
 
     private String code;
 

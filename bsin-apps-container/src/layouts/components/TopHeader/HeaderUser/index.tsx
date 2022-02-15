@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import LayoutContext from '../../../stores/LayoutContext';
 import AvatarDropdown from './AvatarDropdown';
 import MessageCenter from './MessageCenter';
+import Fullscreen from './Fullscreen';
 
 const HeaderUser = () => {
   // 引入公共数据
@@ -10,7 +11,6 @@ const HeaderUser = () => {
 
   return (
     <Row
-      gutter={[16, 16]}
       justify="end"
       style={
         counter.menuTheme === 'light'
@@ -18,6 +18,9 @@ const HeaderUser = () => {
           : { color: '#fff', textAlign: 'center' }
       }
     >
+      <Col>
+        <Fullscreen />
+      </Col>
       <Col>
         <MessageCenter />
       </Col>

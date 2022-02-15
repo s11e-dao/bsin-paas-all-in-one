@@ -8,6 +8,8 @@ import {
 } from '@ant-design/icons';
 import SetTheme from '@/layouts/components/SetTheme';
 import LayoutContext from '../../../../stores/LayoutContext';
+import styles from './style.css';
+import logo2 from '@/assets/logo3.png';
 
 type AvatarDropdownType = {
   userInfo: any;
@@ -56,9 +58,16 @@ const AvatarDropdown: FC<AvatarDropdownType> = ({ userInfo }) => {
     );
   };
   return (
-    <div style={{ textAlign: 'right', marginRight: 30 }}>
+    <div className={styles.wrap}>
       <Dropdown placement="bottomRight" overlay={userContent()}>
-        <a style={{ display: 'inline-block', width: '100%', height: '100%' }}>
+        <div
+          className={styles.dropdown}
+          style={{
+            display: 'inline-block',
+            width: '100%',
+            height: '100%',
+          }}
+        >
           <span
             style={
               counter.menuTheme === 'light'
@@ -68,8 +77,8 @@ const AvatarDropdown: FC<AvatarDropdownType> = ({ userInfo }) => {
           >
             Hi，{userInfo.nickname}
           </span>
-          <Avatar src="https://joeschmoe.io/api/v1/random" />
-        </a>
+          <Avatar src={logo2} style={{ backgroundColor: '#777' }} />
+        </div>
       </Dropdown>
       <SetTheme visible={visible} onClose={onClose} />
     </div>

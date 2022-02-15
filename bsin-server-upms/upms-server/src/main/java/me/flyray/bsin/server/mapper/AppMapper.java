@@ -26,11 +26,15 @@ public interface AppMapper {
 
     SysApp getAppInfoByAppCode(String appCode);
 
-    SysApp getAppInfoByAppId(@Param("appId")String appId);
+    SysApp getAppInfoByAppId(@Param("appId")String appId,@Param("tenantId") String tenantId);
 
     List<AppResp> selectListByTenantIdAndAppName(@Param("tenantId") String  tenantId , @Param("appName") String appName);
 
+    List<AppResp> selectListByTenantId(@Param("tenantId") String  tenantId );
+
     List<String> selectAppIdsByTenantIdAndAppName(@Param("tenantId") String  tenantId , @Param("appName") String appName);
+
+    List<String> selectAppIdsByOrgId(@Param("orgId") String orgId);
 
     List<SysApp> selectListByOrgId(@Param("orgId") String  orgId );
 

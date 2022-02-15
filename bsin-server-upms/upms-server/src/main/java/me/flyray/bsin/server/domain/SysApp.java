@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -50,6 +51,12 @@ public class SysApp implements Serializable {
      * 应用类型
      */
     private Integer type;
+
+    /**
+     *  租户应用类型
+     */
+    @Transient
+    private Integer tenantAppType;
 
     /**
      * 前端语言

@@ -69,7 +69,7 @@ export default function TopHeader() {
         )
       }
       <Row justify="space-between" style={{ paddingRight: 2 }}>
-        <Col xs={2} sm={4} md={8} lg={12} xl={16}>
+        <Col xs={3} sm={6} md={10} lg={14} xl={16}>
           {
             // 判断是否需要显示头部菜单
             counter.layouts === 'Top' &&

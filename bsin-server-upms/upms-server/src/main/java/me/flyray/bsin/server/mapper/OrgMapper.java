@@ -22,7 +22,7 @@ public interface OrgMapper {
 
     void updateById(SysOrg record);
 
-    SysOrg selectById(String orgId);
+    SysOrg selectInfoById(String orgId);
 
     SysOrg selectByOrgCode(String orgCode);
 

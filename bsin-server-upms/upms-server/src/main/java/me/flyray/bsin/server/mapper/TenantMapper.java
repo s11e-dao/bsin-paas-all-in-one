@@ -21,7 +21,7 @@ public interface TenantMapper {
 
     void updateById(SysTenant record);
 
-    SysTenant selectByTenantId(String tenantId);
+    SysTenant selectTenantInfoByTenantId(String tenantId);
 
     List<SysTenant> selectAllList();
 

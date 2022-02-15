@@ -2,9 +2,9 @@ import bsinRequest from '@/utils/bsinRequest';
 
 // 请求示例
 export const getPublishApps = (params: any) => {
-  return bsinRequest('/getPublishApps', {
+  return bsinRequest('/getPublishedApps', {
     serviceName: 'AppService',
-    methodName: 'getPublishApps',
+    methodName: 'getPublishedApps',
     bizParams: {
       ...params,
     },

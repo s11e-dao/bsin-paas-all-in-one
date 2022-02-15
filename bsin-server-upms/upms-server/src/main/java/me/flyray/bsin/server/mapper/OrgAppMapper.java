@@ -22,5 +22,7 @@ public interface OrgAppMapper {
 
     void unAuthorizeAppsByOrgIdAndAppId(@Param("orgId") String orgId , @Param("appId")String appId);
 
+    Integer selectOrgAppType(@Param("orgId") String orgId,@Param("appId") String appId);
+
 
 }

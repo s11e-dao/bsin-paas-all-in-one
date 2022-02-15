@@ -204,7 +204,7 @@ export default function Login() {
                 textAlign: 'left',
               }}
               showSearch
-              placeholder="请选者租户"
+              placeholder="请选择租户"
               optionFilterProp="children"
               onChange={onChange}
               filterOption={(input, option) =>

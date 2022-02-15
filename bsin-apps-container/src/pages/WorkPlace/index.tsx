@@ -23,6 +23,7 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 import styles from './index.less';
+import logo2 from '@/assets/logo3.png';
 
 interface PageProps {
   Apps: AppsState;
@@ -101,7 +102,7 @@ const WorkPlace: FC<PageProps> = ({ Apps, dispatch }) => {
                 avatar={
                   <Avatar
                     size={{ xs: 60, sm: 60, md: 60, lg: 60, xl: 60, xxl: 60 }}
-                    src="https://joeschmoe.io/api/v1/random"
+                    src={logo2}
                   />
                 }
                 title={<div style={{ fontSize: 24 }}>你好，{}</div>}
@@ -201,10 +202,7 @@ const WorkPlace: FC<PageProps> = ({ Apps, dispatch }) => {
                         className={styles.cardTitle}
                         onClick={() => getMenu(item)}
                       >
-                        <Avatar
-                          size="small"
-                          src="https://joeschmoe.io/api/v1/random"
-                        />
+                        <Avatar size="small" src={logo2} />
                         <a>{item.appName}</a>
                       </div>
                     }

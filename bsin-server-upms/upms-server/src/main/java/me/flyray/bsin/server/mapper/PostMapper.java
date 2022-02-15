@@ -37,7 +37,9 @@ public interface PostMapper {
                              @Param("postCode") String postCode,
                              @Param("postName") String postName);
 
-    List<SysPost> getPostByOrgId(@Param("orgId")String orgId);
+    List<SysPost> selectPostListByOrgId(@Param("orgId")String orgId,
+                                        @Param("postCode") String postCode ,
+                                        @Param("postName") String postName);
 
     List<SysPost> getAlreadyAssignPostByUserId(@Param("userId")String userId);
 }

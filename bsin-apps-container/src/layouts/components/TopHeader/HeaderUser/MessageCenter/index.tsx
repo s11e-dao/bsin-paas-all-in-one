@@ -1,6 +1,7 @@
 import React from 'react';
 import { List, Card, Tabs, Typography, Dropdown } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
+import styles from './style.css';
 
 const { TabPane } = Tabs;
 
@@ -58,10 +59,8 @@ export default function MessageCenter() {
   };
   return (
     <Dropdown placement="bottomRight" overlay={massageContent}>
-      <div style={{ width: '100%', height: 64 }}>
-        <BellOutlined
-          style={{ position: 'absolute', top: 23, right: 10, fontSize: 25 }}
-        />
+      <div className={styles.mes}>
+        <BellOutlined style={{ fontSize: 25 }} />
       </div>
     </Dropdown>
   );

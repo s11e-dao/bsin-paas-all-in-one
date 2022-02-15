@@ -1,5 +1,4 @@
 package me.flyray.bsin.server.impl;
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import me.flyray.bsin.facade.service.UserService;
@@ -15,6 +14,7 @@ import java.util.*;
 
 @Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService{
+
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public Map<String, Object> delete(Map<String, Object> requestMap) {
-        String userId = (String) requestMap.get("userId");
+        String userId = (String) requestMap.get("bizUserId");
         // 检查用户是否存在分配了岗位，如果存在抛出异常提示用户
         SysUser postByUserId = userPostMapper.getPostByUserId(userId);
         if (EmptyChecker.isEmpty(userId)) {
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Map<String, Object> edit(Map<String, Object> requestMap) {
         SysUser sysUser = BsinServiceContext.getReqBodyDtoId(SysUser.class, requestMap);
-        String userId = (String) requestMap.get("userId");
+        String userId = (String) requestMap.get("bizUserId");
         if (EmptyChecker.isEmpty(userId)) {
             throw new BusinessException(String.valueOf(ResponseCode.ID_NOT_ISNULL));
         }
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public Map<String, Object> assignPost(Map<String, Object> requestMap) {
-        String userId = (String) requestMap.get("userId");
+        String userId = (String) requestMap.get("bizUserId");
         List<String> postIds = (List<String>) requestMap.get("postIds");
         if (EmptyChecker.isEmpty(userId)) {
             throw new BusinessException(String.valueOf(ResponseCode.ID_NOT_ISNULL));
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService{
             throw new BusinessException(ResponseCode.USER_PASSWORD_IS_FALSE);
         }
         // 登陆返回的用户机构对象信息
-        SysOrg sysOrg = orgMapper.selectById(loginUser.getOrgId());
+        SysOrg sysOrg = orgMapper.selectInfoById(loginUser.getOrgId());
         // 登陆返回的用户岗位对象信息
         List<SysPost> sysPosts = postMapper.getPostByUserId(loginUser.getUserId());
         List<SysRole> roles = new ArrayList<>();
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService{
         if (roles.size() > 0 && roles != null) {
             for (SysRole role : roles) {
                 // 登录返回的所属用户角色的应用
-                SysApp sysApp = appMapper.getAppInfoByAppId(role.getAppId());
+                SysApp sysApp = appMapper.getAppInfoByAppId(role.getAppId(),tenantId);
                 appSet.add(sysApp);
             }
         }

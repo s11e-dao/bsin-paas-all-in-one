@@ -17,5 +17,5 @@ public interface OrgPostMapper {
 
     void unbindPosts(@Param("orgId") String orgId ,@Param("postId") String postId);
 
-    List<SysOrg> getPostByOrgId(String orgId);
+    List<String> getPostIdsByOrgId(String orgId);
 }
