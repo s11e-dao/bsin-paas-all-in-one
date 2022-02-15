@@ -69,7 +69,7 @@ public class BsinContextBuilder {
         if (methodName.equals("login") && requestMap.size() > 0 && serviceName.equals("UserService")){
             Map<String, Object> data = userLogin(requestMap);
             return ApiResult.ok(data);
-        }else if (methodName.equals("login") && requestMap.size() > 0 && serviceName.equals("HysqUserService")){
+        }else if (methodName.equals("login") && requestMap.size() > 0 && serviceName.equals("HysqCustomerService")){
             Map<String, Object> data = appUserLogin(requestMap);
             return ApiResult.ok(data);
         }
