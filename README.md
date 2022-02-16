@@ -104,9 +104,6 @@ http://www.huoyuanshequ.com
 http://h5.huoyuanshequ.com
 ```
 
-## 社区规划
-![avatar](./doc/images/sys/社区规划.png)
-
 ## 社区NFT体系
 ![avatar](./doc/images/sys/社区NFT.png)
 
