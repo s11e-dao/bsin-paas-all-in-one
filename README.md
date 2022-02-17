@@ -23,22 +23,38 @@ http://operation.flyray.me/
 http://merchant.flyray.me/
 ```
 
+>社区地址
+```
+http://www.huoyuanshequ.com
+手机版
+http://h5.huoyuanshequ.com
+```
+
 ## 平台定位
-提供daPaaS层的一站式企业级技术解决方案。
+提供daPaaS层的一站式企业级技术解决方案，帮助企业快速实现商业创新，完成数字化转型。
 
 ## 理念
 为经营者谋发展，为消费者权益，为投资者谋财富
 共创价值 共享价值
 
+
+## 平台总架构设计
+![avatar](./doc/images/sys/架构设计.png)
+
+## 工程介绍
+bsin-apps-container：前端基座
+bsin-server-targe-gateway：网关
+bsin-server-upms：权限管理子应用后端
+bsin-ui-upms：权限管理子应用前端
+
+## 部署手册
+* http://help.flyray.me
+
 ## bsin-paas总体规划
 ![avatar](./doc/images/sys/bsin-paas体系.png)
 
-
 ## 社区规划
 ![avatar](./doc/images/sys/社区规划.png)
-
-## 平台架构
-* 公链或是联盟链对接
 
 ## UI展示
 * 登录页
@@ -72,10 +88,7 @@ http://merchant.flyray.me/
 * react 子应用嵌套
 ![avatar](./doc/images/sys/react应用嵌套.png)
 
-## 社区文档建设
-* http://help.flyray.me
-
->开源协议
+## 开源协议
 
 apache license 2.0
 
@@ -97,12 +110,7 @@ apache license 2.0
 
 火源社区，一个充满激情和想象力的数字组织，聚集了一群目标和愿望最有共鸣的人，我们试图通过开源社区驱动商业，我们默默耕耘，我们从不认为一年就可以改变世界，我们在改变世界的道路上从未停止。我们热爱技术，崇尚技术，天高任鸟飞，海空凭鱼跃。我们奔走在零代码开发趋势的道路上，顺势而为，势不可挡。同时我们在尝试借助区块链的技术建立从根本上符合人类价值观的一种团队协作工具。
 
->社区访问地址
-```
-http://www.huoyuanshequ.com
-手机版
-http://h5.huoyuanshequ.com
-```
+
 
 ## 社区NFT体系
 ![avatar](./doc/images/sys/社区NFT.png)
