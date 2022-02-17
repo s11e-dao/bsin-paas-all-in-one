@@ -42,10 +42,10 @@ http://h5.huoyuanshequ.com
 ![avatar](./doc/images/sys/架构设计.png)
 
 ## 工程介绍
-bsin-apps-container：前端基座
-bsin-server-targe-gateway：网关
-bsin-server-upms：权限管理子应用后端
-bsin-ui-upms：权限管理子应用前端
+* bsin-apps-container：微前端基座
+* bsin-server-targe-gateway：网关
+* bsin-server-upms：权限管理子应用后端
+* bsin-ui-upms：权限管理子应用前端
 
 ## 部署手册
 * http://help.flyray.me
@@ -109,8 +109,6 @@ apache license 2.0
 ## 运营社区
 
 火源社区，一个充满激情和想象力的数字组织，聚集了一群目标和愿望最有共鸣的人，我们试图通过开源社区驱动商业，我们默默耕耘，我们从不认为一年就可以改变世界，我们在改变世界的道路上从未停止。我们热爱技术，崇尚技术，天高任鸟飞，海空凭鱼跃。我们奔走在零代码开发趋势的道路上，顺势而为，势不可挡。同时我们在尝试借助区块链的技术建立从根本上符合人类价值观的一种团队协作工具。
-
-
 
 ## 社区NFT体系
 ![avatar](./doc/images/sys/社区NFT.png)
