@@ -54,8 +54,10 @@ export const RightBottomBox = styled.div`
           display: flex;
           align-items: center;
           flex-direction: column;
-          height: 100px;
+          height: 10vh;
           .dis-text {
+            height: 2vh;
+            line-height: 2vh;
             font-weight: bold;
             margin-top: 0.0625rem;
             color: #b2cfee;

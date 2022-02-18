@@ -89,7 +89,7 @@ export default function TopHeader() {
                   location.hash !== '#/user' &&
                   location.hash !== '#/apps' &&
                   counter.appMenu ? (
-                    <Menu.Item key="1">{counter.appMenu[0].menuName}</Menu.Item>
+                    <Menu.Item key="1">{counter.appMenu.menuName}</Menu.Item>
                   ) : location.hash === '#/user' ? (
                     <Menu.Item key="1">user</Menu.Item>
                   ) : location.hash === '#/apps' ? (

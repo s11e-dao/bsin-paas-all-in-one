@@ -160,6 +160,7 @@ export const FeedbackOptions = (params) => ({
 export const OfflinePortalOptions = (params) => ({
   color: ['#73A0FA', '#73DEB3', '#32C5E9', '#67E0E3'],
   tooltip: {
+    // top: '40',
     trigger: 'axis',
     axisPointer: {
       type: 'cross',
@@ -175,7 +176,7 @@ export const OfflinePortalOptions = (params) => ({
     left: '15',
     right: '15',
     bottom: '0',
-    top: '30',
+    top: '60',
     containLabel: true,
   },
   legend: {

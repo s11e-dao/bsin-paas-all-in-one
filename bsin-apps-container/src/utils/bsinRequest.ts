@@ -28,8 +28,8 @@ export const errorHandler = (error) => {
   // 网络异常
   if (error.message === 'Failed to fetch') {
     notification.error({
-      description: error.message,
       message: '网络异常',
+      description: error.message,
     });
     return false;
   }
@@ -127,7 +127,7 @@ bsinRequest.interceptors.response.use(
         });
     } else {
       notification.error({
-        message: response.status,
+        message: '',
         description: codeMessage?.[response.status],
       });
       return false;

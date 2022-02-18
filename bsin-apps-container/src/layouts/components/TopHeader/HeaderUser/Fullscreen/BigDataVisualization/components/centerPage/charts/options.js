@@ -186,7 +186,7 @@ const mapData = {
     {
       name: '甘肃',
       value: [103.826308, 36.059421, -2],
-      symbolSize: 2,
+      symbolSize: 3,
       itemStyle: {
         normal: {
           color: '#58B3CC',

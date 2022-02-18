@@ -17,28 +17,31 @@ export default function index(props: any) {
 
   // 传入子应用信息
   useEffect(() => {
-    let appCode = location.hash.split('/')[1];
-    if (appCode !== 'workplace' && appCode !== 'user' && appCode !== 'apps') {
-      getUserApplicationMenu(appCode);
+    let app = location.hash.split('/')[1];
+    if (
+      app !== 'workplace' &&
+      app !== 'user' &&
+      app !== 'apps' &&
+      app !== appCode
+    ) {
+      getUserApplicationMenu(app);
     }
   }, [location.hash]);
 
   // 获取用户子应用菜单
   const getUserApplicationMenu = async (app: string) => {
-    if (app !== appCode) {
-      let res = await getUserMenuTreeByAppCode({ appCode: app });
-      console.log(res);
+    let res = await getUserMenuTreeByAppCode({ appCode: app });
+    console.log(res);
 
-      if (res && res.data[0]) {
-        setAppMenu(res.data);
-        setAppCode(app);
-      } else {
-        // message.error(`你没有${app}权限`);
-        setTimeout(() => {
-          history.push('/');
-          location.reload();
-        }, 1000);
-      }
+    if (res && res.data[0]) {
+      setAppMenu(res.data[0]);
+      setAppCode(app);
+    } else {
+      // message.error(`你没有${app}权限`);
+      setTimeout(() => {
+        history.push('/');
+        location.reload();
+      }, 1000);
     }
   };
 

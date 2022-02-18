@@ -15,17 +15,14 @@ export default function BaseMenu({
 }) {
   // 引入公共数据
   const counter = LayoutCounter.useContainer();
-  // 被选中的菜单
-  const [key, setKey] = React.useState(
-    location.hash.slice(location.hash.lastIndexOf('/') + 1),
-  );
-  // 打开的父级菜单
-  const [openKeys, setOpenKeys] = React.useState(['']);
-  // 所有父级的key
-  const [rootSubmenuKeys, setRootSubmenuKeys] = React.useState<
-    (string | undefined)[]
-  >(['']);
 
+  // 被选中的子级菜单
+  const [key, setKey] = React.useState(location.hash.split('#')[1]);
+
+  // 打开的父级菜单
+  const [openKeys, setOpenKeys] = React.useState<string[]>(['']);
+
+  // 获取页面刷新时被选中的子级菜单
   React.useEffect(() => {
     let path = location.hash.split('#')[1];
     setKey(path);
@@ -35,29 +32,42 @@ export default function BaseMenu({
       return;
     }
     if (appMenu) {
-      let rootSubmenuKeys = appMenu.map((item) =>
-        item.children ? item.path : undefined,
-      );
-
-      setRootSubmenuKeys(rootSubmenuKeys);
-      appMenu.forEach((item) => {
-        if (item.children) {
-          item.children.forEach((i) =>
-            i.path === path ? setOpenKeys([item.path]) : null,
-          );
-        }
-      });
+      console.log(appMenu);
+      getOpenKey(appMenu, path);
     }
   }, [location.hash]);
 
-  // 点击切换菜单时调用
-  const onOpenChange = (keys: string[]) => {
-    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-    if (rootSubmenuKeys && rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+  React.useEffect(() => {
+    let path = location.hash.split('#')[1];
+    // 判断父级菜单不用展开的条件
+    // 如果是上下结构或者子菜单显示模式不是inline 父级菜单不打开
+    if (counter.layouts === 'Top' || counter.mode !== 'inline') {
+      return;
     }
+    if (appMenu) {
+      console.log(appMenu);
+      getOpenKey(appMenu, path);
+    }
+  }, [appMenu]);
+
+  // 查找打开的父级菜单
+  const getOpenKey = (item: AppMenu, path: string) => {
+    item.children.forEach((i) => {
+      if (path === i.path) {
+        setOpenKeys([item.path]);
+        return;
+      } else if (i.children[0]) {
+        getOpenKey(i, path);
+      }
+    });
+  };
+
+  // 点击切换打开的父级菜单时调用
+  const onOpenChange = (keys: string[]) => {
+    console.log(keys);
+
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    setOpenKeys([latestOpenKey ? latestOpenKey : '']);
   };
 
   return (
@@ -71,12 +81,13 @@ export default function BaseMenu({
             theme={counter.menuTheme}
             selectedKeys={[key]}
             mode={mode}
+            style={{ height: '100%' }}
           >
             {
               // 渲染菜单
-              appMenu[0].children.map((item) =>
+              appMenu.children.map((item) =>
                 // 判断是否有子菜单
-                item.children[0] && item.children[0].Type === 1 ? (
+                item.children && item.children[0].Type === 1 ? (
                   <SubMenu
                     key={item.path}
                     icon={<UserOutlined />}
