@@ -60,7 +60,9 @@ public class TokenValidationFilter implements Filter {
             // 校验token
             String token = httpServletRequest.getHeader("Authorization");
             if (token == null || token .equals("") ) {
-                throw new BusinessException(ResponseCode.TOKEN_ERROR);
+                // 将异常分发到/error/exthrow控制器
+                request.getRequestDispatcher("/error/exthrow").forward(request,response);
+                return;
             }
 //            // 校验token
 //            requestWrapper.setAttribute("token",token);
@@ -71,7 +73,9 @@ public class TokenValidationFilter implements Filter {
                 jwt = JWTUtil.parseToken(token);
             } catch (Exception e){
                 System.out.println(e);
-                throw new BusinessException(ResponseCode.TOKEN_ERROR);
+                // 将异常分发到/error/exthrow控制器
+                request.getRequestDispatcher("/error/exthrow").forward(request,response);
+                return;
             }
             String userId = (String) jwt.getPayload("userId");
             String username = (String) jwt.getPayload("username");
