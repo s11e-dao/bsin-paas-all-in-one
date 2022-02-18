@@ -16,6 +16,7 @@
     <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
     <result column="theme" jdbcType="VARCHAR" property="theme" />
     <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="tenantAppType" jdbcType="INTEGER" property="tenantAppType" />
     <result column="app_Language" jdbcType="INTEGER" property="appLanguage" />
   </resultMap>
 
@@ -72,9 +73,10 @@
 
   <select id="getAppInfoByAppId" resultMap="BaseResultMap">
     select
-    <include refid="baseColumnList"/>
-    from sys_app
-    where  app_id = #{appId} and del_flag = 0
+    sys_app.app_id, app_code, app_name, logo, url,`status`, remark, create_by, create_time, update_by,
+      update_time, theme, sys_app.type,sta.type as tenantAppType, app_Language
+    from sys_app left join sys_tenant_app sta on sys_app.app_id = sta.app_id
+    where  sys_app.app_id = #{appId} and tenant_id = #{tenantId} and del_flag = 0
   </select>
 
   <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysApp">
@@ -88,7 +90,6 @@
     update_by = #{updateBy,jdbcType=VARCHAR},
     update_time = now(),
     theme = #{theme,jdbcType=VARCHAR},
-    type = #{type,jdbcType=INTEGER},
     app_Language = #{appLanguage,jdbcType=INTEGER}
     where app_id = #{appId,jdbcType=VARCHAR}
   </update>
@@ -105,6 +106,15 @@
     </where>
   </select>
 
+  <select id="selectListByTenantId"  resultMap="AppResultMap">
+    select
+    lert.app_id, lert.app_name, sys_tenant_app.type
+    from sys_app lert left join sys_tenant_app on lert.app_id = sys_tenant_app.app_id
+    <where>
+      tenant_id = #{tenantId,jdbcType=VARCHAR}   and (sys_tenant_app.type = 2 or sys_tenant_app.type = 0) and del_flag = 0
+    </where>
+  </select>
+
   <select id="selectAppIdsByTenantIdAndAppName"  resultType="java.lang.String">
     select
     lert.app_id
@@ -114,6 +124,15 @@
       <if test="appName != null and appName != ''">
         and app_name like concat ('%',#{appName,jdbcType=VARCHAR},'%')
       </if>
+    </where>
+  </select>
+
+  <select id="selectAppIdsByOrgId" resultType="java.lang.String">
+    select
+    lert.app_id
+    from sys_app lert left join sys_org_app on lert.app_id = sys_org_app.app_id
+    <where>
+      org_id = #{orgId,jdbcType=VARCHAR} and del_flag = 0
     </where>
   </select>
 

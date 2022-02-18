@@ -107,9 +107,9 @@ public interface PostService {
      * @return
      */
     @POST
-    @Path("getMayAssignPostByUserId")
+    @Path("getAssignablePostByUserId")
     @Produces("application/json")
-    public Map<String, Object> getMayAssignPostByUserId(Map<String, Object> requestMap);
+    public Map<String, Object> getAssignablePostByUserId(Map<String, Object> requestMap);
 
     /**
      * 根据用户查询可以分配的岗位

@@ -162,6 +162,10 @@ public class AppServiceImpl implements AppService {
     @Override
     public Map<String, Object> getAuthorizedListByTenantId(Map<String, Object> requestMap) {
         String tenantId = (String)requestMap.get("bizTenantId");
+        if(tenantMapper.selectTenantInfoByTenantId(tenantId).getType()==0){
+            List<AppResp> sysApps = appMapper.selectListByTenantIdAndAppName(tenantId,null);
+            return RespBodyHandler.setRespBodyListDto(sysApps);
+        }
         List<AppResp> sysApps = appMapper.selectListByTenantId(tenantId);
         return RespBodyHandler.setRespBodyListDto(sysApps);
     }

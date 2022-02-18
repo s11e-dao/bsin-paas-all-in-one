@@ -80,17 +80,25 @@
         </where>
     </select>
 
-    <select id="getPostByOrgId" resultMap="map">
-        select sys_post.post_id, sys_post.post_code, sys_post.post_name, sys_post.sort, sys_post.status,
-               sys_post.remark, sys_post.create_by, sys_post.create_time, sys_post.update_by, sys_post.update_time,
-               sys_post.del_flag, sys_post.tenant_id, sys_org_post.org_id, sys_org_post.post_id
+    <select id="selectPostListByOrgId" resultMap="map">
+        select sys_post.post_id, post_code, post_name,sort, status,
+               remark, create_by, create_time,update_by, update_time,
+               tenant_id
         from sys_post join sys_org_post on sys_post.post_id=sys_org_post.post_id
-        where org_id=#{orgId} and del_flag=0
+        <where>
+            org_id=#{orgId} and del_flag=0
+            <if test="postCode != null and postCode != ''">
+                and post_code = #{postCode}
+            </if>
+            <if test="postName != null and postName != ''">
+                and post_name = #{postName}
+            </if>
+        </where>
     </select>
 
     <select id="getAlreadyAssignPostByUserId" resultMap="map">
         select p.post_id, post_code, post_name, sort, status, remark, tenant_id, create_by, create_time, update_by,
-               update_time, del_flag from sys_post p join sys_user_post sup on p.post_id = sup.post_id
+               update_time from sys_post p join sys_user_post sup on p.post_id = sup.post_id
         where user_id = #{userId}
     </select>
 </mapper>

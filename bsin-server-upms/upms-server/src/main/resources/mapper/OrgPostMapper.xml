@@ -28,7 +28,7 @@
         where org_id = #{orgId} and post_id=#{postId}
     </delete>
 
-    <select id="getPostByOrgId" resultType="me.flyray.bsin.server.domain.SysPost">
-        select post_id,sys_org_post.org_id from sys_org_post join sys_org  where sys_org_post.org_id=#{orgId}
+    <select id="getPostIdsByOrgId" resultType="java.lang.String">
+        select post_id from sys_org_post where sys_org_post.org_id=#{orgId}
     </select>
 </mapper>

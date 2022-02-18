@@ -68,7 +68,7 @@
         where tenant_id = #{tenantId,jdbcType=VARCHAR}
     </update>
 
-    <select id="selectByTenantId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectTenantInfoByTenantId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_tenant where tenant_id = #{tenantId,jdbcType=VARCHAR}

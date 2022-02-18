@@ -36,32 +36,32 @@ public interface AppService {
      *分页查询
      */
     @POST
-    @Path("selectPageList")
+    @Path("getPageList")
     @Produces("application/json")
-    Map<String,Object> selectPageList(Map<String,Object> requestMap);
+    Map<String,Object> getPageList(Map<String,Object> requestMap);
 
     /**
      *根据当前租户查询应用
      */
     @POST
-    @Path("selectPageList")
+    @Path("getAuthorizableList")
     @Produces("application/json")
-    Map<String,Object> selectAuthorizableList(Map<String,Object> requestMap);
+    Map<String,Object> getAuthorizableList(Map<String,Object> requestMap);
 
     /**
      *根据租户id查询应用
      */
     @POST
-    @Path("selectListByTenantId")
+    @Path("getAuthorizedListByTenantId")
     @Produces("application/json")
-    Map<String,Object> selectAuthorizedListByTenantId(Map<String,Object> requestMap);
+    Map<String,Object> getAuthorizedListByTenantId(Map<String,Object> requestMap);
 
 
     /**
      *查询所有已发布的应用
      */
     @POST
-    @Path("getPublishApps")
+    @Path("getPublishedApps")
     @Produces("application/json")
-    Map<String,Object> getPublishApps(Map<String,Object> requestMap);
+    Map<String,Object> getPublishedApps(Map<String,Object> requestMap);
 }

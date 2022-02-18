@@ -97,12 +97,12 @@ public interface OrgService {
     @Produces("application/json")
     public Map<String, Object> getAppListByOrgId(Map<String, Object> requestMap);
 
-    /**
-     * 根据机构id查询岗位集合
-     * @return
-     */
-    @POST
-    @Path("getPostListByOrgId")
-    @Produces("application/json")
-    public Map<String, Object> getPostListByOrgId(Map<String, Object> requestMap);
+//    /**
+//     * 根据机构id查询岗位集合
+//     * @return
+//     */
+//    @POST
+//    @Path("getPostListByOrgId")
+//    @Produces("application/json")
+//    public Map<String, Object> getPostListByOrgId(Map<String, Object> requestMap);
 }

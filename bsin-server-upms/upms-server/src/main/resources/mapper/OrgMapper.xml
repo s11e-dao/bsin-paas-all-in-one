@@ -67,7 +67,7 @@
         where org_id = #{orgId}
     </delete>
 
-    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectInfoById" parameterType="java.lang.String" resultMap="BaseResultMap">
         select org_id,
                org_code,
                org_name,

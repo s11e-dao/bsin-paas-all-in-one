@@ -51,7 +51,7 @@
 
     <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysUser">
         update sys_user set user_name=#{username}, password =#{password},status=#{status},
-        org_id=#{orgId},tenant_id=#{tenantId},nickname=#{nickname}, phone=#{phone},avatar=#{avatar},email=#{email},
+        org_id=#{orgId},nickname=#{nickname}, phone=#{phone},avatar=#{avatar},email=#{email},
         update_by=#{updateBy},type=#{type}, update_time = now()  where user_id = #{userId}
     </update>
 
