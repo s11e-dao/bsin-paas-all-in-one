@@ -6,17 +6,10 @@ import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson.JSONObject;
-import me.flyray.bsin.gateway.common.ApiResult;
-import me.flyray.bsin.gateway.common.ResponseCode;
 import me.flyray.bsin.gateway.context.BaseContextHandler;
 import me.flyray.bsin.gateway.exception.BusinessException;
 import me.flyray.bsin.gateway.utils.HttpHelper;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -53,7 +46,8 @@ public class TokenValidationFilter implements Filter {
             if (serviceMethod.equals("login") || serviceMethod.equals("getPublishedApps")
                     || serviceMethod.equals("getAllTenantList") || serviceMethod.equals("getArticlePageList")
                     || serviceMethod.equals("register") || serviceMethod.equals("getArticleCategoryList")
-                    || serviceMethod.equals("getAppPageList") || serviceMethod.equals("getTaskList")){
+                    || serviceMethod.equals("getAppPageList") || serviceMethod.equals("getTaskList")
+            || serviceMethod.equals("getArticleDetails")){
                 chain.doFilter(requestWrapper, response);
                 return;
             }

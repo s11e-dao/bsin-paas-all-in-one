@@ -66,7 +66,7 @@ http://h5.huoyuanshequ.com
 * 登录页
 ![avatar](./doc/images/sys/首页.png)
 
-* 登录页
+* 首页工作台
 ![avatar](./doc/images/sys/工作台.png)
 
 * 主题设置

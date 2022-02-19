@@ -5,11 +5,13 @@ import me.flyray.bsin.gateway.context.BsinContextBuilder;
 import me.flyray.bsin.gateway.domain.ChoreographyServiceBiz;
 import me.flyray.bsin.gateway.service.ChoreographyServiceService;
 import me.flyray.bsin.gateway.service.impl.BsinInvokeService;
+import me.flyray.bsin.gateway.service.impl.BsinWebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -28,6 +30,8 @@ public class BsinBussinessPortal {
     public BsinInvokeService bsinInvokeService;
     @Autowired
     private ChoreographyServiceService choreographyServiceService;
+    @Autowired
+    private BsinWebSocketService webSocketService;
 
     /**
      * http请求入口
@@ -35,10 +39,19 @@ public class BsinBussinessPortal {
      * @return
      */
     @PostMapping("/biz-gateway")
-    public ApiResult portal(@RequestBody Map<String, Object> req) {
+    public ApiResult portal(@RequestBody Map<String, Object> req) throws IOException {
         // 系统参数
         String serviceName = (String) req.get("serviceName");
         String methodName = (String) req.get("methodName");
+        // 业务参数
+        Map<String, Object> bizParams = (Map<String, Object>) req.get("bizParams");
+        if (serviceName.equals("WebSocketService")){
+            // protol为空直接调用
+            String protol = (String) bizParams.get("protol");
+            if (protol == null){
+                webSocketService.WebSocketInvoke(methodName,bizParams);
+            }
+        }
         // 1、拼装报文
         Map<String, Object> reqParam = bsinContextBuilder.buildReqMessage(req);
         // 获取编排服务

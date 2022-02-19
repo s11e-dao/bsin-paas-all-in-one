@@ -45,7 +45,7 @@ public class BsinContextBuilder {
         reqParam.putAll(bizParams);
         reqParam.put("pagination", pagination);
 
-        if (!methodName.equals("login") && !methodName.equals("getPublishedApps")){
+        if (!methodName.equals("login") && !methodName.equals("getPublishedApps") && !methodName.equals("register")){
             reqParam.put("userId", userId);
             reqParam.put("username", username);
             reqParam.put("tenantId",tenantId);
@@ -118,6 +118,7 @@ public class BsinContextBuilder {
         Map<String,Object> data = (Map) result.get("data");
         String userId = (String)data.get("userId");
         String nickname = (String)data.get("nickname");
+        String username = (String)data.get("username");
         String email = (String)data.get("email");
         Map<String,Object> map=new HashMap<>();
         DateTime now=DateTime.now();
@@ -130,6 +131,7 @@ public class BsinContextBuilder {
         map.put(JWTPayload.NOT_BEFORE,now);
         map.put("userId",userId);
         map.put("nickname",nickname);
+        map.put("username",username);
         map.put("email",email);
         String token = JWTUtil.createToken(map, "1234".getBytes());
         data.put("token",token);
