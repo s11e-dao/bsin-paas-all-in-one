@@ -54,6 +54,9 @@ http://h5.huoyuanshequ.com
 * bsin-ui-upms：权限管理子应用前端
 
 ## 部署手册
+[Bsin-PaaS服务端部署文档](./Bsin-PaaS服务端部署文档.md)
+[Bsin-PaaS前端部署文档](./Bsin-PaaS前端部署文档.md)
+
 * http://help.flyray.me
 
 ## bsin-paas总体规划
