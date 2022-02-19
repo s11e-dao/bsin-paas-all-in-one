@@ -62,6 +62,10 @@ http://h5.huoyuanshequ.com
 ## 社区规划
 ![avatar](./doc/images/sys/社区规划.png)
 
+
+## 数字资产平台规划
+![avatar](./doc/images/sys/数字资产平台规划.png)
+
 ## UI展示
 * 登录页
 ![avatar](./doc/images/sys/首页.png)
@@ -121,6 +125,9 @@ apache license 2.0
 
 ## 社区NFT体系
 ![avatar](./doc/images/sys/社区NFT.png)
+
+## 社区数字积分
+![avatar](./doc/images/sys/社区数字积分.png)
 
 ## 技术交流
 
