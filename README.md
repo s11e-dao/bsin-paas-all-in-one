@@ -91,7 +91,10 @@ http://h5.huoyuanshequ.com
 * 数字资产管理平台
 ![avatar](./doc/images/sys/数字资产管理平台.png)
 
-* react 子应用嵌套
+* 数据大屏
+![avatar](./doc/images/sys/数据大屏.png)
+
+* react 不同子应用嵌套
 ![avatar](./doc/images/sys/react应用嵌套.png)
 
 ## 开源协议
