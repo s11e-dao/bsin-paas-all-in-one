@@ -41,6 +41,12 @@ http://h5.huoyuanshequ.com
 ## 平台总架构设计
 ![avatar](./doc/images/sys/架构设计.png)
 
+## 平台架构基于DDD设计理念
+![avatar](./doc/images/sys/DDD设计理念.png)
+
+## bsin-paas定位
+![avatar](./doc/images/sys/bsin-paas定位.png)
+
 ## 工程介绍
 * bsin-apps-container：微前端基座
 * bsin-server-targe-gateway：网关
