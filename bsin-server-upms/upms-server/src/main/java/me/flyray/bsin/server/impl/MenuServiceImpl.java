@@ -38,6 +38,8 @@ public class MenuServiceImpl implements MenuService {
     private RoleMenuMapper roleMenuMapper;
     @Autowired
     private TenantAppMapper tenantAppMapper;
+    @Autowired
+    private AppMapper appMapper;
 
     /**
      * 添加菜单
@@ -61,7 +63,10 @@ public class MenuServiceImpl implements MenuService {
         if(menuInfo != null){
             throw new BusinessException(ResponseCode.MENU_CODE_EXISTS);
         }
+
         sysMenu.setMenuId(BsinSnowflake.getId());
+        SysApp sysApp = appMapper.getAppInfoByAppId(tenantId, sysMenu.getAppId());
+        sysMenu.setPath("/"+sysApp.getAppCode()+sysMenu.getPath());
         menuMapper.insert(sysMenu);
         // 针对前端组件穿梭框，取消全选状态
         roleMenuMapper.unAuthorizeMenuByAppIdAndMenuId(sysMenu.getAppId(),sysMenu.getParentId());
