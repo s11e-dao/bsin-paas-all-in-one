@@ -5,7 +5,7 @@ import me.flyray.bsin.gateway.context.BsinContextBuilder;
 import me.flyray.bsin.gateway.domain.ChoreographyServiceBiz;
 import me.flyray.bsin.gateway.service.ChoreographyServiceService;
 import me.flyray.bsin.gateway.service.impl.BsinInvokeService;
-import me.flyray.bsin.gateway.service.impl.BsinWebSocketService;
+import me.flyray.bsin.gateway.service.impl.BsinWebSocketServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +31,7 @@ public class BsinBussinessPortal {
     @Autowired
     private ChoreographyServiceService choreographyServiceService;
     @Autowired
-    private BsinWebSocketService webSocketService;
+    private BsinWebSocketServiceImpl webSocketService;
 
     /**
      * http请求入口
@@ -50,6 +50,7 @@ public class BsinBussinessPortal {
             String protol = (String) bizParams.get("protol");
             if (protol == null){
                 webSocketService.WebSocketInvoke(methodName,bizParams);
+                return ApiResult.ok();
             }
         }
         // 1、拼装报文
