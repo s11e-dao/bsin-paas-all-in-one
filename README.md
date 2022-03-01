@@ -118,6 +118,9 @@ http://h5.huoyuanshequ.com
 * 火源社区小程序端
 ![avatar](./doc/images/sys/火源社区小程序端.png)
 
+* 火源社区NFT头像
+![avatar](./doc/images/sys/NFT头像.png)
+
 
 ## 开源协议
 
