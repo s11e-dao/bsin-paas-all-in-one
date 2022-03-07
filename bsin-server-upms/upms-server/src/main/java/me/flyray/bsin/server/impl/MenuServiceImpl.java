@@ -65,7 +65,7 @@ public class MenuServiceImpl implements MenuService {
         }
 
         sysMenu.setMenuId(BsinSnowflake.getId());
-        SysApp sysApp = appMapper.getAppInfoByAppId(tenantId, sysMenu.getAppId());
+        SysApp sysApp = appMapper.getAppInfoByAppId(sysMenu.getAppId(),tenantId);
         sysMenu.setPath("/"+sysApp.getAppCode()+sysMenu.getPath());
         menuMapper.insert(sysMenu);
         // 针对前端组件穿梭框，取消全选状态
