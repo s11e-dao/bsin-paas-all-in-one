@@ -16,8 +16,8 @@ addGlobalUncaughtErrorHandler((event: any) => {
     // 子应用加载失败会触发三次，只有第一次要提示，其他略过
     if (window.localStorage.getItem('bsin-microAppMount') !== '3') {
       window.localStorage.setItem('bsin-microAppMount', '3');
-      // history.push('/workplace');
-      // location.reload();
+      history.push('/workplace');
+      location.reload();
     }
   }
 });
@@ -48,6 +48,7 @@ export const qiankun = () => {
             name: item.appCode,
             entry: item.url,
             activeRule: `#/${item.appCode}`,
+            // 传递子应用ID
             props: {
               appId: item.appId,
             },

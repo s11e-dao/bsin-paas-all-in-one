@@ -52,6 +52,8 @@ export default function BaseMenu({
 
   // 查找打开的父级菜单
   const getOpenKey = (item: AppMenu, path: string) => {
+    console.log(item);
+
     item.children.forEach((i) => {
       if (path === i.path) {
         setOpenKeys([item.path]);
@@ -64,8 +66,6 @@ export default function BaseMenu({
 
   // 点击切换打开的父级菜单时调用
   const onOpenChange = (keys: string[]) => {
-    console.log(keys);
-
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     setOpenKeys([latestOpenKey ? latestOpenKey : '']);
   };
@@ -87,7 +87,7 @@ export default function BaseMenu({
               // 渲染菜单
               appMenu.children.map((item) =>
                 // 判断是否有子菜单
-                item.children && item.children[0].Type === 1 ? (
+                item.children[0] && item.children[0].Type === 1 ? (
                   <SubMenu
                     key={item.path}
                     icon={<UserOutlined />}
