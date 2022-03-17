@@ -75,15 +75,15 @@ http://h5.huoyuanshequ.com
 ## bsin-paas总体规划
 ![avatar](./doc/images/sys/bsin-paas体系.png)
 
-## 社区规划
+## 一站式dao管理工具
+![avatar](./doc/images/sys/一站式dao管理工具业务闭环.png)
+
+## 火源社区
 ![avatar](./doc/images/sys/社区规划.png)
 
-## 数字资产平台规划
-![avatar](./doc/images/sys/数字资产平台规划.png)
 
-
-## 数字资产平台功能视图
-![avatar](./doc/images/sys/数字资产平台功能视图.png)
+## 一站式dao管理工具功能规划
+![avatar](./doc/images/sys/一站式dao管理工具功能规划.png)
 
 ## UI展示
 * 登录页
