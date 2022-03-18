@@ -24,21 +24,9 @@ Bsin-PaaS（毕昇） 是一套企业级的低代码、零代码去中心化应�
 
 ## 项目演示
 
->运营平台 租户:bsin-paas 账户:admin 123456
+>bsin-paas平台 租户:bsin-paas 账户:admin 123456
 ```
 http://operation.flyray.me/
-```
-
->商户中心
-```
-http://merchant.flyray.me/
-```
-
->社区地址
-```
-http://www.huoyuanshequ.com
-手机版
-http://h5.huoyuanshequ.com
 ```
 
 ## 平台定位
@@ -75,16 +63,6 @@ http://h5.huoyuanshequ.com
 ## bsin-paas总体规划
 ![avatar](./doc/images/sys/bsin-paas体系.png)
 
-## 一站式dao管理工具
-![avatar](./doc/images/sys/一站式dao管理工具业务闭环.png)
-
-## 火源社区
-![avatar](./doc/images/sys/社区规划.png)
-
-
-## 一站式dao管理工具功能规划
-![avatar](./doc/images/sys/一站式dao管理工具功能规划.png)
-
 ## UI展示
 * 登录页
 ![avatar](./doc/images/sys/首页.png)
@@ -104,7 +82,6 @@ http://h5.huoyuanshequ.com
 * 工作流画布
 ![avatar](./doc/images/sys/工作流画布.png)
 
-
 * 服务编排
 ![avatar](./doc/images/sys/服务编排.png)
 
@@ -120,19 +97,6 @@ http://h5.huoyuanshequ.com
 * react 不同子应用嵌套
 ![avatar](./doc/images/sys/react应用嵌套.png)
 
-
-* 商户登录
-![avatar](./doc/images/sys/商户登录.png)
-
-* 商户中心
-![avatar](./doc/images/sys/商户中心.png)
-
-* 火源社区小程序端
-![avatar](./doc/images/sys/火源社区小程序端.png)
-
-* 火源社区NFT头像
-![avatar](./doc/images/sys/NFT头像.png)
-
 ## 开源协议
 
 apache license 2.0
@@ -141,32 +105,10 @@ apache license 2.0
 * 商业用途需要授权.
 * 对未经过授权进行二次开源或者商业化的将追究法律责任.
 
-## 代号
->海星计划
-海星(starfish)，海星是一种分身有术的动物，它的智能分布在身体各处，一旦你打掉它身体的一部分，那个部分甚至可能自己再长成另一个海星，我们希望我们聚是一个大海星，散是无数的海星。
-
-
 ## 文章署名格式
 >#本文作者#
 
 博羸，外号：雷头，资深聊天工程师，前端代码搬运工，后端粘贴复制工程师，摸鱼界专家，划水界冠军，任务分工工程师，团队愿景规划师，时代的被鞭策对象
-
-## 火源社区
-
-火源社区，是一个致力于推进bsin-paas产品和生态应用开发的dao组织，社区拥有自己的NFT身份等级、数字积分和NFT交易平台。社区的使命是帮助企业或社会组织更低成本接入区块链价值网络，用区块链技术构建一种更富有活力的数字化商业生态模式，从而实现企业实现数字化转型。
-
-> 访问地址
-* http://h5.huoyuanshequ.com
-
-### 火源社区业务闭环
-![avatar](./doc/images/sys/火源社区业务闭环.png)
-
-### 社区NFT体系
-![avatar](./doc/images/sys/社区NFT.png)
-
-### 社区数字积分
-![avatar](./doc/images/sys/社区数字积分.png)
-
 
 ## 技术交流
 
@@ -176,40 +118,5 @@ apache license 2.0
 * QQ交流群： 
 
 ![avatar](./doc/images/qq交流群.png)
-
-* 公众号：
-
-![avatar](./doc/images/bsin-paas公众号.jpg)
-
-* 官方网站： http://www.huoyuanshequ.com
-* 官方博客： http://www.huoyuanshequ.com
-* 关注官方微信公众号，获取更多资讯
-
-## 对社区的期望
-我们希望社区更多的参与进来共建，如果觉得文档不完善，可以参与完善文档，如果觉得代码有问题，可以提 PR 修复 如果希望我们能支持更多场景，也可以提 Feature Request
-我们的知识是从社区而来，我们也有必要赋能社区，帮助社区更好的运作下去。
-
-## 谈谈问题
-```
-* 社区建设问题：
-大部分项目的社区不够强大，并缺乏一个有效激励机制将平台的用户、持币者、开发者利益捆绑在一起。
-* 治理投票过程：
-
-治理论坛发起讨论，并逐步完善，形成正式的 FIPs；
-提交到 Snapshot 进行投票批准；
-投票结果生效并执行。
-```
-
-## 社区治理
-* DAO治理模式
-
-## 生态应用建设计划
-＊ 让每个开发者都可以独立自主的参与子应用生态建设
-
-## 生态激励计划
-![avatar](./doc/images/sys/生态激励计划.png)
-
-## 开源地址
-* https://gitee.com/bsin-paas/all-in-one.git
 
 
