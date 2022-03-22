@@ -47,7 +47,7 @@ public class TokenValidationFilter implements Filter {
                     || serviceMethod.equals("getAllTenantList") || serviceMethod.equals("getArticlePageList")
                     || serviceMethod.equals("register") || serviceMethod.equals("getArticleCategoryList")
                     || serviceMethod.equals("getAppPageList") || serviceMethod.equals("getTaskList")
-            || serviceMethod.equals("getArticleDetails")){
+            || serviceMethod.equals("getArticleDetails") || serviceMethod.equals("getTaskDetails") || serviceName.equals("ChainWalletService")){
                 chain.doFilter(requestWrapper, response);
                 return;
             }
