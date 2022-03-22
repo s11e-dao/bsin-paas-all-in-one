@@ -28,10 +28,11 @@
 			<artifactId>rpc-sofa-boot-starter</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.alipay.sofa</groupId>
-			<artifactId>healthcheck-sofa-boot-starter</artifactId>
-		</dependency>
+		<!-- 该依赖影响sofa-rpc远程调用网关内的方法  -->
+<!--		<dependency>-->
+<!--			<groupId>com.alipay.sofa</groupId>-->
+<!--			<artifactId>healthcheck-sofa-boot-starter</artifactId>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

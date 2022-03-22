@@ -92,7 +92,7 @@ public class BsinContextBuilder {
         String updateBy = (String)sysUser.get("userName");
         Map<String,Object> map=new HashMap<>();
         DateTime now=DateTime.now();
-        DateTime newTime=now.offsetNew(DateField.MINUTE,1);
+        DateTime newTime=now.offsetNew(DateField.MINUTE,60);
         //签发时间
         map.put(JWTPayload.ISSUED_AT,now);
         //过期时间
@@ -109,6 +109,7 @@ public class BsinContextBuilder {
         data.put("token",token);
         return data;
     }
+
 
     /**
      *app用户登录

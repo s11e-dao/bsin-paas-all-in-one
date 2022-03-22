@@ -16,6 +16,13 @@
         </sofa:binding.bolt>
     </sofa:reference>
 
+    <bean id="bsinWebSocketService" class="me.flyray.bsin.gateway.service.impl.BsinWebSocketServiceImpl"/>
+    <sofa:service ref="bsinWebSocketService" interface="me.flyray.bsin.facade.service.BsinWebSocketService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+
     <!--
     <bean id="bsinSagaStateMachineConfig" class="me.flyray.bsin.gateway.config.BsinSagaStateMachineConfig">
         <property name="dataSource" ref="dataSource"></property> -->
@@ -47,6 +54,8 @@
     <bean class="io.seata.saga.rm.StateMachineEngineHolder">
         <property name="stateMachineEngine" ref="stateMachineEngine"/>
     </bean>
+
+
 </beans>
 
 

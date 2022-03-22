@@ -47,7 +47,7 @@ public class TokenValidationFilter implements Filter {
                     || serviceMethod.equals("getAllTenantList") || serviceMethod.equals("getArticlePageList")
                     || serviceMethod.equals("register") || serviceMethod.equals("getArticleCategoryList")
                     || serviceMethod.equals("getAppPageList") || serviceMethod.equals("getTaskList")
-            || serviceMethod.equals("getArticleDetails") || serviceMethod.equals("getTaskDetails") || serviceName.equals("ChainWalletService")){
+            || serviceMethod.equals("getArticleDetails") || serviceMethod.equals("getTaskDetails") || serviceMethod.equals("getTaskDetails") || serviceName.equals("ChainWalletService")){
                 chain.doFilter(requestWrapper, response);
                 return;
             }
@@ -58,13 +58,20 @@ public class TokenValidationFilter implements Filter {
                 request.getRequestDispatcher("/error/exthrow").forward(request,response);
                 return;
             }
-//            // 校验token
-//            requestWrapper.setAttribute("token",token);
-            // JWTUtil.verify(token, "1234".getBytes());
-            // 解析token
+
+            // 解析token    校验token
             JWT jwt = null;
             try {
                 jwt = JWTUtil.parseToken(token);
+                boolean verify = jwt.setKey("1234".getBytes()).verify();
+                boolean validate = jwt.validate(0);
+                if(!verify || !validate){
+                    // 将异常分发到/error/exthrow控制器
+                    request.getRequestDispatcher("/error/exthrow").forward(request,response);
+                    return;
+                }
+
+                requestWrapper.setAttribute("token",token);
             } catch (Exception e){
                 System.out.println(e);
                 // 将异常分发到/error/exthrow控制器
@@ -92,6 +99,20 @@ public class TokenValidationFilter implements Filter {
 
     }
 
+    public String createToken(Map<String,Object> payload){
+        DateTime now=DateTime.now();
+        DateTime newTime=now.offsetNew(DateField.MINUTE,1);
+        //签发时间
+        payload.put(JWTPayload.ISSUED_AT,now);
+        //过期时间
+        payload.put(JWTPayload.EXPIRES_AT,newTime);
+        //生效时间
+        payload.put(JWTPayload.NOT_BEFORE,now);
+        String token = JWTUtil.createToken(payload, "1234".getBytes());
+       return token;
+    }
+
+
     public static void main(String[] args) {
 
         Map<String,Object> map=new HashMap<>();
@@ -107,7 +128,6 @@ public class TokenValidationFilter implements Filter {
         System.out.println(token);
         JWT jwt = JWTUtil.parseToken(token);
         System.out.println(jwt);
-
 
 
     }

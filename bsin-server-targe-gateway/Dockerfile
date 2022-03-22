@@ -3,7 +3,7 @@ WORKDIR /home/admin
 
 COPY ./target/*.jar .
 COPY ./start.sh .
-EXPOSE 8083
+EXPOSE 8097
 
 RUN sed -i 's/\r//' ./start.sh
 

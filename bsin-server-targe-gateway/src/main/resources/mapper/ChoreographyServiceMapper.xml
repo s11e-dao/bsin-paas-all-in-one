@@ -3,7 +3,7 @@
 
 <mapper namespace="me.flyray.bsin.gateway.mapper.ChoreographyServiceMapper">
 
-    <resultMap id="BaseResultMap" type="me.flyray.bsin.gateway.domain.ChoreographyService">
+    <resultMap id="BaseResultMap" type="me.flyray.bsin.gateway.domain.ChoreographyServiceBiz">
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="app_id" jdbcType="VARCHAR" property="appId" />
         <result column="service_name" jdbcType="VARCHAR" property="serviceName" />

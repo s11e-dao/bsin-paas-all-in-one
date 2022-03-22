@@ -13,6 +13,7 @@ node {
     //镜像仓库认证id
     def REGISTRY_CREDENTIALS_ID = 'aliyunImg'
 
+
     stage('Clone') {
         checkout([$class: 'GitSCM', branches: [[name: "${GIT_BRANCHES}"]], extensions: [], userRemoteConfigs: [[credentialsId: "${GIT_CREDENTIALS_ID}", url: "${GIT_REPOSITORY}"]]])
     }
