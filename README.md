@@ -15,7 +15,9 @@ Bsin-PaaS（毕昇） 是一套企业级的低代码、零代码去中心化应�
 [Bsin-PaaS服务端部署文档](./Bsin-PaaS服务端部署文档.md)
 
 
-### **环境准备**
+###  **服务端代码部署** 
+
+#### **环境准备**
 
 *  特别说明
 
@@ -33,17 +35,10 @@ Bsin-PaaS（毕昇） 是一套企业级的低代码、零代码去中心化应�
 | zookeeper | 3.6.2 |               |
 |   seata   | 1.4.2 |               |
 
+#### 步骤
 
 
-###  **服务端代码部署** 
-
-*  特别说明
-
-**无论您是多年编程的高级工程师，还是刚刚入门的实习生，部署请完全参考本文档操作，避免踩坑弯**
-
-
-
-#### 一、项目下载
+##### 一、项目下载
 
 > 项目下载
 
@@ -52,7 +47,7 @@ git clone https://gitee.com/bsin-paas/all-in-one.git
 ```
 
 
-#### 二、初始化数据库
+##### 二、初始化数据库
 
 > 参数说明
 
@@ -70,7 +65,7 @@ bsin-server-targe-gateway\src\main\resources\sql\mysql_ini.sql  网关脚本
 ```
 
 
-#### 三、配置修改
+##### 三、配置修改
 
 1、数据库源信息修改（upms和网关application.properties文件都要修改）
 
@@ -105,7 +100,7 @@ service {
 ```
 
 
-#### 四、启动顺序
+##### 四、启动顺序
 
 1、先启动zookeeper
 
@@ -135,7 +130,9 @@ upms-server\src\main\java\me\flyray\bsin\server\BsinUpmsApplication.java
 
 [Bsin-PaaS前端部署文档](./Bsin-PaaS前端部署文档.md)
 
-### **环境准备**
+###  **前端代码部署** 
+
+#### **环境准备**
 
 *  特别说明
 
@@ -145,13 +142,13 @@ upms-server\src\main\java\me\flyray\bsin\server\BsinUpmsApplication.java
 
  去官方下载node版本，进行本地安装
 
-###  **前端代码部署** 
+####  部署步骤
 
 *  特别说明
 
 **无论您是多年编程的高级工程师，还是刚刚入门的实习生，部署请完全参考本文档操作，避免踩坑弯**
 
-#### 一、项目下载
+##### 一、项目下载
 
 > 项目下载
 
@@ -159,7 +156,7 @@ upms-server\src\main\java\me\flyray\bsin\server\BsinUpmsApplication.java
 git clone https://gitee.com/bsin-paas/all-in-one.git
 ```
 
-#### 二、安装依赖
+##### 二、安装依赖
 
 1、基座依赖安装
 
@@ -178,7 +175,7 @@ npm install
 ```
 
 
-#### 三、配置修改
+##### 三、配置修改
 
 1、基座配置修改
 > 进入bsin-apps-container目录，修改其config目录下的config.ts文件
@@ -193,7 +190,7 @@ npm install
   'process.env.baseUrl': 'http://ip:端口号' 
 ```
 
-#### 四、启动顺序
+##### 四、启动顺序
 
 1、先启动基座
 > 进入bsin-apps-container根目录执行
@@ -209,7 +206,7 @@ npm install
   npm start
 ```
 
-#### 五、访问前端
+##### 五、访问前端
 >  chrome 访问http://localhost:8080
 >  默认用户名：admin
 >  密码：123456
