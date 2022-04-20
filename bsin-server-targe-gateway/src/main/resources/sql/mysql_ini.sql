@@ -3,9 +3,7 @@ Navicat MySQL Data Transfer
 
 Source Server         : 阿里云数据库
 Source Server Version : 50726
-Source Host           : rm-2ze2tn8118l90v997no.mysql.rds.aliyuncs.com:3306
 Source Database       : bsin-gateway
-
 Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
