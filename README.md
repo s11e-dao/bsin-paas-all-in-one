@@ -91,7 +91,7 @@ http://operation.flyray.me/
 ![avatar](./doc/images/sys/服务编排1.png)
 
 * bsin-bot低代码平台
-![avatar](./doc/images/sys/服务编排1.png)
+![avatar](./doc/images/sys/前端低代码.png)
 
 * 数字资产管理平台
 ![avatar](./doc/images/sys/数字资产管理平台.png)
