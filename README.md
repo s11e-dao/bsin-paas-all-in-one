@@ -51,6 +51,12 @@ http://operation.flyray.me/
 ## bsin-paas定位
 ![avatar](./doc/images/sys/bsin-paas定位.png)
 
+## bsin-paas-mvp
+![avatar](./doc/images/sys/bsin-paas-mvp.png)
+
+## 后端开发脚手架
+![avatar](./doc/images/sys/后端开发脚手架.png)
+
 ## 工程介绍
 * bsin-apps-container：微前端基座
 * bsin-server-targe-gateway：网关
