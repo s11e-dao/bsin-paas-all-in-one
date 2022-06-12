@@ -98,9 +98,8 @@ service {
 
 ```java
 在zookeeper的bin目录下输入命令
-    
-./zkServer.sh    调用zookeeper脚本
-./zkServer.sh    start 启动命令
+ 
+./zkServer.sh start   启动命令
 ```
 
 2、启动seata
