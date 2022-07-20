@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2022-06-22 11:46:56
+Date: 2022-06-22 16:34:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,6 +41,7 @@ CREATE TABLE `sys_app` (
 -- ----------------------------
 -- Records of sys_app
 -- ----------------------------
+INSERT INTO `sys_app` VALUES ('1539487429730373632', 'bsin-ui-digital-assets-platform', 'dao治理平台', 'icon', 'http://localhost:9091', '0', '1', 'dao治理平台', '1', null, null, '2022-06-22 13:56:20', null, null, '0');
 INSERT INTO `sys_app` VALUES ('6345489506536636416', 'bsin-ui-upms', '权限管理应用（内测版）', 'avatars[0]', 'http://localhost:8003', '0', '1', 'bsin-paas平台自带的基础权限管理功能', '1', null, '智红光', '2021-12-15 11:17:46', null, '2022-06-13 09:11:55', '0');
 INSERT INTO `sys_app` VALUES ('xxx123xxx', 'xxx123xxx', '租户应用模板', null, 'http://baidu.com', '0', '1', '租户应用模板', '0', null, null, '2021-12-13 15:30:09', null, null, '1');
 INSERT INTO `sys_app` VALUES ('xxx123xxx_dao', 'xxx123xxx_dao', 'dao应用模板', null, 'http://baidu.com', '0', '1', 'dao应用模板', '0', null, null, '2021-12-13 15:30:09', null, null, '1');
@@ -287,11 +288,11 @@ INSERT INTO `sys_menu` VALUES ('1485588008890667008', '1485588008890667008', '�
 INSERT INTO `sys_menu` VALUES ('1485588008920027136', '1485588008920027136', '机构岗位', null, '1485588008718700544', '/bsin-ui-orchestration/bsin-ui-upms/organization-post', '1485588008781615105', null, '99', null, '0', '1', null, '2022-01-24 20:19:17', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1485588008957775872', '1485588008957775872', '角色管理', null, '1485588008718700544', '/bsin-ui-orchestration/bsin-ui-upms/role-management', '1485588008781615105', null, '99', null, '0', '1', null, '2022-01-24 20:19:17', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1485588008991330304', '1485588008991330304', '菜单管理', null, '1485588008718700544', '/bsin-ui-orchestration/bsin-ui-upms/menu-management', '1485588008781615105', null, '99', null, '0', '1', null, '2022-01-24 20:19:17', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1485589233254141952', '1485589233254141952', 'bigan', 'sys', 'xxx123xxx_dao', '/system', '-1', null, '99', null, null, '0', null, '2022-01-24 20:24:08', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1485589233254141952', '1485589233254141952', 'bigan', 'sys', '1539487429730373632', '/system', '-1', null, '99', null, null, '0', null, '2022-01-24 20:24:08', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1485818548466094080', '0001', '模型管理', null, '1483632385215041536', '/model-management-admin', '1483632385437339648', '0', '99', null, '0', '1', null, '2022-01-25 11:35:21', null, '2022-01-25 11:37:03', '0');
 INSERT INTO `sys_menu` VALUES ('1485818678946697216', '00011', '模型管理', null, '1483632385215041536', '/bsin-ui-workflow-admin/model-management-admin', '1485818548466094080', '1', '99', null, '0', '1', null, '2022-01-25 11:35:52', null, '2022-01-25 11:39:27', '0');
 INSERT INTO `sys_menu` VALUES ('1485819679103651840', '00012', '模型类型', null, '1483632385215041536', '/bsin-ui-workflow-admin/model-type-admin', '1485818548466094080', '1', '99', null, '0', '1', null, '2022-01-25 11:39:51', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1485828169486438400', 'echo0000', 'dao可视化', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/home', '1485589233254141952', '', '99', null, '0', '1', null, '2022-01-25 12:13:35', null, '2022-03-25 13:59:59', '0');
+INSERT INTO `sys_menu` VALUES ('1485828169486438400', 'echo0000', 'dao可视化', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/home', '1485589233254141952', '', '99', null, '0', '1', null, '2022-01-25 12:13:35', null, '2022-03-25 13:59:59', '0');
 INSERT INTO `sys_menu` VALUES ('1485830902406844416', '00014', '模型定义', null, '1483632385215041536', '/bsin-ui-workflow-admin/model-definition-admin', '1485818548466094080', '1', '99', null, '0', '1', null, '2022-01-25 12:24:27', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1485831586241974272', '00002', '流程管理', null, '1483632385215041536', 'process-management-admin-nav', '1483632385437339648', '1', '99', null, '0', '1', null, '2022-01-25 12:27:10', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1485831831994634240', '000021', '流程定义', null, '1483632385215041536', '/bsin-ui-workflow-admin/process-definition-admin', '1485831586241974272', '1', '99', null, '0', '1', null, '2022-01-25 12:28:08', null, null, '0');
@@ -301,64 +302,63 @@ INSERT INTO `sys_menu` VALUES ('1485832141739790336', '000024', '历史流程实
 INSERT INTO `sys_menu` VALUES ('1485874279550685184', '000001', '服务编排', null, '1485588008718700544', '/bsin-ui-orchestration', '1485588008781615104', '1', '99', null, '0', '1', null, '2022-01-25 15:16:49', null, '2022-01-25 15:18:22', '0');
 INSERT INTO `sys_menu` VALUES ('1485874371934425088', '0000011', '编排服务', null, '1485588008718700544', '/bsin-ui-orchestration/orchestration', '1485874279550685184', '1', '99', null, '0', '1', null, '2022-01-25 15:17:11', null, '2022-01-25 15:18:32', '0');
 INSERT INTO `sys_menu` VALUES ('1485874462657220608', '0000012', '原子服务', null, '1485588008718700544', '/bsin-ui-orchestration/atomic-service', '1485874279550685184', '1', '99', null, '0', '1', null, '2022-01-25 15:17:32', null, '2022-01-25 15:18:37', '0');
-INSERT INTO `sys_menu` VALUES ('1497165977098522624', 'echo0010', '数字积分', null, 'xxx123xxx_dao', '/digital-Integral', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:05:59', null, '2022-03-09 11:03:49', '0');
-INSERT INTO `sys_menu` VALUES ('1497166577764798464', 'echo0020', '账户管理', null, 'xxx123xxx_dao', '/account-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:08:22', null, '2022-03-08 15:11:49', '0');
-INSERT INTO `sys_menu` VALUES ('1497167052887166976', 'echo0030', '数字资产', null, 'xxx123xxx_dao', '/digital-assets', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:10:16', null, '2022-03-08 16:37:44', '1');
-INSERT INTO `sys_menu` VALUES ('1497167568551677952', 'echo0050', '订单管理', null, 'xxx123xxx_dao', '/order-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:12:19', null, '2022-03-09 14:13:33', '0');
-INSERT INTO `sys_menu` VALUES ('1497167903643013120', 'echo0060', 'NFT铸造', null, 'xxx123xxx_dao', '/nft-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:13:38', null, '2022-03-16 18:32:52', '0');
-INSERT INTO `sys_menu` VALUES ('1497168330333753344', 'echo0011', '发行', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/issue', '1497165977098522624', null, '99', null, '0', '1', null, '2022-02-25 19:15:20', null, '2022-03-09 10:55:17', '0');
-INSERT INTO `sys_menu` VALUES ('1497168827904036864', 'echo0021', '账户信息', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/account-info', '1497166577764798464', null, '99', null, '0', '1', null, '2022-02-25 19:17:19', null, '2022-03-09 13:51:55', '0');
-INSERT INTO `sys_menu` VALUES ('1497169037640208384', 'echo0022', '账户流水', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/account-running-water', '1497166577764798464', null, '99', null, '0', '1', null, '2022-02-25 19:18:09', null, '2022-03-08 15:14:56', '0');
-INSERT INTO `sys_menu` VALUES ('1497169263331512320', 'echo0031', '积分发行', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/integral-issue', '1497167052887166976', null, '99', null, '0', '1', null, '2022-02-25 19:19:03', null, '2022-03-08 15:32:30', '1');
-INSERT INTO `sys_menu` VALUES ('1497169437047001088', 'echo0032', 'NFT铸造', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/NFT-casting', '1497167052887166976', '', '99', null, '0', '1', null, '2022-02-25 19:19:44', null, '2022-03-08 15:34:22', '1');
-INSERT INTO `sys_menu` VALUES ('1497169751871459328', 'echo0041', '文档阅读权益', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/reading', '1497167249881042944', null, '99', null, '0', '1', null, '2022-02-25 19:20:59', null, '2022-03-09 14:03:17', '1');
-INSERT INTO `sys_menu` VALUES ('1497170436990046208', 'echo0051', '转赠订单', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/giving-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:23:42', null, '2022-03-09 14:14:32', '0');
-INSERT INTO `sys_menu` VALUES ('1497170577599893504', 'echo0052', '购买订单', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/buy-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:24:16', null, '2022-03-09 14:14:55', '0');
-INSERT INTO `sys_menu` VALUES ('1497170768537194496', 'echo0053', '出售订单', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/sell-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:25:01', null, '2022-03-09 14:15:17', '0');
-INSERT INTO `sys_menu` VALUES ('1497170867636015104', 'echo0054', '合成订单', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/synthetic-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:25:25', null, '2022-03-09 14:15:39', '0');
-INSERT INTO `sys_menu` VALUES ('1497183422211297280', '131213213', '日志管理', null, '6345489506536636416', '/transfer-record', '1482324429441732608', null, '99', null, '0', '1', null, '2022-02-25 20:15:18', null, '2022-02-25 20:17:18', '0');
-INSERT INTO `sys_menu` VALUES ('1497184308497092608', 'echo0070', '智能合约', null, 'xxx123xxx_dao', '/contract', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 20:18:50', null, '2022-03-21 09:28:20', '0');
+INSERT INTO `sys_menu` VALUES ('1497165977098522624', 'echo0010', '数字积分', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/digital-Integral', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:05:59', null, '2022-03-09 11:03:49', '0');
+INSERT INTO `sys_menu` VALUES ('1497166577764798464', 'echo0020', '账户管理', null, '1539487429730373632', '/account-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:08:22', null, '2022-03-08 15:11:49', '0');
+INSERT INTO `sys_menu` VALUES ('1497167052887166976', 'echo0030', '数字资产', null, '1539487429730373632', '/digital-assets', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:10:16', null, '2022-03-08 16:37:44', '1');
+INSERT INTO `sys_menu` VALUES ('1497167568551677952', 'echo0050', '订单管理', null, '1539487429730373632', '/order-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:12:19', null, '2022-03-09 14:13:33', '0');
+INSERT INTO `sys_menu` VALUES ('1497167903643013120', 'echo0060', 'NFT铸造', null, '1539487429730373632', '/nft-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 19:13:38', null, '2022-03-16 18:32:52', '0');
+INSERT INTO `sys_menu` VALUES ('1497168330333753344', 'echo0011', '发行', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/issue', '1497165977098522624', null, '99', null, '0', '1', null, '2022-02-25 19:15:20', null, '2022-03-09 10:55:17', '0');
+INSERT INTO `sys_menu` VALUES ('1497168827904036864', 'echo0021', '账户信息', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/account-info', '1497166577764798464', null, '99', null, '0', '1', null, '2022-02-25 19:17:19', null, '2022-03-09 13:51:55', '0');
+INSERT INTO `sys_menu` VALUES ('1497169037640208384', 'echo0022', '账户流水', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/account-running-water', '1497166577764798464', null, '99', null, '0', '1', null, '2022-02-25 19:18:09', null, '2022-03-08 15:14:56', '0');
+INSERT INTO `sys_menu` VALUES ('1497169263331512320', 'echo0031', '积分发行', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/integral-issue', '1497167052887166976', null, '99', null, '0', '1', null, '2022-02-25 19:19:03', null, '2022-03-08 15:32:30', '1');
+INSERT INTO `sys_menu` VALUES ('1497169437047001088', 'echo0032', 'NFT铸造', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/NFT-casting', '1497167052887166976', '', '99', null, '0', '1', null, '2022-02-25 19:19:44', null, '2022-03-08 15:34:22', '1');
+INSERT INTO `sys_menu` VALUES ('1497169751871459328', 'echo0041', '文档阅读权益', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/reading', '1497167249881042944', null, '99', null, '0', '1', null, '2022-02-25 19:20:59', null, '2022-03-09 14:03:17', '1');
+INSERT INTO `sys_menu` VALUES ('1497170436990046208', 'echo0051', '转赠订单', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/giving-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:23:42', null, '2022-03-09 14:14:32', '0');
+INSERT INTO `sys_menu` VALUES ('1497170577599893504', 'echo0052', '购买订单', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/buy-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:24:16', null, '2022-03-09 14:14:55', '0');
+INSERT INTO `sys_menu` VALUES ('1497170768537194496', 'echo0053', '出售订单', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/sell-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:25:01', null, '2022-03-09 14:15:17', '0');
+INSERT INTO `sys_menu` VALUES ('1497170867636015104', 'echo0054', '合成订单', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/synthetic-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-02-25 19:25:25', null, '2022-03-09 14:15:39', '0');
+INSERT INTO `sys_menu` VALUES ('1497184308497092608', 'echo0070', '智能合约', null, '1539487429730373632', '/contract', '1485589233254141952', null, '99', null, '0', '1', null, '2022-02-25 20:18:50', null, '2022-03-21 09:28:20', '0');
 INSERT INTO `sys_menu` VALUES ('1500010658182336512', '123456', '表单管理', null, '1483632385215041536', '/bsin-ui-workflow-admin/form-management', '1483632385437339648', null, '99', null, '0', '0', null, '2022-03-05 15:29:44', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1500011157359038464', '123411', '表单管理', null, '1483632385215041536', '/bsin-ui-workflow-admin/form-management-admin', '1500010658182336512', null, '99', null, '0', '1', null, '2022-03-05 15:31:43', null, '2022-03-05 15:35:21', '0');
-INSERT INTO `sys_menu` VALUES ('1501112412970029056', 'echo0012', '流通总览', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/circulation-overview', '1497165977098522624', null, '99', null, '0', '1', null, '2022-03-08 16:27:43', null, '2022-03-09 10:55:47', '0');
-INSERT INTO `sys_menu` VALUES ('1501112669585936384', 'echo0013', '钱包详情', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/wallet-detail', '1497165977098522624', null, '99', null, '0', '1', null, '2022-03-08 16:28:44', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501112974855770112', 'echo0033', '流通报表', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/current-report', '1497167052887166976', null, '99', null, '0', '1', null, '2022-03-08 16:29:57', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501113433851039744', 'echo0042', 'Bsin-Pass授权', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/authorization', '1497167249881042944', null, '99', null, '0', '1', null, '2022-03-08 16:31:46', null, '2022-03-09 14:03:44', '1');
-INSERT INTO `sys_menu` VALUES ('1501126958161989632', 'echo0061', '身份铸造', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/head-casting', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:25:31', null, '2022-03-18 10:19:00', '1');
-INSERT INTO `sys_menu` VALUES ('1501127325071314944', 'echo0062', '头像总览', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/head-overview', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:26:58', null, '2022-03-09 11:19:38', '1');
-INSERT INTO `sys_menu` VALUES ('1501129168610529280', 'echo0063', '主题铸造', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/theme-casting', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:34:18', null, '2022-03-09 11:20:03', '0');
-INSERT INTO `sys_menu` VALUES ('1501129771713695744', 'echo0064', '汇率计算协议', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/exchange-rates', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:36:41', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501130246613766144', 'echo0064', '主题NFT', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/theme-nft', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:38:35', null, '2022-03-09 11:20:22', '0');
-INSERT INTO `sys_menu` VALUES ('1501131140130541568', 'echo0066', '爱吃羊的喜洋洋', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/casting1', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:42:08', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501135938552729600', 'echo0071', '合约模板', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/contract-template', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-08 18:01:12', null, '2022-03-10 19:01:36', '0');
-INSERT INTO `sys_menu` VALUES ('1501136149228425216', 'echo0072', 'ERC721合约模板', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/ERC721', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-08 18:02:02', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501136233353580544', 'echo0073', 'ERC1155合约模板', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/ERC1155', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-08 18:02:22', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501392870932877312', 'echo0072', '合约', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/contract-configuration', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-09 11:02:09', null, '2022-03-10 19:01:43', '0');
-INSERT INTO `sys_menu` VALUES ('1501397597875736576', 'echo0065', '合成记录', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/synthetic-record', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-09 11:20:56', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1501434819790376960', 'echo0080', '会员管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/member-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-09 13:48:50', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1501437140880461824', 'echo0090', 'NFT元数据', null, 'xxx123xxx_dao', '/ipfs-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-09 13:58:04', null, '2022-03-21 09:37:29', '0');
-INSERT INTO `sys_menu` VALUES ('1501438694496800768', 'echo0043', '情侣合成', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/couples', '1497167249881042944', null, '99', null, '0', '1', null, '2022-03-09 14:04:14', null, null, '1');
-INSERT INTO `sys_menu` VALUES ('1501441716522192896', 'echo0055', '充值订单', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/recharge-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-03-09 14:16:15', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1503189024767086592', 'echo0091', '身份元数据', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/portrait-ipfs', '1501437140880461824', null, '99', null, '0', '1', null, '2022-03-14 09:59:26', null, '2022-03-18 15:53:50', '0');
-INSERT INTO `sys_menu` VALUES ('1503189147748274176', 'echo0092', '主题元数据', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/theme-ipfs', '1501437140880461824', null, '99', null, '0', '1', null, '2022-03-14 09:59:55', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1503190509861081088', 'echo0030', '权益管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/equity-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-14 10:05:20', null, '2022-03-17 17:45:48', '0');
-INSERT INTO `sys_menu` VALUES ('1504347994919669760', 'echo0040', 'dao中心', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/center', '1485589233254141952', null, '1', null, '0', '1', null, '2022-03-17 14:44:46', null, '2022-03-25 13:58:17', '0');
-INSERT INTO `sys_menu` VALUES ('1504348161223823360', 'echo0100', '投票管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/voting-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-17 14:45:25', null, '2022-03-22 18:42:38', '1');
-INSERT INTO `sys_menu` VALUES ('1504348363238281216', 'echo0110', '贡献管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/contribution-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-17 14:46:13', null, '2022-03-25 12:32:11', '0');
-INSERT INTO `sys_menu` VALUES ('1504348467785502720', 'echo0120', '运营空投', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/drop-management', '1485589233254141952', null, '99', null, '1', '1', null, '2022-03-17 14:46:38', null, '2022-03-25 12:33:17', '0');
-INSERT INTO `sys_menu` VALUES ('1505848320390729728', 'echo0130', 'dao工具', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/dao-management', '1485589233254141952', null, '2', null, '0', '1', null, '2022-03-21 18:06:31', null, '2022-03-25 13:58:24', '0');
-INSERT INTO `sys_menu` VALUES ('1506176739842330624', 'echo0140', 'dao治理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/dao-govern', '1485589233254141952', null, '3', null, '0', '1', null, '2022-03-22 15:51:32', null, '2022-03-25 13:58:28', '0');
-INSERT INTO `sys_menu` VALUES ('1506219761112059904', 'echo0141', '评选管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/voting-management', '1506176739842330624', null, '99', null, '0', '1', null, '2022-03-22 18:42:29', null, '2022-03-23 17:53:34', '0');
-INSERT INTO `sys_menu` VALUES ('1506532168367738880', 'echo0150', '身份铸造', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/identity', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-23 15:23:53', null, '2022-03-23 15:27:55', '0');
-INSERT INTO `sys_menu` VALUES ('1506532309845807104', 'echo0151', '身份铸造', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/head-casting', '1506532168367738880', null, '99', null, '0', '1', null, '2022-03-23 15:24:27', null, '2022-03-23 15:27:15', '0');
-INSERT INTO `sys_menu` VALUES ('1506532476988821504', 'echo0152', '身份总览', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/head-overview', '1506532168367738880', null, '99', null, '0', '1', null, '2022-03-23 15:25:07', null, '2022-03-23 15:27:22', '0');
-INSERT INTO `sys_menu` VALUES ('1506535667184832512', 'echo0160', '汇率管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/exchange-rate-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-23 15:37:47', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1506540629059047424', 'echo0142', '选举管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/election-management', '1506176739842330624', null, '99', null, '0', '1', null, '2022-03-23 15:57:30', null, '2022-03-23 15:57:40', '0');
-INSERT INTO `sys_menu` VALUES ('1506540793412849664', 'echo0143', '提案管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/motion-management', '1506176739842330624', null, '99', null, '0', '1', null, '2022-03-23 15:58:10', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1501112412970029056', 'echo0012', '流通总览', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/circulation-overview', '1497165977098522624', null, '99', null, '0', '1', null, '2022-03-08 16:27:43', null, '2022-03-09 10:55:47', '0');
+INSERT INTO `sys_menu` VALUES ('1501112669585936384', 'echo0013', '钱包详情', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/wallet-detail', '1497165977098522624', null, '99', null, '0', '1', null, '2022-03-08 16:28:44', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501112974855770112', 'echo0033', '流通报表', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/current-report', '1497167052887166976', null, '99', null, '0', '1', null, '2022-03-08 16:29:57', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501113433851039744', 'echo0042', 'Bsin-Pass授权', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/authorization', '1497167249881042944', null, '99', null, '0', '1', null, '2022-03-08 16:31:46', null, '2022-03-09 14:03:44', '1');
+INSERT INTO `sys_menu` VALUES ('1501126958161989632', 'echo0061', '身份铸造', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/head-casting', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:25:31', null, '2022-03-18 10:19:00', '1');
+INSERT INTO `sys_menu` VALUES ('1501127325071314944', 'echo0062', '头像总览', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/head-overview', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:26:58', null, '2022-03-09 11:19:38', '1');
+INSERT INTO `sys_menu` VALUES ('1501129168610529280', 'echo0063', '主题铸造', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/theme-casting', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:34:18', null, '2022-03-09 11:20:03', '0');
+INSERT INTO `sys_menu` VALUES ('1501129771713695744', 'echo0064', '汇率计算协议', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/exchange-rates', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:36:41', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501130246613766144', 'echo0064', '主题NFT', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/theme-nft', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:38:35', null, '2022-03-09 11:20:22', '0');
+INSERT INTO `sys_menu` VALUES ('1501131140130541568', 'echo0066', '爱吃羊的喜洋洋', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/casting1', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-08 17:42:08', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501135938552729600', 'echo0071', '合约模板', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/contract-template', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-08 18:01:12', null, '2022-03-10 19:01:36', '0');
+INSERT INTO `sys_menu` VALUES ('1501136149228425216', 'echo0072', 'ERC721合约模板', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/ERC721', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-08 18:02:02', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501136233353580544', 'echo0073', 'ERC1155合约模板', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/ERC1155', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-08 18:02:22', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501392870932877312', 'echo0072', '合约', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/contract-configuration', '1497184308497092608', null, '99', null, '0', '1', null, '2022-03-09 11:02:09', null, '2022-03-10 19:01:43', '0');
+INSERT INTO `sys_menu` VALUES ('1501397597875736576', 'echo0065', '合成记录', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/synthetic-record', '1497167903643013120', null, '99', null, '0', '1', null, '2022-03-09 11:20:56', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1501434819790376960', 'echo0080', '会员管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/member-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-09 13:48:50', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1501437140880461824', 'echo0090', 'NFT元数据', null, '1539487429730373632', '/ipfs-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-09 13:58:04', null, '2022-03-21 09:37:29', '0');
+INSERT INTO `sys_menu` VALUES ('1501438694496800768', 'echo0043', '情侣合成', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/couples', '1497167249881042944', null, '99', null, '0', '1', null, '2022-03-09 14:04:14', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('1501441716522192896', 'echo0055', '充值订单', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/recharge-order', '1497167568551677952', null, '99', null, '0', '1', null, '2022-03-09 14:16:15', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1503189024767086592', 'echo0091', '身份元数据', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/portrait-ipfs', '1501437140880461824', null, '99', null, '0', '1', null, '2022-03-14 09:59:26', null, '2022-03-18 15:53:50', '0');
+INSERT INTO `sys_menu` VALUES ('1503189147748274176', 'echo0092', '主题元数据', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/theme-ipfs', '1501437140880461824', null, '99', null, '0', '1', null, '2022-03-14 09:59:55', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1503190509861081088', 'echo0030', '权益管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/equity-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-14 10:05:20', null, '2022-03-17 17:45:48', '0');
+INSERT INTO `sys_menu` VALUES ('1504347994919669760', 'echo0040', 'dao中心', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/center', '1485589233254141952', null, '1', null, '0', '1', null, '2022-03-17 14:44:46', null, '2022-03-25 13:58:17', '0');
+INSERT INTO `sys_menu` VALUES ('1504348161223823360', 'echo0100', '投票管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/voting-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-17 14:45:25', null, '2022-03-22 18:42:38', '1');
+INSERT INTO `sys_menu` VALUES ('1504348363238281216', 'echo0110', '贡献管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/contribution-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-17 14:46:13', null, '2022-03-25 12:32:11', '0');
+INSERT INTO `sys_menu` VALUES ('1504348467785502720', 'echo0120', '运营空投', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/drop-management', '1485589233254141952', null, '99', null, '1', '1', null, '2022-03-17 14:46:38', null, '2022-03-25 12:33:17', '0');
+INSERT INTO `sys_menu` VALUES ('1505848320390729728', 'echo0130', 'dao工具', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/dao-management', '1485589233254141952', null, '2', null, '0', '1', null, '2022-03-21 18:06:31', null, '2022-03-25 13:58:24', '0');
+INSERT INTO `sys_menu` VALUES ('1506176739842330624', 'echo0140', 'dao治理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/dao-govern', '1485589233254141952', null, '3', null, '0', '1', null, '2022-03-22 15:51:32', null, '2022-03-25 13:58:28', '0');
+INSERT INTO `sys_menu` VALUES ('1506219761112059904', 'echo0141', '评选管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/voting-management', '1506176739842330624', null, '99', null, '0', '1', null, '2022-03-22 18:42:29', null, '2022-03-23 17:53:34', '0');
+INSERT INTO `sys_menu` VALUES ('1506532168367738880', 'echo0150', '身份铸造', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/identity', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-23 15:23:53', null, '2022-03-23 15:27:55', '0');
+INSERT INTO `sys_menu` VALUES ('1506532309845807104', 'echo0151', '身份铸造', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/head-casting', '1506532168367738880', null, '99', null, '0', '1', null, '2022-03-23 15:24:27', null, '2022-03-23 15:27:15', '0');
+INSERT INTO `sys_menu` VALUES ('1506532476988821504', 'echo0152', '身份总览', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/head-overview', '1506532168367738880', null, '99', null, '0', '1', null, '2022-03-23 15:25:07', null, '2022-03-23 15:27:22', '0');
+INSERT INTO `sys_menu` VALUES ('1506535667184832512', 'echo0160', '汇率管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/exchange-rate-management', '1485589233254141952', null, '99', null, '0', '1', null, '2022-03-23 15:37:47', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1506540629059047424', 'echo0142', '选举管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/election-management', '1506176739842330624', null, '99', null, '0', '1', null, '2022-03-23 15:57:30', null, '2022-03-23 15:57:40', '0');
+INSERT INTO `sys_menu` VALUES ('1506540793412849664', 'echo0143', '提案管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/motion-management', '1506176739842330624', null, '99', null, '0', '1', null, '2022-03-23 15:58:10', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1506886956569726976', 'echo0001', '测试菜单', null, '6345489506536636416', '/bsin-ui-upms/system/role/list/aaa', '1482324429441732608', null, '0', '测试', '0', '1', null, '2022-03-24 14:53:41', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1507213631417356288', 'echo0111', '贡献总览', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/contribution-overview', '1504348363238281216', null, '99', null, '0', '1', null, '2022-03-25 12:31:47', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1507213841031892992', 'echo0112', '原力规则', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/yuanli-rule', '1504348363238281216', null, '99', null, '0', '1', null, '2022-03-25 12:32:37', null, null, '0');
-INSERT INTO `sys_menu` VALUES ('1507213960053657600', 'echo0113', '任务管理', null, 'xxx123xxx_dao', '/bsin-ui-digital-assets-platform/task-management', '1504348363238281216', null, '99', null, '0', '1', null, '2022-03-25 12:33:05', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1507213631417356288', 'echo0111', '贡献总览', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/contribution-overview', '1504348363238281216', null, '99', null, '0', '1', null, '2022-03-25 12:31:47', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1507213841031892992', 'echo0112', '原力规则', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/yuanli-rule', '1504348363238281216', null, '99', null, '0', '1', null, '2022-03-25 12:32:37', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('1507213960053657600', 'echo0113', '任务管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/task-management', '1504348363238281216', null, '99', null, '0', '1', null, '2022-03-25 12:33:05', null, null, '0');
 INSERT INTO `sys_menu` VALUES ('1508679987190960128', '8', '字典管理', null, '6345489506536636416', '/bsin-ui-upms/dict-management', '1482324429441732608', null, '99', null, '0', '1', null, '2022-03-29 13:38:33', null, '2022-03-29 13:38:33', '0');
 INSERT INTO `sys_menu` VALUES ('1508697866573582336', '9', '区域管理', null, '6345489506536636416', '/bsin-ui-upms/district-management', '1482324429441732608', null, '33', null, '0', '1', null, '2022-03-29 14:49:36', null, '2022-03-29 14:49:36', '0');
 INSERT INTO `sys_menu` VALUES ('1513765823779573760', '1513765823779573760', '工作流', 'sys', '1513765823460806656', '/bsin-ui-workflow-admin', '-1', null, '0', null, null, '0', null, '2022-04-12 14:27:51', null, '2022-04-12 14:27:51', '0');
@@ -395,6 +395,21 @@ INSERT INTO `sys_menu` VALUES ('1531440290781597696', '1531440290781597696', '�
 INSERT INTO `sys_menu` VALUES ('1531440290810957824', '1531440290810957824', '菜单管理', null, '1531440290576076800', '/bsin-ui-orchestration/bsin-ui-upms/menu-management', '1531440290630602753', null, '99', null, '0', '1', null, '2022-05-31 08:59:52', null, '2022-05-31 08:59:52', '0');
 INSERT INTO `sys_menu` VALUES ('1531442832114585600', 'orchestration', '编排服务', null, '1531440290576076800', '/bsin-ui-orchestration/orchestration', '1531440290630602752', null, '2', null, '0', '1', null, '2022-05-31 09:09:58', null, '2022-05-31 09:13:39', '0');
 INSERT INTO `sys_menu` VALUES ('1531443027179081728', 'atomic-service', '原子服务', null, '1531440290576076800', '/bsin-ui-orchestration/atomic-service', '1531440290630602752', null, '1', null, '0', '1', null, '2022-05-31 09:10:45', null, '2022-05-31 09:13:08', '0');
+INSERT INTO `sys_menu` VALUES ('1539487429973643265', '1539487429973643265', '权限管理', 'sys', '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms', '1485589233254141952', null, '0', null, '0', '0', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539487430103666688', '1539487430103666688', '机构管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms/organizational-management', '1539487429973643265', null, '99', null, '0', '1', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539487430233690112', '1539487430233690112', '用户管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms/user-management', '1539487429973643265', null, '99', null, '0', '1', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539487430363713536', '1539487430363713536', '岗位管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms/post-management', '1539487429973643265', null, '99', null, '0', '1', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539487430502125568', '1539487430502125568', '机构岗位', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms/organization-post', '1539487429973643265', null, '99', null, '0', '1', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539487430627954688', '1539487430627954688', '角色管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms/role-management', '1539487429973643265', null, '99', null, '0', '1', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539487430762172416', '1539487430762172416', '菜单管理', null, '1539487429730373632', '/bsin-ui-digital-assets-platform/bsin-ui-upms/menu-management', '1539487429973643265', null, '99', null, '0', '1', null, '2022-06-22 13:56:21', null, '2022-06-22 13:56:21', '0');
+INSERT INTO `sys_menu` VALUES ('1539503497588903936', '1539503497588903936', 'dao治理', 'sys', '1539503497324662784', '/dao-test', '-1', null, '0', null, null, '0', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503497588903937', '1539503497588903937', '权限管理', 'sys', '1539503497324662784', '/dao-test/bsin-ui-upms', '1539503497588903936', null, '0', null, null, '0', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503497723121664', '1539503497723121664', '机构管理', null, '1539503497324662784', '/dao-test/bsin-ui-upms/organizational-management', '1539503497588903937', null, '99', null, '0', '1', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503497865728000', '1539503497865728000', '用户管理', null, '1539503497324662784', '/dao-test/bsin-ui-upms/user-management', '1539503497588903937', null, '99', null, '0', '1', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503497999945728', '1539503497999945728', '岗位管理', null, '1539503497324662784', '/dao-test/bsin-ui-upms/post-management', '1539503497588903937', null, '99', null, '0', '1', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503498134163456', '1539503498134163456', '机构岗位', null, '1539503497324662784', '/dao-test/bsin-ui-upms/organization-post', '1539503497588903937', null, '99', null, '0', '1', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503498268381184', '1539503498268381184', '角色管理', null, '1539503497324662784', '/dao-test/bsin-ui-upms/role-management', '1539503497588903937', null, '99', null, '0', '1', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
+INSERT INTO `sys_menu` VALUES ('1539503498406793216', '1539503498406793216', '菜单管理', null, '1539503497324662784', '/dao-test/bsin-ui-upms/menu-management', '1539503497588903937', null, '99', null, '0', '1', null, '2022-06-22 15:00:12', null, '2022-06-22 15:00:12', '0');
 INSERT INTO `sys_menu` VALUES ('4', '机构管理', '机构管理', null, 'xxx123xxx', '/bsin-ui-upms/organizational-management', '1', null, '99', null, '0', '1', null, '2022-01-17 14:59:47', null, null, '1');
 INSERT INTO `sys_menu` VALUES ('5', '用户管理', '用户管理', null, 'xxx123xxx', '/bsin-ui-upms/user-management', '1', null, '99', null, '0', '1', null, '2022-01-17 14:59:49', null, null, '1');
 INSERT INTO `sys_menu` VALUES ('6', '岗位管理', '岗位管理', null, 'xxx123xxx', '/bsin-ui-upms/post-management', '1', null, '99', null, '0', '1', null, '2022-01-17 14:59:53', null, null, '1');
@@ -430,6 +445,8 @@ CREATE TABLE `sys_org` (
 -- Records of sys_org
 -- ----------------------------
 INSERT INTO `sys_org` VALUES ('1535984304478359552', '1535984304369307648', 'bsin-paas', null, '-1', null, '1', null, null, null, null, null, '6345824413764157440', '2022-06-12 21:56:10', null, '0');
+INSERT INTO `sys_org` VALUES ('1539479386183569408', 'bolei-tenant', '博羸测试', null, '-1', null, '1', null, null, null, null, null, '1539479385919328256', '2022-06-22 13:24:23', null, '0');
+INSERT INTO `sys_org` VALUES ('1539486889738899456', 'bolei-dao', 'bolei-dao', null, '-1', null, '1', null, null, null, null, null, '1539486889516601344', '2022-06-22 13:54:12', null, '0');
 
 -- ----------------------------
 -- Table structure for sys_org_app
@@ -445,7 +462,11 @@ CREATE TABLE `sys_org_app` (
 -- ----------------------------
 -- Records of sys_org_app
 -- ----------------------------
+INSERT INTO `sys_org_app` VALUES ('1535984304478359552', '1539487429730373632', '1');
 INSERT INTO `sys_org_app` VALUES ('1535984304478359552', '6345489506536636416', '0');
+INSERT INTO `sys_org_app` VALUES ('1539479386183569408', '6345489506536636416', '0');
+INSERT INTO `sys_org_app` VALUES ('1539486889738899456', '6345489506536636416', '0');
+INSERT INTO `sys_org_app` VALUES ('1539486889738899456', 'xxx123xxx_dao', '0');
 
 -- ----------------------------
 -- Table structure for sys_org_post
@@ -462,6 +483,8 @@ CREATE TABLE `sys_org_post` (
 -- ----------------------------
 INSERT INTO `sys_org_post` VALUES ('1535984304478359552', '1535984304579022848');
 INSERT INTO `sys_org_post` VALUES ('1535984304478359554', '');
+INSERT INTO `sys_org_post` VALUES ('1539479386183569408', '1539479386846269440');
+INSERT INTO `sys_org_post` VALUES ('1539486889738899456', '1539486890191884288');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -487,6 +510,8 @@ CREATE TABLE `sys_post` (
 -- Records of sys_post
 -- ----------------------------
 INSERT INTO `sys_post` VALUES ('1535984304579022848', '3213213', '超级管理员岗（内测版）', null, '0', '32132', '6345824413764157440', null, '2022-01-17 18:04:25', null, '2022-01-18 14:31:25', '0');
+INSERT INTO `sys_post` VALUES ('1539479386846269440', '1539479386846269440', '租户管理员岗位', null, '0', null, '1539479385919328256', null, '2022-06-22 13:24:23', null, null, '0');
+INSERT INTO `sys_post` VALUES ('1539486890191884288', '1539486890191884288', '租户管理员岗位', null, '0', null, '1539486889516601344', null, '2022-06-22 13:54:12', null, null, '0');
 
 -- ----------------------------
 -- Table structure for sys_post_role
@@ -502,7 +527,14 @@ CREATE TABLE `sys_post_role` (
 -- ----------------------------
 -- Records of sys_post_role
 -- ----------------------------
+INSERT INTO `sys_post_role` VALUES ('1539487429730373632', '1481510909087191040', '1535984304579022848');
+INSERT INTO `sys_post_role` VALUES ('1539487429730373632', '1539487433874345984', '1535984304579022848');
 INSERT INTO `sys_post_role` VALUES ('6345489506536636416', '1481510909087191040', '1535984304579022848');
+INSERT INTO `sys_post_role` VALUES ('6345489506536636416', '1539479388222001152', '1539479386846269440');
+INSERT INTO `sys_post_role` VALUES ('6345489506536636416', '1539486890888138752', '1539486890191884288');
+INSERT INTO `sys_post_role` VALUES ('6345489506536636416', '1539486891555033088', '1539486890191884288');
+INSERT INTO `sys_post_role` VALUES ('xxx123xxx_dao', '1539486890888138752', '1539486890191884288');
+INSERT INTO `sys_post_role` VALUES ('xxx123xxx_dao', '1539486891555033088', '1539486890191884288');
 
 -- ----------------------------
 -- Table structure for sys_region
@@ -4072,6 +4104,11 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1481510909087191040', '148151090908719104032131', '超级管理员（内测版）', '6345489506536636416', null, '2021-12-13 15:52:59', '2022-01-17 20:55:48', 'admin', null, '0', '6345824413764157440', '1');
+INSERT INTO `sys_role` VALUES ('1539479388222001152', 'bolei-tenant', '权限管理角色', '6345489506536636416', null, '2022-06-22 13:24:23', null, null, null, '0', '1539479385919328256', '2');
+INSERT INTO `sys_role` VALUES ('1539486890888138752', 'bolei-dao', '权限管理角色', 'xxx123xxx_dao', null, '2022-06-22 13:54:12', null, null, null, '0', '1539486889516601344', '2');
+INSERT INTO `sys_role` VALUES ('1539486891555033088', 'bolei-dao', '权限管理角色', '6345489506536636416', null, '2022-06-22 13:54:12', null, null, null, '0', '1539486889516601344', '2');
+INSERT INTO `sys_role` VALUES ('1539487433874345984', 'bsin-ui-digital-assets-platform', '应用默认角色', '1539487429730373632', null, '2022-06-22 13:56:21', null, null, null, '0', '6345824413764157440', '1');
+INSERT INTO `sys_role` VALUES ('1539503501779013632', 'dao-test', '应用默认角色', '1539503497324662784', null, '2022-06-22 15:00:12', null, null, null, '0', '6345824413764157440', '1');
 INSERT INTO `sys_role` VALUES ('xxx999xxx', '9999', '超级角色', '6345489506536636416', '11111', '2021-12-06 17:50:39', null, '1', null, '1', '6345824413764157440', '2');
 
 -- ----------------------------
@@ -4097,6 +4134,85 @@ INSERT INTO `sys_role_menu` VALUES ('1481510909087191040', '1481874706662569744'
 INSERT INTO `sys_role_menu` VALUES ('1481510909087191040', '1481874790112472128', '6345489506536636416');
 INSERT INTO `sys_role_menu` VALUES ('1481510909087191040', '1481874879719582784', '6345489506536636416');
 INSERT INTO `sys_role_menu` VALUES ('1481510909087191040', '6345189999375917056', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874071586213888', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874362180177920', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874457822892032', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874550391581312', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874706662569744', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874790112472128', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1481874879719582784', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1482324429441732608', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1497183422211297280', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1506886956569726976', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1508679987190960128', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539479388222001152', '1508697866573582336', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874071586213888', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874362180177920', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874457822892032', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874550391581312', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874706662569744', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874790112472128', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1481874879719582784', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1482324429441732608', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1506886956569726976', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1508679987190960128', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539486891555033088', '1508697866573582336', '6345489506536636416');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1485589233254141952', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1485828169486438400', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497165977098522624', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497166577764798464', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497167568551677952', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497167903643013120', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497168330333753344', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497168827904036864', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497169037640208384', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497170436990046208', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497170577599893504', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497170768537194496', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497170867636015104', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1497184308497092608', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501112412970029056', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501129168610529280', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501130246613766144', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501135938552729600', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501392870932877312', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501397597875736576', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501434819790376960', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501437140880461824', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1501441716522192896', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1503189024767086592', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1503189147748274176', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1503190509861081088', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1504347994919669760', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1504348363238281216', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1504348467785502720', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1505848320390729728', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506176739842330624', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506219761112059904', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506532168367738880', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506532309845807104', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506532476988821504', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506535667184832512', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506540629059047424', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1506540793412849664', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1507213631417356288', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1507213841031892992', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1507213960053657600', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487429973643265', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487430103666688', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487430233690112', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487430363713536', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487430502125568', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487430627954688', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539487433874345984', '1539487430762172416', '1539487429730373632');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503497588903936', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503497588903937', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503497723121664', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503497865728000', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503497999945728', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503498134163456', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503498268381184', '1539503497324662784');
+INSERT INTO `sys_role_menu` VALUES ('1539503501779013632', '1539503498406793216', '1539503497324662784');
 
 -- ----------------------------
 -- Table structure for sys_tenant
@@ -4119,7 +4235,8 @@ CREATE TABLE `sys_tenant` (
 -- ----------------------------
 -- Records of sys_tenant
 -- ----------------------------
-INSERT INTO `sys_tenant` VALUES ('1539436815675691008', 'louis', 'louis', null, null, '1', null, '2022-06-22 10:35:12', null, '0');
+INSERT INTO `sys_tenant` VALUES ('1539479385919328256', 'bolei-tenant', '博羸测试', null, '测试', '1', '0', '2022-06-22 13:24:23', null, '0');
+INSERT INTO `sys_tenant` VALUES ('1539486889516601344', 'bolei-dao', 'bolei-dao', null, null, '1', null, '2022-06-22 13:54:12', null, '0');
 INSERT INTO `sys_tenant` VALUES ('6345824413764157440', 'bsin-paas', 'bsin-paas', 'http://baidu.com', '线上交易中心', '0', '0', '2021-12-16 09:28:35', '2022-01-25 11:25:15', '0');
 
 -- ----------------------------
@@ -4136,6 +4253,10 @@ CREATE TABLE `sys_tenant_app` (
 -- ----------------------------
 -- Records of sys_tenant_app
 -- ----------------------------
+INSERT INTO `sys_tenant_app` VALUES ('1539479385919328256', '6345489506536636416', '0');
+INSERT INTO `sys_tenant_app` VALUES ('1539486889516601344', '6345489506536636416', '0');
+INSERT INTO `sys_tenant_app` VALUES ('1539486889516601344', 'xxx123xxx_dao', '0');
+INSERT INTO `sys_tenant_app` VALUES ('6345824413764157440', '1539487429730373632', '1');
 INSERT INTO `sys_tenant_app` VALUES ('6345824413764157440', '6345489506536636416', '0');
 
 -- ----------------------------
@@ -4168,6 +4289,8 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1535984304528691200', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '0', '1535984304478359552', '6345824413764157440', null, null, null, null, null, null, '2022-06-12 21:56:10', null, null, '0');
+INSERT INTO `sys_user` VALUES ('1539479386464587776', 'bolei', 'e10adc3949ba59abbe56e057f20f883e', '0', '1539479386183569408', '1539479385919328256', null, null, null, null, null, null, '2022-06-22 13:24:23', null, null, '0');
+INSERT INTO `sys_user` VALUES ('1539486889965391872', 'bolei-dao', 'e10adc3949ba59abbe56e057f20f883e', '0', '1539486889738899456', '1539486889516601344', null, null, null, null, null, null, '2022-06-22 13:54:12', null, null, '0');
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -4183,3 +4306,5 @@ CREATE TABLE `sys_user_post` (
 -- Records of sys_user_post
 -- ----------------------------
 INSERT INTO `sys_user_post` VALUES ('1535984304528691200', '1535984304579022848');
+INSERT INTO `sys_user_post` VALUES ('1539479386464587776', '1539479386846269440');
+INSERT INTO `sys_user_post` VALUES ('1539486889965391872', '1539486890191884288');
