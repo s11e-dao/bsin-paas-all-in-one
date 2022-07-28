@@ -26,7 +26,7 @@ public class BsinInvokeService {
 
     public static StateMachineEngine stateMachineEngine;
 
-    private static ConcurrentHashMap<String, GenericService> concurrentHashMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, GenericService> concurrentHashMap = new ConcurrentHashMap<String, GenericService>();
 
     /**
      * sofa泛化调用
@@ -39,6 +39,7 @@ public class BsinInvokeService {
                 .setProtocol("bolt")
                 .setSubscribe(true)
                 .setRegister(true)
+                .setTimeout(60000)
                 .setRepeatedReferLimit(-1)
                 .setRegistry(RegistryFactory.getRegistryConfigs());
         // 解决sofa consumerConfig重复实例化不能超过三次问题

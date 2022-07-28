@@ -68,7 +68,7 @@ const LayoutContext = (initialState: InitialState | undefined) => {
 
   // 菜单主题色
   const [menuTheme, setThemeColor] = useState(
-    initialState ? initialState.menuTheme : 'dark',
+    initialState ? initialState.menuTheme : 'light',
   );
   // 通过设置content样式 控制顶部菜单是否固定
   const [fixedHeaderStyle, setFixedHeaderStyle] = useState(true);

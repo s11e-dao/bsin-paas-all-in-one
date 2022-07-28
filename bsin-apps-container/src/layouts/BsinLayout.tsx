@@ -35,11 +35,11 @@ const BsinLayout: React.FC<BsinLayoutProps> = ({
   userInfo,
   children,
 }) => {
-  let primaryColor = '#4e6ef2';
+  let primaryColor = '#F67825';
   let textColor = '#222';
   let layouts: Layouts = 'Sider';
   let mode: Mode = 'inline';
-  let menuTheme: MenuTheme = 'dark';
+  let menuTheme: MenuTheme = 'light';
 
   // 用户信息
   if (userInfo.theme) {

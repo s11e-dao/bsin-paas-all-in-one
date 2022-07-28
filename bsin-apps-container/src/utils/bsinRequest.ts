@@ -54,6 +54,8 @@ let gatewayUrl = process.env.baseUrl;
 
 // 请求拦截
 bsinRequest.interceptors.request.use((url, options) => {
+  console.log(url, options);
+
   // 请求方法统一为 POST
   options.method = 'POST';
 
@@ -101,6 +103,7 @@ bsinRequest.interceptors.request.use((url, options) => {
   options.headers = {
     ...headers,
   };
+  console.log(gatewayUrl, { data, ...options });
 
   return {
     url: gatewayUrl,

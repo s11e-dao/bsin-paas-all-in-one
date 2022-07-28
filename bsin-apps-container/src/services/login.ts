@@ -23,3 +23,15 @@ export const getTenantList = (params: any) => {
     },
   });
 };
+
+// Dao登录
+export const DAOLogin = (params: any) => {
+  console.log(params);
+  return bsinRequest('/daoLogin', {
+    serviceName: 'AdminTenantDaoService',
+    methodName: 'daoLogin',
+    bizParams: {
+      ...params,
+    },
+  });
+};

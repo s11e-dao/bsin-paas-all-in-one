@@ -62,6 +62,12 @@ public class SysTenant implements Serializable {
     private String username;
 
     /**
+     * 添加租户的来源渠道
+     */
+    @Transient
+    private String addChannel;
+
+    /**
      * 创建时间
      */
     @JsonFormat(shape =JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")

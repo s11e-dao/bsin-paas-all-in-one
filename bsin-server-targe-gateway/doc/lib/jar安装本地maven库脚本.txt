@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=C:\\Users\\bolei\\Downloads\\multibase.jar -DgroupId=com.github.multiformats -DartifactId=java-multibase -Dversion=v1.1.0 -Dpackaging=jar

@@ -59,4 +59,22 @@
         <sofa:binding.rest/>
     </sofa:service>
 
+    <bean id="dictService" class="me.flyray.bsin.server.impl.DictServiceImpl"/>
+    <sofa:service ref="dictService" interface="me.flyray.bsin.facade.service.DictService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="regionService" class="me.flyray.bsin.server.impl.RegionServiceImpl"/>
+    <sofa:service ref="regionService" interface="me.flyray.bsin.facade.service.RegionService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
+    <bean id="smsMessageService" class="me.flyray.bsin.server.impl.SmsMessageServiceImpl"/>
+    <sofa:service ref="smsMessageService" interface="me.flyray.bsin.facade.service.SmsMessageService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
+
 </beans>

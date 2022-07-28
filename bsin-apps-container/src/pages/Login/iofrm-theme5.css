@@ -1,0 +1,125 @@
+.form-body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0093ff;
+  position: relative;
+}
+.form-body .row {
+  display: flex;
+}
+.form-body .row .img-holder {
+  width: 550px;
+  height: 100vh;
+  background-color: #5cbaff;
+  position: relative;
+  transition: all 1s;
+}
+.form-body .row .img-holder img {
+  width: 430px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form-body .row .form-holder {
+  width: calc(100% - 550px);
+  height: 100vh;
+  position: relative;
+}
+.form-body .row .form-holder .form-content {
+  max-width: 340px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form-body .row .form-holder .form-content h3 {
+  color: #fff;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.form-body .row .form-holder .form-content p {
+  color: #fff;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 20px;
+  margin-bottom: 30px;
+}
+.form-body .row .form-holder .form-content .form-name {
+  margin-bottom: 20px;
+}
+.form-body .row .form-holder .form-content .form-name span {
+  display: inline-block;
+  margin-right: 10px;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #e3e4e5;
+  border-bottom: 2px solid #e3e4e5;
+  cursor: pointer;
+}
+.form-body .row .form-holder .form-content .form-name .form-checked {
+  font-weight: 600;
+  color: #fff;
+  border-bottom: 3px solid #fff;
+}
+.form-body .row .form-holder .form-content form .form-control {
+  padding: 9px 20px;
+  border: 0;
+  width: 100%;
+  color: #8d8d8d;
+  background-color: #fff;
+  text-align: left;
+  outline: 0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 300;
+  background-clip: padding-box;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  margin-bottom: 14px;
+}
+.form-body .row .form-holder .form-content form .form-button {
+  margin: 15px 0 0;
+}
+.form-body .row .form-holder .form-content form .form-button .ibtn {
+  background-color: #fff;
+  color: #29a4ff;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.16);
+  border-radius: 6px;
+  border: 0;
+  padding: 0 28px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.form-body .row .form-holder .form-content form .form-button p {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+}
+.login-link {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #fff;
+}
+@media screen and (max-width: 992px) {
+  .form-body .row .img-holder {
+    display: none;
+    height: 200px;
+  }
+  .form-body .row .form-holder {
+    width: 100%;
+  }
+}

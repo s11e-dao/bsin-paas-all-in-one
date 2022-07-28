@@ -21,7 +21,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(interceptor()).addPathPatterns("/gateway","/biz-gateway")
-                .excludePathPatterns("/api/userInfo","/api/arrange");
+        registry.addInterceptor(interceptor()).addPathPatterns("/gateway")
+                .excludePathPatterns("/api/userInfo","/api/arrange","/upload","/biz-gateway");
     }
 }

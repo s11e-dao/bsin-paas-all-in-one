@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class MenuBiz {
                     m.getPath(),m.getIcon(),m.getParentId(),m.getType(),m.getAppId(),m.getSort(),m.getStatus(),
                     m.getRemark(),getChildren(m,all));//递归
             return childMenu;
-        }).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(MenuTree::getSort)).collect(Collectors.toList());
 
         return children;
     }

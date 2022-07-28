@@ -24,6 +24,8 @@ import {
 import moment from 'moment';
 import styles from './index.less';
 import logo2 from '@/assets/logo3.png';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 interface PageProps {
   Apps: AppsState;
@@ -105,8 +107,12 @@ const WorkPlace: FC<PageProps> = ({ Apps, dispatch }) => {
                     src={logo2}
                   />
                 }
-                title={<div style={{ fontSize: 24 }}>你好，{}</div>}
-                description="欢迎使用 bsin-paas 平台"
+                title={
+                  <div style={{ fontSize: 24 }}>
+                    你好，{counter.userInfo.username}
+                  </div>
+                }
+                description={`欢迎使用${process.env.title}`}
               />
             </List.Item>
           </List>
@@ -290,7 +296,18 @@ const WorkPlace: FC<PageProps> = ({ Apps, dispatch }) => {
                 bordered={false}
                 bodyStyle={{ padding: 0 }}
               >
-                <Calendar fullscreen={false} />
+                <Calendar
+                  locale={{
+                    lang: {
+                      locale: 'zh-cn',
+                      year: '年',
+                      month: '月',
+                      yearFormat: 'YYYY',
+                      dateFormat: 'M/D/YYYY',
+                    },
+                  }}
+                  fullscreen={false}
+                />
               </Card>
             </Col>
             <Col xl={24} lg={12} md={24} sm={24} xs={24}>

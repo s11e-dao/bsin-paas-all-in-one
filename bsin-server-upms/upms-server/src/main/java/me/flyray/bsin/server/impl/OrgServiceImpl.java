@@ -141,7 +141,11 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public Map<String, Object> getOrgTree(Map<String, Object> requestMap) {
+
         String tenantId = (String) requestMap.get("tenantId");
+        if(tenantId == null){
+             tenantId = (String) requestMap.get("bizTenantId");
+        }
         // 获取所有机构信息
         List<SysOrg> orgList = orgMapper.selectOrgListByTenantId(tenantId);
         // 组装成父子的树形目录结构
@@ -307,5 +311,30 @@ public class OrgServiceImpl implements OrgService {
         String orgId = (String) requestMap.get("orgId");
         List<AppResp> sysAppList = appMapper.selectOrgAppTypeListByOrgId(orgId);
         return RespBodyHandler.setRespBodyListDto(sysAppList);
+    }
+
+
+    /**
+     * 根据租户查询所有机构
+     */
+    @Override
+    public Map<String, Object> getOrgsByTenantId(Map<String, Object> requestMap) {
+        SysOrg sysOrg = new SysOrg();
+        String tenantId = (String) requestMap.get("bizTenantId");
+        sysOrg.setTenantId(tenantId);
+        List<OrgResp> orgResp = orgMapper.selectOrgList(sysOrg);
+        return RespBodyHandler.setRespBodyListDto(orgResp);
+    }
+
+    /**
+     * 根据机构id获取机构
+     * @param requestMap
+     * @return
+     */
+    @Override
+    public Map<String, Object> getOrg(Map<String, Object> requestMap) {
+        String orgId = (String) requestMap.get("orgId");
+        SysOrg sysOrg = orgMapper.selectInfoById(orgId);
+        return RespBodyHandler.setRespBodyDto(sysOrg);
     }
 }

@@ -14,7 +14,7 @@ function SetPrimary() {
   // 引入公共数据
   const counter = LayoutContext.useContainer();
   // 颜色选项参数
-  const color = ['pink', 'gray', '#0fb748', '#4e6ef2'];
+  const color = ['pink', 'gray', '#0fb748', '#4e6ef2', '#F67825'];
   /**
    * 点击选项调用改变PrimaryColor
    * @param color

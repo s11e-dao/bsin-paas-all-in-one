@@ -11,7 +11,7 @@ export default function LogoAndTitle() {
 
   const back = () => {
     history.push({
-      pathname: '/workplace',
+      pathname: '/',
     });
   };
 
@@ -51,7 +51,7 @@ export default function LogoAndTitle() {
                       }
                 }
               >
-                Bsin-PaaS平台
+                {process.env.title}
               </div>
             </Col>
           ) : null}

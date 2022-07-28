@@ -14,7 +14,11 @@ public class TenantConfig {
 
     private String appId;
 
+    private String daoAppId;
+
     private String roleName;
+
+    private String daoRoleName;
 
     private String roleId;
 

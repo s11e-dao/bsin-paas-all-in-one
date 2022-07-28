@@ -10,14 +10,14 @@ public class RespBodyHandler {
 
 
     public static Map<String, Object> RespBodyDto(){
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String,Object>();
         map.put("data","");
         return map;
     }
 
 
     public static Map<String, Object> setRespBodyDto(Object object) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String,Object>();
         if (null == object) {
             map.put("data","");
             return map;
@@ -29,7 +29,7 @@ public class RespBodyHandler {
 
 
     public static Map<String, Object> setRespBodyListDto(List<?> list) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String,Object>();
         if(list.size() == 0){
             map.put("data","");
             return map;

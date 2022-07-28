@@ -16,13 +16,23 @@
         </sofa:binding.bolt>
     </sofa:reference>
 
+    <sofa:reference jvm-first="false" id="tenantAppService" interface="com.alipay.sofa.rpc.api.GenericService">
+        <sofa:binding.bolt>
+            <sofa:global-attrs generic-interface="me.flyray.bsin.facade.service.TenantAppService"/>
+        </sofa:binding.bolt>
+    </sofa:reference>
+
     <bean id="bsinWebSocketService" class="me.flyray.bsin.gateway.service.impl.BsinWebSocketServiceImpl"/>
     <sofa:service ref="bsinWebSocketService" interface="me.flyray.bsin.facade.service.BsinWebSocketService">
         <sofa:binding.bolt/>
         <sofa:binding.rest/>
     </sofa:service>
 
-
+    <bean id="fileUpAndDownService" class="me.flyray.bsin.gateway.service.impl.FileUpAndDownServiceImpl"/>
+    <sofa:service ref="fileUpAndDownService" interface="me.flyray.bsin.facade.service.FileUpAndDownService">
+        <sofa:binding.bolt/>
+        <sofa:binding.rest/>
+    </sofa:service>
     <!--
     <bean id="bsinSagaStateMachineConfig" class="me.flyray.bsin.gateway.config.BsinSagaStateMachineConfig">
         <property name="dataSource" ref="dataSource"></property> -->

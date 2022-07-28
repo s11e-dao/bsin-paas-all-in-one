@@ -11,6 +11,7 @@ import me.flyray.bsin.server.domain.SysTenant;
 import me.flyray.bsin.server.enums.TenantOrgAppType;
 import me.flyray.bsin.server.exception.BusinessException;
 import me.flyray.bsin.server.mapper.*;
+import me.flyray.bsin.server.utils.BsinPageUtil;
 import me.flyray.bsin.server.utils.BsinServiceContext;
 import me.flyray.bsin.server.utils.BsinSnowflake;
 import me.flyray.bsin.server.utils.RespBodyHandler;
@@ -135,6 +136,7 @@ public class AppServiceImpl implements AppService {
         String appCode = (String)requestMap.get("appCode");
         String appName = (String)requestMap.get("appName");
         Map<String,Object> pagination = (Map<String,Object>)requestMap.get("pagination");
+        BsinPageUtil.pageNotNull(pagination);
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
         List<SysApp> sysApps = appMapper.selectPageList(tenantId,appId,appCode,appName);
         PageInfo<SysApp> pageInfo = new PageInfo<SysApp>(sysApps);

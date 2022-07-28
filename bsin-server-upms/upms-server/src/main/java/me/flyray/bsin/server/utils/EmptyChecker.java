@@ -1,5 +1,8 @@
 package me.flyray.bsin.server.utils;
 
+import me.flyray.bsin.server.common.ResponseCode;
+import me.flyray.bsin.server.exception.BusinessException;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -21,7 +24,7 @@ public class EmptyChecker {
      */
     public static boolean isEmpty(Object obj) {
         if (obj == null || "null".equals(obj.toString()) || "".equals(obj.toString())) {
-            return true;
+            throw new BusinessException(ResponseCode.PAGE_NUM_ISNULL);
         }
 
         if (obj instanceof String) {

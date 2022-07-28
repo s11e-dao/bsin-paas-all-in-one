@@ -1,0 +1,122 @@
+.form-body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0093ff;
+  position: relative;
+  .row {
+    display: flex;
+    .img-holder {
+      width: 550px;
+      height: 100vh;
+      background-color: #5cbaff;
+      position: relative;
+      transition: all 1s;
+      img {
+        width: 430px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .form-holder {
+      width: calc(100% - 550px);
+      height: 100vh;
+      position: relative;
+      .form-content {
+        max-width: 340px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        h3 {
+          color: #fff;
+          text-align: left;
+          font-size: 24px;
+          font-weight: 900;
+          margin-bottom: 10px;
+        }
+        p {
+          color: #fff;
+          text-align: left;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 20px;
+          margin-bottom: 30px;
+        }
+        form {
+          input {
+            border: 0;
+            background-color: #fff;
+            color: #8d8d8d;
+            width: 100%;
+            padding: 9px 20px;
+            text-align: left;
+            outline: 0;
+            border-radius: 6px;
+            font-size: 15px;
+            background-clip: padding-box;
+            font-weight: 300;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            margin-bottom: 14px;
+          }
+          .form-button {
+            margin: 20px 0 30px;
+            .ibtn {
+              background-color: #fff;
+              color: #29a4ff;
+              box-shadow: 0 0 0 rgb(0 0 0 / 16%);
+              border-radius: 6px;
+              border: 0;
+              padding: 0 28px;
+              font-size: 14px;
+              font-weight: 700;
+              text-decoration: none;
+              cursor: pointer;
+              margin-right: 10px;
+              outline: none;
+              transition: all 0.3s ease;
+            }
+            a {
+              font-size: 13px;
+              font-weight: 700;
+              color: #fff;
+            }
+          }
+        }
+        .other-links {
+          font-family: 'Lato', sans-serif;
+          font-weight: 400;
+          text-rendering: optimizeLegibility;
+          span {
+            font-size: 12px;
+            color: #fff;
+            font-weight: 300;
+            margin-right: 20px;
+          }
+          a {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .form-body {
+    .row {
+      .img-holder {
+        display: none;
+        height: 200px;
+      }
+      .form-holder {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -32,7 +32,6 @@ export default function BaseMenu({
       return;
     }
     if (appMenu) {
-      console.log(appMenu);
       getOpenKey(appMenu, path);
     }
   }, [location.hash]);
@@ -45,15 +44,12 @@ export default function BaseMenu({
       return;
     }
     if (appMenu) {
-      console.log(appMenu);
       getOpenKey(appMenu, path);
     }
   }, [appMenu]);
 
   // 查找打开的父级菜单
   const getOpenKey = (item: AppMenu, path: string) => {
-    console.log(item);
-
     item.children.forEach((i) => {
       if (path === i.path) {
         setOpenKeys([item.path]);
@@ -87,7 +83,7 @@ export default function BaseMenu({
               // 渲染菜单
               appMenu.children.map((item) =>
                 // 判断是否有子菜单
-                item.children[0] && item.children[0].Type === 1 ? (
+                item.children[0] && item.children[0].type === 1 ? (
                   <SubMenu
                     key={item.path}
                     icon={<UserOutlined />}

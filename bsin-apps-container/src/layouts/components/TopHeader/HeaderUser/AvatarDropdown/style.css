@@ -9,9 +9,11 @@
   cursor: pointer;
 }
 
-.dropdown {
-  display: 'inline-block';
-  width: 100%;
-  height: 100%;
-  padding-right: 5px;
+.username {
+  display: inline-block;
+  margin-right: 10px;
+  max-width: 85px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

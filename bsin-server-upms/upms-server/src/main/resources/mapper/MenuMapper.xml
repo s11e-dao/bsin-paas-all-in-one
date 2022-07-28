@@ -126,7 +126,7 @@
     SELECT
     menu_id
     FROM sys_menu left join sys_app sa on sys_menu.app_id = sa.app_id
-    where app_code= #{appCode} AND parent_id = -1
+    where app_code= #{appCode} AND parent_id = -1 and sys_menu.del_flag = 0
   </select>
 
   <select id="selectOneByMenuId" resultMap="BaseResultMap">

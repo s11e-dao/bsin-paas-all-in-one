@@ -8,6 +8,7 @@ import me.flyray.bsin.server.domain.SysRole;
 import me.flyray.bsin.server.exception.BusinessException;
 import me.flyray.bsin.server.mapper.RoleMapper;
 import me.flyray.bsin.server.mapper.RoleMenuMapper;
+import me.flyray.bsin.server.utils.BsinPageUtil;
 import me.flyray.bsin.server.utils.BsinServiceContext;
 import me.flyray.bsin.server.utils.BsinSnowflake;
 import me.flyray.bsin.server.utils.RespBodyHandler;
@@ -90,6 +91,7 @@ public class RoleServiceImpl implements RoleService {
         String roleCode = (String)requestMap.get("roleCode");
         String roleName = (String)requestMap.get("roleName");
         Map<String,Object> pagination = (Map<String,Object>)requestMap.get("pagination");
+        BsinPageUtil.pageNotNull(pagination);
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
         List<SysRole> roles = roleMapper.selectPageList(roleCode,roleName,appId,tenantId);
         PageInfo<SysRole> pageInfo = new PageInfo<SysRole>(roles);

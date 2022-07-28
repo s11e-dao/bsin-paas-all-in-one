@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -63,7 +64,14 @@ public class MenuServiceImpl implements MenuService {
         if(menuInfo != null){
             throw new BusinessException(ResponseCode.MENU_CODE_EXISTS);
         }
-
+        // 默认排序为99
+        if(sysMenu.getSort()==null){
+            sysMenu.setSort(99);
+        }
+        // 不能添加顶级菜单，顶级菜单唯一
+        if("-1".equals(sysMenu.getParentId())){
+            throw new BusinessException(ResponseCode.NOT_TOP_MENU);
+        }
         sysMenu.setMenuId(BsinSnowflake.getId());
         SysApp sysApp = appMapper.getAppInfoByAppId(sysMenu.getAppId(),tenantId);
         sysMenu.setPath("/"+sysApp.getAppCode()+sysMenu.getPath());
@@ -108,11 +116,12 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Map<String, Object> edit(Map<String, Object> requestMap) {
         SysMenu sysMenu = BsinServiceContext.getReqBodyDtoId(SysMenu.class,requestMap );
-        SysMenu menuInfo = menuMapper.getMenuInfoByMenuCode(sysMenu.getMenuCode());
+        SysMenu menuInfo = menuMapper.selectOneByMenuId(sysMenu.getMenuId());
         String tenantId = (String)requestMap.get("tenantId");
         // 授权应用不能编辑菜单
-        String type = tenantAppMapper.selectTenantAppType(tenantId, sysMenu.getAppId()).toString();
-        if(type.equals(TenantOrgAppType.AUTH.getCode())||type.equals(TenantOrgAppType.DEF_AUTH.getCode())){
+        System.out.println(tenantId);
+        String type = tenantAppMapper.selectTenantAppType(tenantId, menuInfo.getAppId());
+        if(TenantOrgAppType.AUTH.getCode().equals(type)||TenantOrgAppType.DEF_AUTH.getCode().equals(type)){
             throw new BusinessException(ResponseCode.MENU_NOT_UPDATE);
         }
 
@@ -159,7 +168,7 @@ public class MenuServiceImpl implements MenuService {
                             m.getPath(),m.getIcon(),m.getParentId(),m.getType(),m.getAppId(),m.getSort(),m.getStatus(),
                             m.getRemark(),menuBiz.getChildren(m, finalSysMenus));
                     return level1Menu;
-                }) .collect(Collectors.toList());
+                }).sorted(Comparator.comparing(MenuTree::getSort)).collect(Collectors.toList());
         return RespBodyHandler.setRespBodyListDto(menuTreeList);
     }
 
@@ -205,7 +214,7 @@ public class MenuServiceImpl implements MenuService {
                 break;
             }
             i++;
-            if(i==sysMenuList.size()){
+            if(i == sysMenuList.size()){
                 String menuId = menuMapper.selectTopMenuId(appCode);
                 menuIdList.add(menuId);
                 for(SysMenu menu:sysMenuList){
@@ -225,7 +234,7 @@ public class MenuServiceImpl implements MenuService {
                         MenuTree level1Menu = new MenuTree(m.getMenuId(),m.getMenuCode(),m.getMenuName(),m.getPermission(),
                                 m.getPath(),m.getIcon(),m.getParentId(),m.getType(),m.getAppId(),m.getSort(),m.getStatus(),m.getRemark(),menuBiz.getChildren(m,sysMenus));
                         return level1Menu;
-                    }) .collect(Collectors.toList());
+                    }).sorted(Comparator.comparing(MenuTree::getSort)) .collect(Collectors.toList());
         }
         return RespBodyHandler.setRespBodyListDto(menuTreeList);
     }

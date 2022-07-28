@@ -37,10 +37,11 @@ export default function index(props: any) {
       setAppMenu(res.data[0]);
       setAppCode(app);
     } else {
-      // message.error(`你没有${app}权限`);
+      message.error(`你没有${app}菜单权限`);
       setTimeout(() => {
         history.push('/');
         location.reload();
+        window.localStorage.setItem('bsin-microAppMount', '3');
       }, 1000);
     }
   };

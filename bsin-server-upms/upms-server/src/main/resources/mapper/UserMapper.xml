@@ -41,50 +41,101 @@
 
     <insert id="insertUser" parameterType="me.flyray.bsin.server.domain.SysUser">
         insert into sys_user(user_id, user_name, password, org_id, tenant_id, nickname, phone, avatar, email,
-                            create_by, type)
-        VALUES(#{userId},#{username},#{password},#{orgId},#{tenantId},#{nickname},#{phone},#{avatar},#{email},#{createBy},#{type})
+                             create_by, type)
+        VALUES (#{userId}, #{username}, #{password}, #{orgId}, #{tenantId}, #{nickname}, #{phone}, #{avatar}, #{email},
+                #{createBy}, #{type})
     </insert>
 
     <update id="deleteById" parameterType="java.lang.String">
-        update sys_user set del_flag=1 where user_id=#{userId}
-     </update>
+        update sys_user
+        set del_flag=1
+        where user_id = #{userId}
+    </update>
 
     <update id="updateById" parameterType="me.flyray.bsin.server.domain.SysUser">
-        update sys_user set user_name=#{username}, password =#{password},status=#{status},
-        org_id=#{orgId},nickname=#{nickname}, phone=#{phone},avatar=#{avatar},email=#{email},
-        update_by=#{updateBy},type=#{type}, update_time = now()  where user_id = #{userId}
+        update sys_user
+        set user_name=#{username},
+            password =#{password},
+            status=#{status},
+            org_id=#{orgId},
+            nickname=#{nickname},
+            phone=#{phone},
+            avatar=#{avatar},
+            email=#{email},
+            update_by=#{updateBy},
+            type=#{type},
+            update_time = now()
+        where user_id = #{userId}
     </update>
 
     <select id="selectByUsername" resultMap="map" parameterType="java.lang.String">
         select user_id, user_name, status, org_id, tenant_id, nickname, phone, avatar, email, del_flag, create_by,
-               create_time, update_by, update_time, type from sys_user
-            <where>
-                <if test="username != null and username != ''">
+        create_time, update_by, update_time, type from sys_user
+        <where>
+            <if test="username != null and username != ''">
                 user_name like concat('%',#{username},'%')
-                </if>
-                <if test="nickname != null and nickname != ''">
-                    nickname like concat('%',#{nickname},'%')
-                </if>
-                and del_flag=0
-            </where>
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname like concat('%',#{nickname},'%')
+            </if>
+            and del_flag=0
+        </where>
     </select>
 
     <select id="login" parameterType="java.lang.String" resultMap="map">
-        select user_id, user_name, password, status, org_id, tenant_id, nickname, phone, avatar, email, del_flag, create_by, create_time, update_by, update_time, type
-        from sys_user where user_name=#{username} and password=#{password} and tenant_id = #{tenantId}
+        select user_id,
+               user_name,
+               password,
+               status,
+               org_id,
+               tenant_id,
+               nickname,
+               phone,
+               avatar,
+               email,
+               del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               type
+        from sys_user
+        where user_name = #{username}
+          and password = #{password}
+          and tenant_id = #{tenantId}
     </select>
 
     <select id="selectById" parameterType="java.lang.String" resultMap="map">
-    select user_id, user_name, password, status, org_id, tenant_id, nickname, phone, avatar, email, del_flag, create_by, create_time, update_by, update_time, type
-    from sys_user where user_id=#{userId}
-</select>
+        select user_id,
+               user_name,
+               password,
+               status,
+               org_id,
+               tenant_id,
+               nickname,
+               phone,
+               avatar,
+               email,
+               del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               type
+        from sys_user
+        where user_id = #{userId}
+    </select>
 
     <update id="deleteByTenantId" parameterType="java.lang.String">
-        update sys_user set del_flag = 1 where tenant_id = #{tenantId}
+        update sys_user
+        set del_flag = 1
+        where tenant_id = #{tenantId}
     </update>
 
     <select id="selectByTenantId" parameterType="java.lang.String">
-        select user_id from sys_user where tenant_id = #{tenantId}
+        select user_id
+        from sys_user
+        where tenant_id = #{tenantId}
     </select>
 
     <update id="deleteUserById" parameterType="java.lang.String">
@@ -93,25 +144,46 @@
         where org_id = #{orgId}
     </update>
 
-    <select id="selectList"  resultMap="maps">
+    <select id="selectList" resultMap="maps">
         select user_id, user_name,status, org_id, tenant_id, nickname, phone, avatar, email,
         create_by, create_time, update_by, update_time, type from sys_user
         where tenant_id = #{tenantId,jdbcType=VARCHAR}
-            <if test="username != null and username != ''">
-               and user_name=#{username}
-            </if>
-            <if test="orgId != null and orgId != ''">
-               and org_id=#{orgId}
-            </if>
-            <if test="nickname != null and nickname != ''">
-                and nickname=#{nickname}
-            </if>
-            and del_flag = 0
+        <if test="username != null and username != ''">
+            and user_name=#{username}
+        </if>
+        <if test="orgId != null and orgId != ''">
+            and org_id=#{orgId}
+        </if>
+        <if test="nickname != null and nickname != ''">
+            and nickname=#{nickname}
+        </if>
+        <if test="phone != null and phone != ''">
+            and phone=#{phone}
+        </if>
+        and del_flag = 0
     </select>
 
     <select id="selectUserByPostIdAndOrgId" resultMap="maps">
-        select sys_user.user_id from sys_user left join sys_user_post sup on sys_user.user_id = sup.user_id
-        where org_id=#{orgId} and post_id=#{postId}
+        select sys_user.user_id
+        from sys_user
+                 left join sys_user_post sup on sys_user.user_id = sup.user_id
+        where org_id = #{orgId}
+          and post_id = #{postId}
+    </select>
+
+    <select id="selectUserInfo" resultMap="map">
+        select user_id, user_name,status, org_id, tenant_id, nickname, phone, avatar, email,
+        create_by, create_time, update_by, update_time, type from sys_user
+        where tenant_id = #{tenantId,jdbcType=VARCHAR}
+        and phone=#{phone}
+        and del_flag = 0
+    </select>
+
+    <select id="selectEmail" resultMap="map">
+        select user_id, user_name,status, org_id, tenant_id, nickname, phone, avatar, email,
+               create_by, create_time, update_by, update_time, type from sys_user
+        where  email = #{email}
+          and del_flag = 0
     </select>
 </mapper>
 

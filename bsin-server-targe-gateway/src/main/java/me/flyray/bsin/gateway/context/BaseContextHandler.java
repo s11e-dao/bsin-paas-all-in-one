@@ -14,7 +14,11 @@ import java.util.Map;
  */
 public class BaseContextHandler {
 
-    public static ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<Map<String, Object>>();
+    private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<Map<String, Object>>() {
+        protected Map<String, Object> initialValue() {
+            return new HashMap<String, Object>();
+        }
+    };
 
     public static void set(String key, Object value) {
         Map<String, Object> map = threadLocal.get();

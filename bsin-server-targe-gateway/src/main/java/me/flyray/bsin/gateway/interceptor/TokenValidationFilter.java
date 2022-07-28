@@ -6,6 +6,7 @@ import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson.JSONObject;
+import me.flyray.bsin.gateway.common.CommonConstants;
 import me.flyray.bsin.gateway.context.BaseContextHandler;
 import me.flyray.bsin.gateway.exception.BusinessException;
 import me.flyray.bsin.gateway.utils.HttpHelper;
@@ -47,13 +48,17 @@ public class TokenValidationFilter implements Filter {
                     || serviceMethod.equals("getAllTenantList") || serviceMethod.equals("getArticlePageList")
                     || serviceMethod.equals("register") || serviceMethod.equals("getArticleCategoryList")
                     || serviceMethod.equals("getAppPageList") || serviceMethod.equals("getTaskList")
-            || serviceMethod.equals("getArticleDetails") || serviceMethod.equals("getTaskDetails") || serviceMethod.equals("getTaskDetails") || serviceName.equals("ChainWalletService")){
+            || serviceMethod.equals("getArticleDetails") || serviceMethod.equals("getTaskDetails")
+                    || serviceName.equals("NftImgService")
+                    || serviceName.equals("DictService")|| serviceName.equals("RegionService")
+                    || serviceMethod.equals("mchLogin")
+            || serviceMethod.equals("daoLogin") || serviceMethod.equals("mchRegister") || serviceMethod.equals("getAccessToken")){
                 chain.doFilter(requestWrapper, response);
                 return;
             }
             // 校验token
             String token = httpServletRequest.getHeader("Authorization");
-            if (token == null || token .equals("") ) {
+            if (token == null || token.equals("") ) {
                 // 将异常分发到/error/exthrow控制器
                 request.getRequestDispatcher("/error/exthrow").forward(request,response);
                 return;
@@ -63,14 +68,13 @@ public class TokenValidationFilter implements Filter {
             JWT jwt = null;
             try {
                 jwt = JWTUtil.parseToken(token);
-                boolean verify = jwt.setKey("1234".getBytes()).verify();
-                boolean validate = jwt.validate(0);
-                if(!verify || !validate){
-                    // 将异常分发到/error/exthrow控制器
-                    request.getRequestDispatcher("/error/exthrow").forward(request,response);
-                    return;
-                }
-
+                boolean verify = jwt.setKey(CommonConstants.JWT_SECRET.getBytes()).verify();
+//                boolean validate = jwt.validate(0);
+//                if(!verify || !validate){
+//                    // 将异常分发到/error/exthrow控制器
+//                    request.getRequestDispatcher("/error/exthrow").forward(request,response);
+//                    return;
+//                }
                 requestWrapper.setAttribute("token",token);
             } catch (Exception e){
                 System.out.println(e);
@@ -83,14 +87,21 @@ public class TokenValidationFilter implements Filter {
             String email = (String) jwt.getPayload("email");
             BaseContextHandler.set("email",email);
             String tenantId = (String) jwt.getPayload("tenantId");
+            String appId = (String) jwt.getPayload("appId");
             String createBy = (String) jwt.getPayload("createBy");
             String updateBy = (String) jwt.getPayload("updateBy");
             BaseContextHandler.set("tenantId",tenantId);
+            BaseContextHandler.set("appId",appId);
             BaseContextHandler.set("userId",userId);
             BaseContextHandler.set("username",username);
             BaseContextHandler.set("createBy",createBy);
             BaseContextHandler.set("updateBy",updateBy);
         }
+//        else {
+//            // 将异常分发到/error/exthrow控制器
+//            request.getRequestDispatcher("/error/exthrow").forward(request,response);
+//            return;
+//        }
         chain.doFilter(requestWrapper, response);
     }
 
@@ -115,7 +126,7 @@ public class TokenValidationFilter implements Filter {
 
     public static void main(String[] args) {
 
-        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> map=new HashMap<String,Object>();
         DateTime now=DateTime.now();
         DateTime newTime=now.offsetNew(DateField.MINUTE,1);
         //签发时间

@@ -60,24 +60,25 @@ const AvatarDropdown: FC<AvatarDropdownType> = ({ userInfo }) => {
   return (
     <div className={styles.wrap}>
       <Dropdown placement="bottomRight" overlay={userContent()}>
-        <div
-          className={styles.dropdown}
-          style={{
-            display: 'inline-block',
-            width: '100%',
-            height: '100%',
-          }}
-        >
+        <div style={{ height: 64, lineHeight: '64px' }}>
           <span
+            className={styles.username}
             style={
               counter.menuTheme === 'light'
-                ? { color: '#111', marginRight: 10 }
-                : { color: '#fff', marginRight: 10 }
+                ? { color: '#111' }
+                : { color: '#fff' }
             }
           >
-            Hi，{userInfo.nickname}
+            {userInfo.username}
           </span>
-          <Avatar src={logo2} style={{ backgroundColor: '#777' }} />
+          <Avatar
+            src={logo2}
+            style={{
+              backgroundColor: '#777',
+              position: 'relative',
+              top: '-30px',
+            }}
+          />
         </div>
       </Dropdown>
       <SetTheme visible={visible} onClose={onClose} />

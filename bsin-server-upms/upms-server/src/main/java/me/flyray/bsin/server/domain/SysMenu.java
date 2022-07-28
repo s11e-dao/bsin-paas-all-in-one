@@ -102,5 +102,4 @@ public class SysMenu implements Serializable {
      * 逻辑删除
      */
     private Integer delFlag;
-
 }

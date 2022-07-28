@@ -16,7 +16,7 @@ addGlobalUncaughtErrorHandler((event: any) => {
     // 子应用加载失败会触发三次，只有第一次要提示，其他略过
     if (window.localStorage.getItem('bsin-microAppMount') !== '3') {
       window.localStorage.setItem('bsin-microAppMount', '3');
-      history.push('/workplace');
+      history.push('/');
       location.reload();
     }
   }

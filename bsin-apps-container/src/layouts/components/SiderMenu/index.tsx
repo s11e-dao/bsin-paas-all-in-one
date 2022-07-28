@@ -32,6 +32,8 @@ const SiderMenu = () => {
                     overflowY: 'auto',
                     height: '100vh',
                     position: 'fixed',
+                    boxShadow: '2px 0 8px 0 rgb(0 1 2 / 5%)',
+                    zIndex: 100,
                     left: 0,
                   }
                 : { backgroundColor: '#fff' }

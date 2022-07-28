@@ -10,6 +10,7 @@ import me.flyray.bsin.server.domain.SysRole;
 import me.flyray.bsin.server.domain.SysUser;
 import me.flyray.bsin.server.exception.BusinessException;
 import me.flyray.bsin.server.mapper.*;
+import me.flyray.bsin.server.utils.BsinPageUtil;
 import me.flyray.bsin.server.utils.BsinServiceContext;
 import me.flyray.bsin.server.utils.BsinSnowflake;
 import me.flyray.bsin.server.utils.RespBodyHandler;
@@ -152,6 +153,7 @@ public class PostServiceImpl implements PostService {
         String postId = (String) requestMap.get("postId");
         String postName = (String) requestMap.get("postName");
         String postCode = (String) requestMap.get("postCode");
+        BsinPageUtil.pageNotNull(pagination);
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
         List<SysPost> postList = sysPostMapper.selectList(tenantId, postId, postCode, postName);
         PageInfo<SysPost> pageInfo = new PageInfo<SysPost>(postList);
@@ -170,6 +172,7 @@ public class PostServiceImpl implements PostService {
         String orgId = (String) requestMap.get("orgId");
         String postCode = (String) requestMap.get("postCode");
         String postName = (String) requestMap.get("postName");
+        BsinPageUtil.pageNotNull(pagination);
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
         List<SysPost> postList = sysPostMapper.selectPostListByOrgId(orgId,postCode,postName);
         PageInfo<SysPost> pageInfo = new PageInfo<SysPost>(postList);

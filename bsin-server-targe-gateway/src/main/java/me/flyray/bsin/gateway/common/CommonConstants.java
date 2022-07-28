@@ -36,4 +36,7 @@ public class CommonConstants {
     //应用ID
     public static final String JWT_KEY_APP_ID = "appId";
 
+    //应用ID
+    public static final String JWT_SECRET = "1234";
+
 }

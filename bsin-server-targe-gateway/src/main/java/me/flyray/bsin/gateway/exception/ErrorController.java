@@ -17,4 +17,13 @@ public class ErrorController {
     public void rethrow(HttpServletRequest request){
         throw new BusinessException(ResponseCode.TOKEN_ERROR);
     }
+
+    /**
+     * 拦截器抛出的异常，sign异常
+     * @param request
+     */
+    @RequestMapping("/error/sign")
+    public void sign(HttpServletRequest request){
+        throw new BusinessException(ResponseCode.SIGN_NOT_EMPTY);
+    }
 }

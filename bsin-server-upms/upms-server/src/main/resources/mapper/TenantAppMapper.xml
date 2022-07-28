@@ -19,7 +19,7 @@
         where tenant_id = #{tenantId} and app_id = #{appId}
     </delete>
 
-    <select id="selectTenantAppType" resultType="java.lang.Integer">
+    <select id="selectTenantAppType" resultType="java.lang.String">
         select type from sys_tenant_app
         where tenant_id = #{tenantId} and app_id = #{appId}
     </select>

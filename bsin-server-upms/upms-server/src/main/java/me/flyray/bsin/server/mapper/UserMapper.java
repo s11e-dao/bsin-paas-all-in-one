@@ -28,9 +28,13 @@ public interface UserMapper {
     List<SysUser> selectList(@Param("tenantId") String tenantId
             , @Param("nickname") String nickname
             , @Param("username") String userName
+            , @Param("phone") String phone
             , @Param("orgId") String orgId);
 
     List<SysUser> selectUserByPostIdAndOrgId(@Param("postId") String postId,
                                              @Param("orgId") String orgId);
 
+    SysUser selectUserInfo( @Param("tenantId") String tenantId,@Param("phone")String phone);
+
+    SysUser selectEmail(String email);
 }

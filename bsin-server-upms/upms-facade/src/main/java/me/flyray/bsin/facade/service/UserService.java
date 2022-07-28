@@ -45,6 +45,14 @@ public interface UserService {
     public Map<String, Object> getUser(Map<String, Object> requestMap);
 
     /**
+     * 根据条件查询用户(rpc)
+     * @return
+     */
+    @POST
+    @Path("getUser")
+    @Produces("application/json")
+    Map<String, Object> getUserInfo(Map<String, Object> requestMap);
+    /**
      * 分配岗位
      * @return
      */

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
     <!--注意：若需要用 spring 扩展 profile 支持，则文件名应为 logback-spring.xml，而不是 logback.xml。-->
-    <springProperty scope="context" name="logging.path" source="logging.path"/>
-    <springProperty scope="context" name="logging.level" source="logging.level.bsin"/>
+    <springProperty scope="context" name="logging.path" source="bsin.logging.path"/>
+    <springProperty scope="context" name="logging.level" source="bsin.logging.level"/>
     <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
     <!--  需要调试再添加 STDOUT 标准输出-->
-   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{HH:mm:ss.SSS} [%X{traceJournalNo}] %-5level %logger{80} - %msg%n</Pattern>
         </encoder>
@@ -61,10 +61,7 @@
         </encoder>
     </appender>
 
-    <logger name="io.seata.saga" level="debug" additivity="false">
-        <appender-ref ref="ROOT-APPENDER"/>
-    </logger>
-
+    <!--异步处理日志-->
     <appender name="ASYNC_ROLLING_FILE" class="ch.qos.logback.classic.AsyncAppender">
         <!--<discardingThreshold></discardingThreshold>-->
         <queueSize>512</queueSize>
@@ -75,10 +72,18 @@
         <appender-ref ref="ERROR-APPENDER"/>
     </appender>
 
-    <logger name="org.dozer" level="OFF"></logger>
+    <!-- name=指定打印日志文件级别 level=日志级别 additivity=是否想向上传递 先不加上 additivity=false 属性 -->
+    <logger name="me.flyray.bsin.server" level="${logging.level}">
+        <appender-ref ref="ROOT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+    </logger>
+
+    <logger name="io.seata.saga" level="${logging.level}" additivity="false">
+        <appender-ref ref="ROOT-APPENDER"/>
+    </logger>
+
     <root level="${logging.level}">
         <!--   需要调试时再打开 STDOUT 控制台标志输出    -->
-<!--        <appender-ref ref="STDOUT"/>-->
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ASYNC_ROLLING_FILE"/>
         <appender-ref ref="ASYNC_ROLLING_FILE_ERROR"/>

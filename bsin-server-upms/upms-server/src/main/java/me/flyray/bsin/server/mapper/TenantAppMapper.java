@@ -23,5 +23,5 @@ public interface TenantAppMapper {
 
     void unAuthorizeApp(@Param("tenantId") String tenantId , @Param("appId") String appId);
 
-    Integer selectTenantAppType(@Param("tenantId") String tenantId , @Param("appId") String appId);
+    String selectTenantAppType(@Param("tenantId") String tenantId , @Param("appId") String appId);
 }

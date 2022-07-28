@@ -1,11 +1,13 @@
 import { defineConfig } from 'umi';
-import routes from './router';
+import routes from './routes';
 
 export default defineConfig({
   define: {
     // 后台访问地址
-    // 'process.env.baseUrl': 'http://192.168.1.100:8083/gateway',
-    'process.env.baseUrl': 'http://114.116.93.253:31551/gateway',
+    // 'process.env.baseUrl': 'http://2f22-36-161-237-201.ngrok.io',//远程调试
+    // 'process.env.baseUrl': 'http://114.116.93.253:8097/gateway',
+    'process.env.baseUrl': 'http://127.0.0.1:8097/gateway', //本地调试
+    'process.env.title': 'Dao治理平台',
   },
   // 设置 node_modules 目录下依赖文件的编译方式。
   // 默认是 all，全部编译，然后可以通过 exclude 忽略不需要编译的依赖库；

@@ -29,7 +29,7 @@ public class MenuTree implements Serializable {
     private String parentId;
 
     //菜单类型 C目录  M菜单  B按钮
-    private Integer Type;
+    private Integer type;
 
     private String appId;
 

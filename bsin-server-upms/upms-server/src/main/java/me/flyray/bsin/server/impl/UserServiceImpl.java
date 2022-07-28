@@ -1,4 +1,7 @@
 package me.flyray.bsin.server.impl;
+
+import cn.hutool.core.util.DesensitizedUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import me.flyray.bsin.facade.service.UserService;
@@ -7,7 +10,9 @@ import me.flyray.bsin.server.domain.*;
 import me.flyray.bsin.server.exception.BusinessException;
 import me.flyray.bsin.server.mapper.*;
 import me.flyray.bsin.server.utils.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -27,6 +32,8 @@ public class UserServiceImpl implements UserService{
     private RoleMapper roleMapper;
     @Autowired
     private AppMapper appMapper;
+    @Autowired
+    private TenantMapper tenantMapper;
 
     /**
      * 新增
@@ -86,9 +93,25 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public Map<String, Object> getUser(Map<String, Object> requestMap) {
+        String tenantId = (String) requestMap.get("tenantId");
+        String phone = (String) requestMap.get("phone");
+        String orgId = (String) requestMap.get("orgId");
+        String nickname = (String) requestMap.get("nickname");
         String username = (String) requestMap.get("username");
-        List<SysUser> sysUser = userMapper.selectByUsername(username,null);
+        List<SysUser> sysUser = userMapper.selectList(tenantId,nickname,username,phone,orgId);
         return RespBodyHandler.setRespBodyListDto(sysUser);
+    }
+    /**
+     * 根据用户名查询用户(rpc)
+     * @param requestMap
+     * @return
+     */
+    @Override
+    public Map<String, Object> getUserInfo(Map<String, Object> requestMap) {
+        String tenantId = (String) requestMap.get("tenantId");
+        String phone = (String) requestMap.get("phone");
+        SysUser sysUser = userMapper.selectUserInfo(tenantId,phone);
+        return RespBodyHandler.setRespBodyDto(sysUser);
     }
 
     /**
@@ -122,6 +145,14 @@ public class UserServiceImpl implements UserService{
         String tenantId = (String)requestMap.get("bizTenantId");
         String username = (String) requestMap.get("username");
         String password = (String) requestMap.get("password");
+        String methodName = (String) requestMap.get("methodName");
+        if ("mchLogin".equals(methodName) || "daoLogin".equals(methodName)){
+            SysTenant tenantCode = tenantMapper.getTenantByTenantCode(username);
+            if(tenantCode == null){
+                throw new BusinessException(String.valueOf(ResponseCode.USER_PASSWORD_IS_FALSE));
+            }
+            tenantId = tenantCode.getTenantId();
+        }
         // 判断用户名密码是否为空
         if (EmptyChecker.isEmpty(username) || EmptyChecker.isEmpty(password)) {
             throw new BusinessException(String.valueOf(ResponseCode.USERNAME_PASSWORD_ERROR));
@@ -169,9 +200,11 @@ public class UserServiceImpl implements UserService{
         String tenantId = (String)requestMap.get("tenantId");
         String username = (String)requestMap.get("username");
         String nickname = (String)requestMap.get("nickname");
+        String phone = (String)requestMap.get("phone");
         String orgId = (String)requestMap.get("orgId");
+        BsinPageUtil.pageNotNull(pagination);
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
-        List<SysUser> userList = userMapper.selectList(tenantId,nickname,username,orgId);
+        List<SysUser> userList = userMapper.selectList(tenantId,nickname,username,phone,orgId);
         PageInfo<SysUser> pageInfo = new PageInfo<SysUser>(userList);
         return RespBodyHandler.setRespPageInfoBodyDto(pageInfo);
     }
@@ -188,6 +221,7 @@ public class UserServiceImpl implements UserService{
         Map<String, Object> pagination = (Map<String, Object>) requestMap.get("pagination");
         String userId = (String) requestMap.get("userId");
         SysUser sysUser = userMapper.selectById(userId);
+        BsinPageUtil.pageNotNull(pagination);
         PageHelper.startPage((Integer) pagination.get("pageNum"),(Integer) pagination.get("pageSize"));
         List<SysApp> sysApps = appMapper.selectListByOrgId(sysUser.getOrgId());
         PageInfo<SysApp> pageInfo = new PageInfo<SysApp>(sysApps);

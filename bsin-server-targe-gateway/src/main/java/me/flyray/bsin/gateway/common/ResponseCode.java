@@ -4,7 +4,7 @@ public enum ResponseCode implements ReturnCode {
 
     /***********************************通用错误码*****************************************/
     OK("000000", "请求成功"),
-    FAIL("100000","请求失败"),
+    FAIL("100000","服务器在开小差，我们正在加紧处理!"),
 
     // 用户 100100
     USER_NAME_ISNULL("100101","用户名为空值"),
@@ -41,13 +41,17 @@ public enum ResponseCode implements ReturnCode {
     // 租户 100700
     TENANT_CODE_EXISTS("100701","编码已存在"),
 
+    APPID_NOT_EMPTY("100702","应用ID不能为空"),
+
+    // 文件上传
+    UPLOAD_PICTURE_NOT_EMPTY("100701","上传图片不能为空"),
+    PICTURE_FORMAT_NOT_FAIL("000701","图片格式错误,仅支持png|jpg|jpeg"),
 
     TOKEN_ERROR("000001","token失效"),
-    ID_NOT_ISNULL("4001","Id不能为空");
+    ID_NOT_ISNULL("4001","Id不能为空"),
 
-
-
-
+    SIGN_INVALIT("800000","无效的签名"),
+    SIGN_NOT_EMPTY("800001","签名参数不能为空");
 
 
     private String code;

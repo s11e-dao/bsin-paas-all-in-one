@@ -47,6 +47,7 @@ public enum ResponseCode implements ReturnCode {
     MENU_NOT_DELETE("100503","您没有权限删除该应用的菜单"),
     MENU_NOT_UPDATE("100504","您没有权限编辑该应用的菜单"),
     MENU_EXIST_SUBMENU("100505","该菜单存在子菜单"),
+    NOT_TOP_MENU("100506","不能添加顶级菜单"),
 
     // 应用 100600
     APP_CODE_EXISTS("100601","应用编码已存在"),
@@ -60,7 +61,10 @@ public enum ResponseCode implements ReturnCode {
     SUB_TENANT_NOT_AUTH("100702","超级租户不能授权"),
 
     // 机构岗位 100800
-    ID_NOT_ISNULL("100801","Id不能为空");
+    ID_NOT_ISNULL("100801","Id不能为空"),
+
+    // 分页 100900
+    PAGE_NUM_ISNULL("100901","分页参数为空");
 
     private String code;
     private String message;

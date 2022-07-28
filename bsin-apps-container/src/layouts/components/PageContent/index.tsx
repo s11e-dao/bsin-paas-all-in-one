@@ -66,7 +66,7 @@ export default function PageContent(props: any) {
               <div
                 className="site-layout-background"
                 style={{
-                  margin: '15px 15px 0',
+                  margin: '15px 15px',
                 }}
               >
                 {props.children}
@@ -80,7 +80,7 @@ export default function PageContent(props: any) {
               location.hash === '#/workplace'
                 ? {}
                 : {
-                    margin: '15px 15px 0',
+                    margin: '15px 15px',
                   }
             }
           >
