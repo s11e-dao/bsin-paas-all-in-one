@@ -213,10 +213,12 @@ export default () => {
         columns={columns}
         // 请求数据
         request={async (params) => {
-          let { data } = await getOrganizationList({ ...params });
-          setIsExpandedKeys([data[0]?.orgId]);
+          let res = await getOrganizationList({ ...params });
+          console.log(res);
+
+          setIsExpandedKeys([res.data[0]?.orgId]);
           const result = {
-            data,
+            data: res.data,
           };
           return result;
         }}
@@ -226,8 +228,11 @@ export default () => {
         search={{
           labelWidth: 'auto',
         }}
-        // 取消页码
-        pagination={false}
+        // 页码
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
         // 默认展开，受控
         expandedRowKeys={isExpandedKeys}
         // 展开行调用事件

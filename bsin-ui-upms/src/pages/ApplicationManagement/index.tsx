@@ -106,7 +106,7 @@ export default () => {
           let res = await editAppList({ ...response, appId });
           res ? message.success('编辑成功') : message.error('编辑失败！');
         }
-        // 刷新proTble
+        // 刷新表格
         actionRef.current?.reload();
         // 重置表单Form
         formRef.resetFields();
@@ -126,7 +126,7 @@ export default () => {
   const confirmDel = async (appId: string) => {
     let res = await delAppInfo({ appId });
     res ? message.success('删除成功') : message.error('删除失败！');
-    // 刷新表单
+    // 刷新表格
     actionRef.current?.reload();
   };
 
@@ -141,11 +141,11 @@ export default () => {
         columns={columns}
         // 请求数据
         request={async (params) => {
-          let { data } = await getAppList({ ...params });
-          console.log('🎉');
-
+          let res = await getAppList({ ...params });
+          console.log('🎉', res);
           const result = {
-            data,
+            data: res.data,
+            total: res.pagination.totalSize,
           };
           return result;
         }}

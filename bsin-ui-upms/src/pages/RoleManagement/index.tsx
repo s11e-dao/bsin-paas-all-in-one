@@ -189,12 +189,15 @@ export default () => {
         columns={columns}
         // 请求数据
         request={async (params) => {
-          let { data } = await getRoleList({
+          let res = await getRoleList({
             ...params,
             appId,
           });
+          console.log(res);
+
           const result = {
-            data,
+            data: res.data,
+            total: res.pagination.totalSize,
           };
           return result;
         }}

@@ -207,15 +207,20 @@ export default () => {
         actionRef={actionRef}
         scroll={{ x: 900 }}
         bordered
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
         headerTitle={<TableTitle title="租户管理" />}
         columns={columns}
         // 请求数据
         request={async (params) => {
-          let { data } = await getTenantList({
+          let res = await getTenantList({
             ...params,
           });
           const result = {
-            data,
+            data: res.data,
+            total: res.pagination.totalSize,
           };
           return result;
         }}

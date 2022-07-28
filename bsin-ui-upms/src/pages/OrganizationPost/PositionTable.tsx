@@ -75,9 +75,12 @@ export default ({ orgId }) => {
         // 请求数据
         request={async (params) => {
           if (orgId) {
-            let { data } = await getPageListByOrgId({ ...params, orgId });
+            let res = await getPageListByOrgId({ ...params, orgId });
+            console.log(res);
+
             const result = {
-              data,
+              data: res.data,
+              total: res.pagination.totalSize,
             };
             return result;
           } else {

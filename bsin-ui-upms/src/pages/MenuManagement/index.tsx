@@ -12,6 +12,7 @@ import {
   message,
   Popconfirm,
   Tooltip,
+  InputNumber,
 } from 'antd';
 import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
@@ -25,7 +26,7 @@ const MenuManagement = () => {
   const { Option } = Select;
   const { appId } = useModel('@@qiankunStateFromMaster');
   // 配置提示信息
-  const text = (
+  const menuSortText = (
     <>
       <div>主菜单：大菜单</div>
       <div>菜单：大菜单内的子菜单</div>
@@ -97,11 +98,11 @@ const MenuManagement = () => {
   const columnsTagsRender: any = {
     type: (text: any, record: any, index: number) => (
       <div>
-        {record.Type === 0 ? (
+        {record.type === 0 ? (
           <Tag color="#f50">主菜单</Tag>
-        ) : record.Type === 1 ? (
+        ) : record.type === 1 ? (
           <Tag color="#2db7f5">菜单</Tag>
-        ) : record.Type === 2 ? (
+        ) : record.type === 2 ? (
           <Tag color="#87d068">按钮</Tag>
         ) : (
           ''
@@ -269,7 +270,7 @@ const MenuManagement = () => {
           <Form.Item label="菜单图标" name="icon">
             <Input />
           </Form.Item>
-          <Tooltip placement="bottom" title={text}>
+          <Tooltip placement="bottom" title={menuSortText}>
             <QuestionCircleOutlined
               style={{
                 float: 'right',
@@ -281,7 +282,7 @@ const MenuManagement = () => {
               }}
             />
           </Tooltip>
-          <Form.Item label="菜单类型" name="Type">
+          <Form.Item label="菜单类型" name="type">
             {/* 判断是不是新增还是添加还是编辑 */}
             {isOption === 'increased' ? (
               <Select>
@@ -306,7 +307,21 @@ const MenuManagement = () => {
               </Select>
             )}
           </Form.Item>
-
+          <Tooltip placement="bottom" title={menuSortText}>
+            <QuestionCircleOutlined
+              style={{
+                float: 'right',
+                color: '#999',
+                marginLeft: '-20px',
+                position: 'relative',
+                left: '-24px',
+                top: '8px',
+              }}
+            />
+          </Tooltip>
+          <Form.Item label="菜单序列" name="sort">
+            <InputNumber min={0} style={{ width: '100%' }} />
+          </Form.Item>
           {selectValue !== 2 ? (
             <Form.Item
               label="组件路径"

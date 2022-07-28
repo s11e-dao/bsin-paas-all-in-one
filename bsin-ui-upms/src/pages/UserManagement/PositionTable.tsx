@@ -19,6 +19,7 @@ import {
 import TableTitle from '@/components/TableTitle';
 import { getUserInfo, addUserInfo, editUserInfo, delUserInfo } from './service';
 import PositionShuttleModal from './PositionShuttleModal';
+import { hex_md5 } from '../../utils/md5';
 
 export default ({ orgId }) => {
   const { Option } = Select;
@@ -58,7 +59,7 @@ export default ({ orgId }) => {
     // 保存record
     setIsRecord(record);
     // 数据回显
-    formRef.setFieldsValue(record);
+    formRef.setFieldsValue({ ...record, password: '******' });
     setIsFormModal(true);
   };
 
@@ -72,7 +73,14 @@ export default ({ orgId }) => {
       .then(async () => {
         let response = formRef.getFieldsValue();
         if (option === 'add') {
-          let res = await addUserInfo({ orgId, ...response });
+          console.log(hex_md5(response.password));
+
+          let res = await addUserInfo({
+            orgId,
+            ...response,
+            password: hex_md5(response.password),
+          });
+          console.log(res);
           res ? message.success('添加成功') : message.error('添加失败！');
         } else {
           let res = await editUserInfo({ orgId, ...response, userId });
@@ -162,9 +170,12 @@ export default ({ orgId }) => {
         // 请求数据
         request={async (params) => {
           if (orgId) {
-            let { data } = await getUserInfo({ ...params, orgId });
+            let res = await getUserInfo({ ...params, orgId });
+            console.log(res);
+
             const result = {
-              data,
+              data: res.data,
+              total: res.pagination.totalSize,
             };
             return result;
           } else {
@@ -193,7 +204,7 @@ export default ({ orgId }) => {
       />
       {/* 新增编辑模态框 */}
       <Modal
-        title={isOption.option === 'add' ? '添加用户信息' : '编辑用户信息'}
+        title={isOption.option === 'add' ? '添加用户' : '修改用户'}
         visible={isFormModal}
         onOk={formOk}
         onCancel={formCancel}
@@ -243,9 +254,8 @@ export default ({ orgId }) => {
                 name="password"
                 rules={[{ required: true, message: '请输入密码!' }]}
               >
-                <Input />
+                <Input disabled={isOption.option === 'add' ? false : true} />
               </Form.Item>
-
               <Form.Item label="状态" name="status">
                 <Select>
                   <Option value={0}>在岗</Option>

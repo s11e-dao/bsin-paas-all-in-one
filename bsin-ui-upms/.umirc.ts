@@ -1,9 +1,18 @@
 import { defineConfig } from 'umi';
 export default defineConfig({
+  base: '/vue3/bsin-ui-upms',
   define: {
     // 后台访问地址
-    'process.env.baseUrl': 'http://192.168.1.105:8097/gateway',
+    'process.env.baseUrl': 'http://127.0.0.1:8097/gateway',
+    // 'process.env.baseUrl': 'http://114.116.93.253:8097/gateway',
   },
+  // 按需引入，编译时每个页面编译程不同的js文件
+  // dynamicImport: {
+  //   // 页面加载动画
+  //   // loading: '@/pages/Loading.tsx',
+  // },
+  // // 打包后资源路径
+  // publicPath: './',
   nodeModulesTransform: {
     type: 'none',
   },
@@ -59,6 +68,16 @@ export default defineConfig({
       name: '菜单管理',
       path: '/menu-management',
       component: '@/pages/MenuManagement/index',
+    },
+    {
+      name: '字典管理',
+      path: '/dict-management',
+      component: '@/pages/DictManagement/index',
+    },
+    {
+      name: '区域管理',
+      path: '/district-management',
+      component: '@/pages/DistrictManagement/index',
     },
   ],
 });

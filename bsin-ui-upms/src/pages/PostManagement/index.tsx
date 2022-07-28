@@ -205,9 +205,11 @@ export default () => {
         columns={columns}
         // 请求数据
         request={async (params) => {
-          let { data } = await getPostList({ ...params });
+          let res = await getPostList({ ...params });
+          console.log(res);
+
           const result = {
-            data,
+            data: res.data,
           };
           return result;
         }}

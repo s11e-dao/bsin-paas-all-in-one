@@ -35,26 +35,31 @@ let columnsData: ProColumns<AppColumnsItem>[] = [
     title: '租户编码',
     hideInSearch: true,
     dataIndex: 'tenantCode',
+    width: 170,
   },
   {
     title: '租户名称',
     hideInSearch: true,
     dataIndex: 'tenantName',
+    width: 120,
   },
   {
     title: 'logo',
     hideInSearch: true,
     dataIndex: 'logo',
+    width: 80,
   },
   {
     title: '租户类型',
     hideInSearch: true,
     dataIndex: 'type',
+    width: 80,
   },
   {
     title: '租户状态',
     hideInSearch: true,
     dataIndex: 'status',
+    width: 80,
     valueEnum: {
       0: { text: '启用', status: 'Processing' },
       1: {
@@ -67,6 +72,7 @@ let columnsData: ProColumns<AppColumnsItem>[] = [
     title: '描述',
     hideInSearch: true,
     dataIndex: 'remark',
+    width: 180,
   },
   {
     title: '操作',

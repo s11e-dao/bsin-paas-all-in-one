@@ -9,7 +9,7 @@
 export const qiankun = {
   // 应用加载之前
   async bootstrap(props) {
-    console.log('upms');
+    // 判断子应用是否正常接入
     window.localStorage.setItem('bsin-microAppMount', '3');
   },
   // 应用 render 之前触发
@@ -18,6 +18,7 @@ export const qiankun = {
   },
   // 应用卸载之后触发
   async unmount(props) {
+    // 卸载后子恢复子应用接入状态
     window.localStorage.setItem('bsin-microAppMount', '2');
   },
 };

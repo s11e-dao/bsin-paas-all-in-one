@@ -38,6 +38,11 @@ let columnsData: ColumnsType<AppColumnsItem> = [
     width: 90,
   },
   {
+    title: '菜单序列',
+    dataIndex: 'sort',
+    width: 90,
+  },
+  {
     title: '菜单图标',
     dataIndex: 'icon',
     width: 90,
