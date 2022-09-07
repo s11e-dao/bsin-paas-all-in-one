@@ -48,6 +48,9 @@ http://operation.flyray.me/
 ## 平台架构基于DDD设计理念
 ![avatar](./doc/images/sys/DDD设计理念.png)
 
+## 应用业务流程视图
+![avatar](./doc/images/sys/应用业务流程视图.png)
+
 ## bsin-paas定位
 ![avatar](./doc/images/sys/bsin-paas定位.png)
 
@@ -56,6 +59,8 @@ http://operation.flyray.me/
 
 ## 后端开发脚手架
 ![avatar](./doc/images/sys/后端开发脚手架.png)
+
+
 
 ## 工程介绍
 * bsin-apps-container：微前端基座
