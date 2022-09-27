@@ -60,6 +60,11 @@ http://operation.flyray.me/
 ## 后端开发脚手架
 ![avatar](./doc/images/sys/后端开发脚手架.png)
 
+## 前端开发脚手架
+![avatar](./doc/images/sys/前端开发模式.png)
+
+## 微前端设计
+![avatar](./doc/images/sys/微前端设计.png)
 
 
 ## 工程介绍
@@ -109,7 +114,7 @@ http://operation.flyray.me/
 * 数据大屏
 ![avatar](./doc/images/sys/数据大屏.png)
 
-* react 不同子应用嵌套
+* react 不同子应用相互嵌套展示
 ![avatar](./doc/images/sys/react应用嵌套.png)
 
 ## 开源协议
